@@ -1,0 +1,551 @@
+/* ==========================================================
+   FOOTER CSS ONLY
+   ========================================================== */
+
+.oh-foot {
+  width: 100%;
+  background:#354C24;
+  padding: 80px 0 28px;
+  position: relative;
+  overflow: hidden;
+}
+
+.oh-foot__container {
+  grid-template-columns: 472px 160px 260px 160px;
+  align-items: start;
+  gap: 154px;
+  width: 1520px;
+  margin: 0 auto;
+  display: grid;
+}
+
+.oh-foot__brand {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 384px;
+}
+
+.oh-foot__logo2 {
+  width: 150px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+}
+
+.logo2 {
+    object-fit: contain;
+    width: 149px;
+    height: 145px;
+    margin-top: -5px;
+}
+
+.oh-foot__tag {
+  font-size: 14px;
+  line-height: 1.6;
+  color: white;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+.oh-foot__form {
+  display: flex;
+  width: 384px;
+  height: 46px;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.oh-foot__input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: #1F3A25;
+  color: white;
+  padding: 0 20px;
+  font-size: 14px;
+}
+
+.oh-foot__input::placeholder {
+  color: #ffffff;
+}
+
+.oh-foot__subscribe {
+  width: 110px;
+  border: none;
+  background: #A3B18A;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.oh-foot__subscribe:hover {
+  background: #2D5840;
+}
+
+.oh-foot__col {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.oh-foot__heading,
+.oh-foot__heading1 {
+  font-size: 13px;
+  letter-spacing: 0.16em;
+  color: white;
+  margin: 0;
+}
+
+.oh-foot__heading1 {
+  margin-left: 69px;
+}
+
+.oh-foot__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.oh-foot__list a {
+  text-decoration: none;
+  color: #ffffff9c;
+  font-size: 16px;
+  transition: 0.3s ease;
+  font-family: 'Inter', sans-serif;
+}
+
+.oh-foot__list a:hover {
+  color: white;
+}
+
+.oh-foot__list--touch li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  color: #ffffff9c;
+  line-height: 1.5;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+}
+
+.oh-foot__social {
+    flex-direction: row;
+    gap: 28px;
+    margin-left: 81px;
+    display: flex;
+}
+
+.oh-foot__socialBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  transition: 0.3s ease;
+}
+
+.oh-foot__socialBtn:hover {
+  transform: translateY(-2px);
+  opacity: 0.8;
+}
+
+.oh-foot__bottom {
+  color: #ffffffb3;
+  border-top: 3px solid #ffffff1a;
+  justify-content: space-between;
+  align-items: center;
+  width: 1506px;
+  max-width: calc(99% - 80px);
+  margin: 60px auto 0;
+  padding-top: 25px;
+  padding-bottom: 48px;
+  font-family: Inter, sans-serif;
+  font-size: 18px;
+  display: flex;
+}
+
+.oh-foot__bottomBrand {
+  letter-spacing: 0.18em;
+  font-size: 12px;
+}
+
+/* ==========================================================
+   FOOTER MEDIA QUERIES
+   ========================================================== */
+
+/* LAPTOP (1367px - 1700px) */
+@media screen and (min-width: 1367px) and (max-width: 1700px) {
+  .oh-foot__container {
+    width: 100%;
+    padding: 0 clamp(40px, 6vw, 80px);
+    gap: clamp(20px, 3vw, 40px);
+    grid-template-columns: 350px 1fr 1fr 1fr;
+  }
+  .logo2 {
+    object-fit: contain;
+    width: 100px;
+    height: 119px;
+    margin-top: -5px;
+}
+
+
+  .oh-foot__bottom {
+    width: 100%;
+    padding: 25px clamp(40px, vw, 80px) 48px;
+  }
+}
+
+/* TABLET (1024px - 1366px) */
+@media screen and (min-width: 1024px) and (max-width: 1366px) {
+  .oh-foot__container {
+    width: 100%;
+    padding: 0 clamp(20px, 5vw, 50px);
+    gap: clamp(15px, 2vw, 30px);
+    grid-template-columns: 1.2fr 0.8fr 1.2fr 0.8fr;
+  }
+
+  .oh-foot__bottom {
+    width: 100%;
+    padding: 25px clamp(20px, 5vw, 50px) 48px;
+    flex-direction: column;
+    gap: clamp(10px, 2vw, 20px);
+    text-align: center;
+    font-size: clamp(12px, 1.3vw, 15px);
+  }
+
+  .oh-foot__brand {
+    flex-direction: column;
+    gap: clamp(16px, 2vw, 24px);
+    max-width: clamp(200px, 22vw, 261px);
+    display: flex;
+  }
+
+  .oh-foot__tag {
+    font-size: clamp(11px, 1.1vw, 13px);
+  }
+
+  .logo2 {
+    width: clamp(100px, 10vw, 130px);
+    height: auto;
+  }
+
+  .oh-foot__col {
+    flex-direction: column;
+    gap: clamp(20px, 3vw, 36px);
+    display: flex;
+    margin-left: 0;
+  }
+
+  .oh-foot__heading,
+  .oh-foot__heading1 {
+    font-size: clamp(11px, 1.1vw, 12px);
+    margin-left: 0;
+  }
+
+  .oh-foot__social {
+    gap: clamp(15px, 2vw, 25px);
+    margin-left: 45px;
+  }
+
+  #follow {
+    margin-left: 30px;
+  }
+
+  .oh-foot__list {
+    flex-direction: column;
+    gap: clamp(10px, 1.5vw, 15px);
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+  }
+
+  .oh-foot__list a,
+  .oh-foot__list--touch li {
+    font-size: clamp(12px, 1.2vw, 14px);
+  }
+}
+
+/* SMALL SCREENS (640px - 1023px) */
+@media screen and (min-width: 641px) and (max-width: 1023px) {
+  .oh-foot__container {
+    width: 100%;
+    padding: 0 clamp(20px, 3vw, 40px);
+    gap: clamp(20px, 3vw, 40px);
+    grid-template-columns: repeat(2, 1fr);
+    margin-left: 0;
+    max-width: 100%;
+  }
+
+  .oh-foot__brand {
+    grid-column: 1 / -1;
+    gap: 12px;
+    max-width: 100%;
+    flex-direction: column;
+    display: flex;
+    margin-top: 0;
+  }
+
+  .oh-foot__tag {
+    font-size: clamp(12px, 1.3vw, 14px);
+    color: #fff;
+    margin: 0;
+    line-height: 1.5;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .oh-foot__logo .logo {
+    display: none;
+  }
+.oh-foot__col {
+    flex-direction: column;
+    gap: 36px;
+    display: flex;
+}
+  .oh-foot__heading,
+  .oh-foot__heading1 {
+    font-size: clamp(11px, 1.2vw, 12px);
+    letter-spacing: .16em;
+    color: #fff;
+    margin: 0;
+  }
+
+  .oh-foot__list {
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    gap: 10px;
+  }
+
+  .oh-foot__list a,
+  .oh-foot__list--touch li {
+    font-size: clamp(12px, 1.3vw, 14px);
+    color: #ffffff9c;
+  }
+
+  .oh-foot__list--touch li {
+    width: 100%;
+  }
+
+  .oh-foot__social {
+    flex-direction: row;
+    margin-top: 0;
+    display: flex;
+    margin-left: 0;
+    gap: 15px;
+  }
+
+  .oh-foot__bottom {
+    width: 100%;
+    padding: 20px clamp(20px, 3vw, 40px);
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+    font-size: clamp(12px, 1.2vw, 14px);
+  }
+
+  .logo2 {
+    width: clamp(80px, 10vw, 110px);
+    height: auto;
+    margin-top: 0;
+  }
+}
+
+/* MOBILE (max-width: 640px) */
+@media screen and (max-width: 640px) {
+  .oh-foot {
+    padding: 0px 0 30px;
+  }
+
+  .oh-foot__list {
+   
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0 0 0 42px;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    gap: 26px;
+    font-size: 12px;
+  }
+
+  .oh-foot__list--touch {
+    margin: 0;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    width: 100%;
+  }
+
+  .oh-foot__input {
+    color: #fff;
+    padding: 0 calc(20px * var(--oh-scale));
+    font-size: calc(21px * var(--oh-scale));
+    background: #1f3a25;
+    border: none;
+    outline: none;
+    flex: 1;
+    font-family: inherit;
+  }
+
+  .oh-foot__subscribe {
+    width: calc(110px * var(--oh-scale));
+    color: var(--oh-cream);
+    font-size: calc(21px * var(--oh-scale));
+    cursor: pointer;
+    background: #a3b18a;
+    border: none;
+    font-family: inherit;
+    transition: background .3s;
+  }
+
+  .oh-foot__list a {
+    font-size: calc(24px * var(--oh-scale));
+    color: #ffffff9c;
+    text-decoration: none;
+    transition: color .3s;
+  }
+
+  .oh-foot__heading {
+    font-size: 13px;
+    letter-spacing: .16em;
+    color: #fff;
+    text-align: left;
+    margin-left: 36px;
+  }
+
+  .oh-foot__heading1 {
+    font-size: 13px;
+    letter-spacing: 0.16em;
+    color: white;
+    margin: 0;
+    margin-left: 46px;
+  }
+
+  .oh-foot__container {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 32px 1px !important;
+    text-align: left;
+    width: 101% !important;
+    margin: 0 auto;
+    display: grid;
+  }
+
+  .oh-foot__brand {
+    grid-column: 1 / -1;
+    margin-top: 0 !important;
+    align-items: center;
+    max-width: none !important;
+    text-align: center;
+  }
+
+  .oh-foot__logo {
+    justify-content: center !important;
+  }
+
+  .oh-foot__tag {
+    max-width: 325px !important;
+    margin: 0 auto;
+    font-size: 11px;
+  }
+
+  .oh-foot__form {
+    width: 100% !important;
+    max-width: 300px;
+    margin: 16px auto;
+  }
+
+  .oh-foot__col {
+   align-items: flex-start;
+    margin-left: -13px;
+    gap: 16px !important;
+    width: 100% !important;
+  }
+
+  #get{
+    margin-left: 4px;
+  }
+
+  .oh-foot__col:last-child {
+    grid-column: 1 / -1;
+    align-items: center;
+    margin-top: 16px;
+  }
+
+  .oh-foot__list--touch li {
+    align-items: flex-start;
+    gap: calc(7px * var(--oh-scale));
+    font-size: calc(24px * var(--oh-scale));
+    color: #ffffff9c;
+    line-height: 1.5;
+    display: flex;
+    width: 100%;
+  }
+
+  .oh-foot__list--touch li,
+  .oh-foot__list--touch li * {
+    font-family: 'Inter', sans-serif !important;
+    gap: 12px;
+  }
+
+  .oh-foot__social {
+    flex-direction: row !important;
+    justify-content: center;
+    margin-top: 0 !important;
+    margin-left: 0;
+  }
+
+  .oh-foot__socialBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.35s ease, opacity 0.3s ease;
+  }
+
+  .oh-foot__socialBtn:hover {
+    transform: translateY(-2px);
+    opacity: 0.8;
+  }
+
+  .oh-foot__bottom {
+    text-align: center;
+    gap: 20px;
+    font-size: 12px;
+    flex-direction: column !important;
+    width: 90% !important;
+    margin-top: 40px !important;
+    padding-bottom: 30px !important;
+  }
+
+  .oh-foot__bottomBrand {
+    letter-spacing: .18em;
+    font-size: 8px;
+  }
+}
+
+/* TABLET & MOBILE PORTRAIT (max-width: 900px) */
+@media screen and (max-width: 900px) {
+  .oh-foot {
+    padding: 60px 0 20px;
+  }
+  .oh-foot__bottom {
+    margin-top: 40px;
+    padding-top: 20px;
+    padding-bottom: 30px;
+  }
+}
