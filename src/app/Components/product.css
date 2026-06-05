@@ -617,7 +617,7 @@ padding: 51px 44px 35px;
     border-radius: 24px;
     flex-shrink: 0;
     width: 669px;
-height: 500px;
+height: 525px;
     margin-top: 0;
     padding: 35px;
 }
@@ -628,7 +628,7 @@ height: 500px;
     margin-bottom: 36px;
     font-size: 16px;
     font-weight: 500;
-    margin-top: 21px;
+    margin-top: 37px;
 }
 
 .storage-item {
@@ -1338,13 +1338,14 @@ height: 500px;
   .benefits-tag {
     margin-left: 0;
     text-align: left;
-    width: auto;
+    width: 299px;
   }
 
   .benefits-desc {
     font-size: clamp(16px, 1.2vw, 18px);
     max-width: 80%;
     margin-left: 0;
+    text-align: left;
   }
 
   .benefits-body {
@@ -1454,6 +1455,7 @@ height: 500px;
     padding: clamp(24px, 2.5vw, 40px) clamp(20px, 2vw, 30px);
     margin-top: 0;
     align-self: flex-start;
+    height: stretch;
   }
 
   .contact-form h3 {
@@ -1553,6 +1555,37 @@ height: 500px;
   
   }
 
+  @media (min-width: 1024px) and (max-width: 1266px) {
+    .product-page {
+      padding: 40px 5% !important;
+      margin-top: 0 !important;
+    }
+    .product-container {
+      gap: 25px !important;
+    }
+    .main-image {
+      width: 350px !important;
+      height: 580px !important;
+    }
+    .thumbs img {
+      width: 100px !important;
+      height: 100px !important;
+    }
+    .feature-card p {
+       width: auto !important;
+       max-width: 100% !important;
+    }
+    .features-grid {
+      gap: 15px !important;
+    }
+    .feature-card {
+      padding: 15px !important;
+    }
+    .product-info h1 {
+      font-size: 42px !important;
+    }
+  }
+
 @media (min-width: 641px) and (max-width: 1023px) {
   .category-main {
     padding-top: clamp(80px, 10vw, 134px);
@@ -1580,6 +1613,15 @@ height: 500px;
     padding: 0 15px;
     box-sizing: border-box;
   }
+
+  .dropdown {
+    min-width: 220px;
+  }
+
+  .flour-dropdown {
+    min-width: 220px;
+  }
+
 
   .menu-item:nth-child(3n) {
     border-right: none;
@@ -1823,7 +1865,7 @@ height: 500px;
 
   .contact-form {
     padding: clamp(24px, 2.5vw, 40px) clamp(20px, 2vw, 30px);
-    margin-top: 0;
+    margin-top: 31px;
     align-self: flex-start;
   }
 
@@ -1960,6 +2002,15 @@ height: 500px;
     box-sizing: border-box;
   }
 
+  .dropdown {
+    min-width: 160px;
+  }
+
+  .flour-dropdown {
+    min-width: 160px;
+  }
+
+
   .menu-item:nth-child(2n) {
     border-right: none;
   }
@@ -2068,6 +2119,7 @@ height: 500px;
     color: #3d5c2c;
     margin-bottom: 25px;
     font-size: 23px;
+    text-align: center;
 }
 .desc-text {
     color: #444;
@@ -2127,6 +2179,7 @@ height: 500px;
 
   .feature-card {
     padding: 12px;
+    height: stretch;
   }
 
   .recipe-section {
@@ -2161,7 +2214,7 @@ height: 500px;
     background: #faf8f3;
     border: 1px solid #d9cdb8;
     border-radius: 22px;
-    padding: 34px 34px 35px;
+    padding: 35px 30px 25px;
 }
 
   .steps-grid {
@@ -2214,10 +2267,11 @@ height: 500px;
   }
 
   .storage-box h3 {
-    font-size: 14px;
-    letter-spacing: 2px;
-    margin-bottom: 15px;
-  }
+        letter-spacing: 2px;
+        margin-bottom: 12px;
+        font-size: 14px;
+        margin-top: 23px;
+    }
 
   .storage-item {
     padding: 15px 0;

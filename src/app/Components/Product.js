@@ -215,6 +215,38 @@ export default function ProductDetails({ initialSlug, onBack }) {
   const maxIndex = Math.max((carouselItems.length || 1) - visibleItems, 0);
   const prev = () => setIndex((i) => Math.max(i - 1, 0));
   const next = () => setIndex((i) => Math.min(i + 1, maxIndex));
+ const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    message: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    if (name === "phone") {
+      const numbersOnly = value.replace(/\D/g, "");
+      setFormData({ ...formData, [name]: numbersOnly });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    console.log(formData);
+
+    alert("Form submitted successfully!");
+
+    setFormData({
+      name: "",
+      phone: "",
+      email: "",
+      message: "",
+    });
+  };
 
   return (
     <>
@@ -458,28 +490,63 @@ export default function ProductDetails({ initialSlug, onBack }) {
           </div>
         </div>
 
-        <div className="contact-form">
-          <h3>Send us a message</h3>
-          <div className="form-row">
-            <div className="form-group">
-              <label className="name">Name</label>
-              <input type="text" placeholder="Your name" />
-            </div>
-            <div className="form-group">
-              <label className="name">Phone</label>
-              <input type="text" placeholder="+91" />
-            </div>
-          </div>
-          <div className="form-group">
-            <label className="name">Email</label>
-            <input type="email" placeholder="you@example.com" />
-          </div>
-          <div className="form-group">
-            <label className="name">Message</label>
-            <textarea placeholder="Tell us what you'd like to order..."></textarea>
-          </div>
-          <button className="contact-btn">Order Now →</button>
+        <form className="contact-form" onSubmit={handleSubmit}>
+      <h3>Send us a message</h3>
+
+      <div className="form-row">
+        <div className="form-group">
+          <label className="name">Name</label>
+          <input
+            type="text"
+            name="name"
+            placeholder="Your name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
         </div>
+
+        <div className="form-group">
+          <label className="name">Phone</label>
+          <input
+            type="text"
+            name="phone"
+            placeholder="+91"
+            value={formData.phone}
+            onChange={handleChange}
+            maxLength={10}
+            required
+          />
+        </div>
+      </div>
+
+      <div className="form-group">
+        <label className="name">Email</label>
+        <input
+          type="email"
+          name="email"
+          placeholder="you@example.com"
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
+      </div>
+
+      <div className="form-group">
+        <label className="name">Message</label>
+        <textarea
+          name="message"
+          placeholder="Tell us what you'd like to order..."
+          value={formData.message}
+          onChange={handleChange}
+          required
+        />
+      </div>
+
+      <button type="submit" className="contact-btn">
+        Order Now →
+      </button>
+    </form>
       </section>
     </>
   );

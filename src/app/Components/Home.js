@@ -42,6 +42,38 @@ export default function Home({ onProductClick }) {
       setIndex3(index3 - 1);
     }
   };
+ const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    message: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    if (name === "phone") {
+      const numbersOnly = value.replace(/\D/g, "");
+      setFormData({ ...formData, [name]: numbersOnly });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    console.log(formData);
+
+    alert("Form submitted successfully!");
+
+    setFormData({
+      name: "",
+      phone: "",
+      email: "",
+      message: "",
+    });
+  };
 
   return (
     <div>
@@ -620,7 +652,7 @@ export default function Home({ onProductClick }) {
 
       <section className="benefits-section" id="benefits">
         <img src="/red_wheat.png" alt="background" className="products-bg8" />
-        <span className="benefits-tag">WHY CHOOSE US</span>
+        <span className="benefitss-tag">WHY CHOOSE US</span>
 
         <h2 className="benefits-heading">
           Pure benefits, <br />
@@ -797,40 +829,63 @@ Thirukarugavur, Thanjavur -614302</p>
         </div>
 
         {/* RIGHT SIDE FORM */}
-        <div className="contact-form">
+          <form className="contact-form" onSubmit={handleSubmit}>
+      <h3>Send us a message</h3>
 
-          <h3>Send us a message</h3>
-
-          {/* Name & Phone */}
-          <div className="form-row">
-            <div className="form-group">
-              <label className="name">Name</label>
-              <input type="text" placeholder="Your name" />
-            </div>
-
-            <div className="form-group">
-              <label className="name">Phone</label>
-              <input type="text" placeholder="+91" />
-            </div>
-          </div>
-
-          {/* Email */}
-          <div className="form-group">
-            <label className="name">Email</label>
-            <input type="email" placeholder="you@example.com" />
-          </div>
-
-          {/* Message */}
-          <div className="form-group">
-            <label className="name">Message</label>
-            <textarea placeholder="Tell us what you'd like to order..."></textarea>
-          </div>
-
-          <button className="contact-btn">
-            Order Now →
-          </button>
-
+      <div className="form-row">
+        <div className="form-group">
+          <label className="name">Name</label>
+          <input
+            type="text"
+            name="name"
+            placeholder="Your name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
         </div>
+
+        <div className="form-group">
+          <label className="name">Phone</label>
+          <input
+            type="text"
+            name="phone"
+            placeholder="+91"
+            value={formData.phone}
+            onChange={handleChange}
+            maxLength={10}
+            required
+          />
+        </div>
+      </div>
+
+      <div className="form-group">
+        <label className="name">Email</label>
+        <input
+          type="email"
+          name="email"
+          placeholder="you@example.com"
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
+      </div>
+
+      <div className="form-group">
+        <label className="name">Message</label>
+        <textarea
+          name="message"
+          placeholder="Tell us what you'd like to order..."
+          value={formData.message}
+          onChange={handleChange}
+          required
+        />
+      </div>
+
+      <button type="submit" className="contact-btn">
+        Order Now →
+      </button>
+    </form>
 
       </section>
      
