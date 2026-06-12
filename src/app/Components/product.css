@@ -29,8 +29,11 @@ body.inner-page-active .navbar {
 
 .back-home-btn {
   position: absolute;
-  left: clamp(20px, 9%, 150px);
-  top: clamp(90px, 10vw, 139px);
+  left: clamp(20px, 5vw, 9%);
+  left: clamp(29px, 8vw, 9%);
+
+
+
   display: flex;
   align-items: center;
   gap: 8px;
@@ -114,7 +117,7 @@ body.inner-page-active .navbar {
   top: 100%;
   left: 0;
 
-  min-width: 320px;
+  min-width: 294px;
   background: #fff;
 
   border: 1px solid #b9b9b9;
@@ -127,7 +130,7 @@ body.inner-page-active .navbar {
 }
 
 .flour-dropdown {
-  min-width: 380px;
+  min-width: 295px;
 }
 
 .dropdown a {
@@ -159,6 +162,7 @@ body.inner-page-active .navbar {
 
 .product-container {
   display: flex;
+  flex-wrap: nowrap;
   gap: 40px;
   align-items: flex-start;
   /* padding-top: 73px; */
@@ -167,6 +171,7 @@ body.inner-page-active .navbar {
 .gallery {
   display: flex;
   gap: 20px;
+  flex-shrink: 1;
 }
 
 .main-image {
@@ -189,21 +194,21 @@ body.inner-page-active .navbar {
   gap: 17px;
 }
 
-.thumbs img {
+.thumbs .thumb-wrapper {
   width: 133px;
   height: 133px;
   border-radius: 15px;
-  object-fit: cover;
   cursor: pointer;
   border: 1px solid #ddd;
   transition: all 0.3s ease;
+  overflow: hidden;
 }
 
-.thumbs img:hover {
+.thumbs .thumb-wrapper:hover {
   border-color: #48632e;
 }
 
-.thumbs img.active-thumb {
+.thumbs .thumb-wrapper.active-thumb {
   border: 2px solid #48632e;
   transform: scale(1.02);
 }
@@ -263,9 +268,30 @@ body.inner-page-active .navbar {
 
 .size-options {
   display: flex;
+  flex-wrap: nowrap;
   gap: 15px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
+  align-items: flex-end;
 }
+
+.size-btn-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* .popular-tag {
+  position: absolute;
+  top: -24px;
+  background: #354c24;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 1px;
+} */
 
 .size-btn {
   width: 121px;
@@ -277,6 +303,7 @@ body.inner-page-active .navbar {
   font-size: 22px;
   color: #2A2520;
   font-family: "Inria Serif", serif;
+  transition: all 0.3s ease;
 }
 
 .size-btn.active {
@@ -1229,7 +1256,7 @@ body.inner-page-active .navbar {
 
   /* category section */
   .category-main {
-    padding-top: clamp(100px, 8vw, 134px);
+    padding-top: clamp(80px, 6vw, 110px);
     padding-bottom: clamp(20px, 2vw, 29px);
   }
 
@@ -1238,7 +1265,7 @@ body.inner-page-active .navbar {
     border: 1px solid #b9b9b9;
     justify-content: center;
     width: 100%;
-    margin: 40px auto;
+    margin-top: 57px;
     display: flex;
     max-width: 83vw;
   }
@@ -1264,12 +1291,16 @@ body.inner-page-active .navbar {
 
   .product-container {
     gap: clamp(20px, 3vw, 40px);
-    padding-top: clamp(40px, 5vw, 73px);
+    padding-top: clamp(15px, 2vw, 30px);
   }
 
   .storage-item {
     border-top: 1px solid #ffffff26;
     padding: 20px 0 0px;
+  }
+
+  .gallery {
+    gap: clamp(10px, 1.5vw, 20px);
   }
 
   .main-image {
@@ -1302,7 +1333,8 @@ body.inner-page-active .navbar {
   .feature-card p {
     font-size: clamp(12px, 0.9vw, 14px);
     line-height: 1.4;
-    width: 192px;
+    width: 100%;
+    max-width: 192px;
   }
 
   #recipe {
@@ -1329,6 +1361,7 @@ body.inner-page-active .navbar {
     margin-top: clamp(-35px, -3.5vw, -41px);
   }
 
+  .thumbs .thumb-wrapper,
   .thumbs img {
     width: clamp(80px, 8vw, 108px);
     height: clamp(80px, 8vw, 108px);
@@ -1357,9 +1390,9 @@ body.inner-page-active .navbar {
   }
 
   .size-btn {
-    width: clamp(90px, 8vw, 121px);
+    width: clamp(80px, 8vw, 121px);
     height: clamp(45px, 4vw, 55px);
-    font-size: clamp(18px, 1.5vw, 22px);
+    font-size: clamp(16px, 1.5vw, 22px);
     color: #2A2520;
   }
 
@@ -1432,6 +1465,23 @@ body.inner-page-active .navbar {
     margin-left: 0;
     text-align: left;
     width: 299px;
+  }
+
+  .back-home-btn {
+    cursor: pointer;
+    color: #354c24;
+    z-index: 10;
+    background: none;
+    border: none;
+    align-items: center;
+    gap: 8px;
+    font-size: clamp(14px, 1.1vw, 16px);
+    font-weight: 500;
+    transition: all .3s;
+    display: flex;
+    position: absolute;
+    top: clamp(70px, 8vw, 110px);
+    left: clamp(20px, 5vw, 9%);
   }
 
   .benefits-desc {
@@ -1659,18 +1709,26 @@ body.inner-page-active .navbar {
 @media (min-width: 1024px) and (max-width: 1266px) {
   .product-page {
     padding: 40px 5% !important;
-    margin-top: 0 !important;
+    margin-top: -50px !important;
   }
 
   .product-container {
-    gap: 25px !important;
+    gap: 15px !important;
+  }
+
+  .back-home-btn {
+    left: 3% !important;
+    top: 100px !important;
   }
 
   .main-image {
-    width: 350px !important;
-    height: 580px !important;
+    width: 320px !important;
+    max-width: 100%;
+    height: auto !important;
+    aspect-ratio: 1 / 1.5;
   }
 
+  .thumbs .thumb-wrapper,
   .thumbs img {
     width: 100px !important;
     height: 100px !important;
@@ -1773,6 +1831,7 @@ body.inner-page-active .navbar {
 
   .product-page {
     padding: clamp(30px, 5vw, 60px) 5%;
+    margin-top: -44px;
   }
 
   .product-container {
@@ -2123,7 +2182,7 @@ body.inner-page-active .navbar {
     position: relative;
     left: 0;
     top: 0;
-    margin-bottom: 15px;
+    margin-bottom: 25px;
     align-self: flex-start;
   }
 
@@ -2211,6 +2270,7 @@ body.inner-page-active .navbar {
     width: 100%;
   }
 
+  .thumbs .thumb-wrapper,
   .thumbs img {
     width: clamp(65px, 18vw, 85px);
     height: clamp(65px, 18vw, 85px);
@@ -2606,20 +2666,21 @@ body.inner-page-active .navbar {
     justify-content: center;
     align-items: center;
     height: auto;
-    aspect-ratio: 1 / 1.4; /* Increased height ratio to give more room for the product */
+    aspect-ratio: 1 / 1.4;
+    /* Increased height ratio to give more room for the product */
     display: flex;
     overflow: hidden;
     width: 100%;
   }
 
-      .pi-card .pi-img-box img {
-        object-fit: contain;
-        width: 116%;
-        height: 102%;
-        padding: 1px;
-        transition: all .4s;
-        display: block;
-    }
+  .pi-card .pi-img-box img {
+    object-fit: contain;
+    width: 116%;
+    height: 102%;
+    padding: 1px;
+    transition: all .4s;
+    display: block;
+  }
 
   .feature-card h5 {
     margin-bottom: 10px;
@@ -2662,6 +2723,7 @@ body.inner-page-active .navbar {
     overflow: hidden;
     box-shadow: 0 5px 15px #0000001a;
   }
+
   .pi-products h2 {
     font-size: 28px;
   }

@@ -18,9 +18,9 @@ const MALT_BADGES  = ["badge5", "badge5 yellow"];
  * Static fallback product data — shown while API data loads / not available.
  * ───────────────────────────────────────────────────────────────────────────── */
 const STATIC_RICE = [
-  { img: "/rice1.png", badge: "badge2",       title: "Karuppu Kavuni Rice", slug: "karuppu-kavuni-rice", desc: "The legendary forbidden black rice",  points: ["✔ Rich in antioxidants", "✔ Supports heart health", "✔ Helps manage diabetes", "✔ Iron-rich (helps anemia)", "✔ Anti-aging & good for skin"] },
-  { img: "/rice2.png", badge: "badge red",    title: "Rathasali Rice",      slug: "rathasali-rice",      desc: "Ancient red rice for vitality",       points: ["✔ Improves blood health", "✔ Increases hemoglobin", "✔ Supports digestion", "✔ Enhances energy & strength", "✔ Helps manage blood sugar"] },
-  { img: "/rice3.png", badge: "badge yellow", title: "Thuyamalli Rice",     slug: "thuyamalli-rice",     desc: "Aromatic, light and easy to digest",  points: ["✔ Easy to digest", "✔ Sustained energy", "✔ Suitable for diabetics", "✔ Boosts immunity", "✔ Rich in nutrients"] },
+  { img: "./Images/karuppu-kavuni-rice-main.svg", badge: "badge2",       title: "Karuppu Kavuni Rice", slug: "karuppu-kavuni-rice", desc: "The legendary forbidden black rice",  points: ["✔ Rich in antioxidants", "✔ Supports heart health", "✔ Helps manage diabetes", "✔ Iron-rich (helps anemia)", "✔ Anti-aging & good for skin"] },
+  { img: "./Images/rathasali-rice-main.svg", badge: "badge red",    title: "Rathasali Rice",      slug: "rathasali-rice",      desc: "Ancient red rice for vitality",       points: ["✔ Improves blood health", "✔ Increases hemoglobin", "✔ Supports digestion", "✔ Enhances energy & strength", "✔ Helps manage blood sugar"] },
+  { img: "./Images/thuyamalli-rice-main.svg", badge: "badge yellow", title: "Thuyamalli Rice",     slug: "thuyamalli-rice",     desc: "Aromatic, light and easy to digest",  points: ["✔ Easy to digest", "✔ Sustained energy", "✔ Suitable for diabetics", "✔ Boosts immunity", "✔ Rich in nutrients"] },
 ];
 
 const STATIC_PUTTU = [
@@ -186,56 +186,16 @@ export default function Home({ onProductClick, prefetchedData }) {
   }
 
   // ── Rice (up to 3 products) ──────────────────────────────────────────────
-  const riceItems = _allProds.length
-    ? _getSection("rice", "heritage").slice(0, 3).map((p, i) => ({
-        img:    _getImg(p) || `/rice${i + 1}.png`,
-        badge:  RICE_BADGES[i % RICE_BADGES.length],
-        title:  _getName(p),
-        slug:   p?.slug || "",
-        desc:   _getDesc(p),
-        points: _getPoints(p).length ? _getPoints(p) : (STATIC_RICE[i]?.points || []),
-      }))
-    : STATIC_RICE;
+  const riceItems = STATIC_RICE;
 
   // ── Puttu & Idiyappam (up to 6 products) ────────────────────────────────
-  const puttuItems = _allProds.length
-    ? _getSection("flour", "puttu", "idiyappam").slice(0, 6).map((p, i) => ({
-        img:       _getImg(p) || `/puttu${i + 1}.png`,
-        alt:       p?.slug || "",
-        badge:     PUTTU_BADGES[i % PUTTU_BADGES.length],
-        badgeText: p?.badge || ((p?.slug || "").includes("puttu") ? "Puttu Flour" : "Idiyappam Flour"),
-        slug:      p?.slug || "",
-        title:     _getName(p),
-        desc:      _getDesc(p),
-        points:    _getPoints(p).length ? _getPoints(p) : (STATIC_PUTTU[i]?.points || []),
-      }))
-    : STATIC_PUTTU;
+  const puttuItems = STATIC_PUTTU;
 
   // ── Soup & Booster Mixes (up to 5 products) ─────────────────────────────
-  const soupItems = _allProds.length
-    ? _getSection("soup", "booster", "mix").slice(0, 5).map((p, i) => ({
-        img:       _getImg(p) || `/soup${i + 1}.png`,
-        alt:       p?.slug || "",
-        badge:     SOUP_BADGES[i % SOUP_BADGES.length],
-        badgeText: p?.badge || "Soup Mix",
-        slug:      p?.slug || "",
-        title:     _getName(p),
-        desc:      _getDesc(p),
-        points:    _getPoints(p).length ? _getPoints(p) : (STATIC_SOUP[i]?.points || []),
-      }))
-    : STATIC_SOUP;
+  const soupItems = STATIC_SOUP;
 
   // ── Health Malts (up to 2 products) ─────────────────────────────────────
-  const maltItems = _allProds.length
-    ? _getSection("malt", "health malt").slice(0, 2).map((p, i) => ({
-        img:    _getImg(p) || `/malt${i + 1}.png`,
-        badge:  MALT_BADGES[i % MALT_BADGES.length],
-        title:  _getName(p),
-        slug:   p?.slug || "",
-        desc:   _getDesc(p),
-        points: _getPoints(p).length ? _getPoints(p) : (STATIC_MALT[i]?.points || []),
-      }))
-    : STATIC_MALT;
+  const maltItems = STATIC_MALT;
 
   return (
     <div>
@@ -380,15 +340,17 @@ export default function Home({ onProductClick, prefetchedData }) {
               onClick={() => onProductClick && onProductClick(item.slug)}
             >
 
-              <div className="card-overlay">
-                <ul>
-                  {item.points.map((point, i) => (
-                    <li key={i}>{point}</li>
-                  ))}
-                </ul>
-              </div>
+              <div className="img-box">
+                <img src={item.img} alt="rice" />
 
-              <img src={item.img} alt="rice" />
+                <div className="card-overlay">
+                  <ul>
+                    {item.points.map((point, i) => (
+                      <li key={i}>{point}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
 
               <div className={item.badge}>Heritage Rice</div>
 

@@ -4,6 +4,7 @@ import Home from './Components/Home';
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
 import InnerPage from './Components/Product';
+import Preloader from './Components/Preloader';
 
 const BASE_URL = process.env.NEXT_PUBLIC_PRODUC_URI;
 
@@ -84,6 +85,7 @@ export default function Page() {
 
   return (
     <div>
+      <Preloader />
       <Navbar onBack={selectedSlug ? handleBack : null} key={selectedSlug || "home"} />
       {selectedSlug ? (
         <InnerPage
@@ -92,7 +94,7 @@ export default function Page() {
           prefetchedData={prefetchedData}
         />
       ) : (
-        <Home onProductClick={handleProductClick} />
+        <Home onProductClick={handleProductClick} prefetchedData={prefetchedData} />
       )}
       <Footer />
     </div>

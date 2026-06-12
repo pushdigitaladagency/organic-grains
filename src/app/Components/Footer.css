@@ -456,6 +456,12 @@
     margin: 0 auto;
     display: grid;
   }
+.logo2 {
+    object-fit: contain;
+    width: 123px;
+    height: 122px;
+    margin-top: -5px;
+}
 
   .oh-foot__brand {
     grid-column: 1 / -1;

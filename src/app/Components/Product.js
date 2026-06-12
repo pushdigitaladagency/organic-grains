@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./product.css";
 
 const BASE_URL = process.env.NEXT_PUBLIC_PRODUC_URI;
@@ -16,6 +16,43 @@ const contactInfo = [
   { icon: "/em.png", alt: "email", label: "EMAIL", value: " thirugailifestylecenter@gmail.com" },
   { icon: "/log1.png", alt: "location", label: "LOCATION", value: "Thirugai Life style Center, Thirukarugavur, Thanjavur - 614302", iconId: "location-icon" },
 ];
+
+/* ─────────────────────────────────────────────────────────────────────────────
+ * Image with Shimmer Skeleton Loader
+ * ───────────────────────────────────────────────────────────────────────────── */
+const ImageWithSkeleton = ({ src, alt, className = "" }) => {
+  const [loaded, setLoaded] = useState(false);
+  const imgRef = useRef(null);
+
+  useEffect(() => {
+    if (imgRef.current?.complete) {
+      setLoaded(true);
+    } else {
+      setLoaded(false);
+    }
+  }, [src]);
+
+  return (
+    <div className={`${!loaded && src ? "shimmer-bg" : ""} ${className}`} style={{ position: "relative", overflow: "hidden", width: "100%", height: "100%" }}>
+      {src && (
+        <img
+          ref={imgRef}
+          src={src}
+          alt={alt}
+          onLoad={() => setLoaded(true)}
+          style={{
+            opacity: loaded ? 1 : 0,
+            transition: "opacity 0.15s ease-in-out",
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            display: "block",
+          }}
+        />
+      )}
+    </div>
+  );
+};
 
 /* ---------- HELPERS ---------- */
 const list = (v) => (Array.isArray(v) ? v : []);
@@ -62,8 +99,7 @@ export default function ProductDetails({ initialSlug, onBack, prefetchedData }) 
 
   const getVisibleItems = () => {
     if (typeof window === "undefined") return 3;
-    if (window.innerWidth <= 768) return 2;
-    if (window.innerWidth <= 1024) return 2;
+    if (window.innerWidth <= 640) return 2;
     return 3;
   };
 
@@ -150,7 +186,7 @@ export default function ProductDetails({ initialSlug, onBack, prefetchedData }) 
     const show = (prod) => {
       setCurrentProduct(prod);
       if (prod?.slug) window.history.pushState({}, "", `?product=${prod.slug}`);
-      document.querySelector(".product-page")?.scrollIntoView({ behavior: "smooth" });
+      window.scrollTo({ top: 0, behavior: "smooth" });
     };
     if (found) return show(found);
     fetch(`${BASE_URL}/api/grains/products/${slug}`)
@@ -329,19 +365,15 @@ export default function ProductDetails({ initialSlug, onBack, prefetchedData }) 
         <div className="product-container">
           <div className="gallery">
             <div className="main-image">
-              <img src={activeImg || getProductImage(p) || undefined} alt="product" />
+              <ImageWithSkeleton src={activeImg || getProductImage(p) || undefined} alt="product" />
             </div>
             <div className="thumbs">
-              {list(p?.images).slice(1).map((img, i) => {
+              {list(p?.images).slice(1).filter(img => img).map((img, i) => {
                 const url = buildImageUrl(img);
                 return (
-                  <img
-                    src={url}
-                    alt={`thumb-${i}`}
-                    key={i}
-                    onClick={() => setActiveImg(url)}
-                    className={activeImg === url ? "active-thumb" : ""}
-                  />
+                  <div key={i} className={`thumb-wrapper ${activeImg === url ? "active-thumb" : ""}`} onClick={() => setActiveImg(url)}>
+                    <ImageWithSkeleton src={url} alt={`thumb-${i}`} />
+                  </div>
                 );
               })}
             </div>
@@ -373,9 +405,12 @@ export default function ProductDetails({ initialSlug, onBack, prefetchedData }) 
 
             <div className="size-options">
               {weights.map((size) => (
-                <button key={size} className={selectedSize === size ? "size-btn active" : "size-btn"} onClick={() => setSelectedSize(size)}>
-                  {size}
-                </button>
+                <div key={size} className="size-btn-wrapper">
+             
+                  <button className={selectedSize === size ? "size-btn active" : "size-btn"} onClick={() => setSelectedSize(size)}>
+                    {size}
+                  </button>
+                </div>
               ))}
             </div>
 
@@ -513,7 +548,7 @@ export default function ProductDetails({ initialSlug, onBack, prefetchedData }) 
                 <div className="pi-carousel-item" key={i}>
                   <div className="pi-card" style={{ cursor: "pointer" }} onClick={() => handleProductSelect(item.slug)}>
                     <div className="pi-img-box">
-                      <img src={item.img || undefined} alt={item.alt} />
+                      <ImageWithSkeleton src={item.img || undefined} alt={item.alt} />
                     </div>
                     <div className="pi-card-content">
                       <h4>{item.title}</h4>
