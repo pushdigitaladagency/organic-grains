@@ -49,7 +49,7 @@ function splitHeading(str) {
   return idx === -1 ? [str, ""] : [str.slice(0, idx + 2), str.slice(idx + 2)];
 }
 
-export default function ProductDetails({ initialSlug, onBack }) {
+export default function ProductDetails({ initialSlug, onBack, prefetchedData }) {
   const [selectedSize, setSelectedSize] = useState("");
   const [index, setIndex] = useState(0);
   const [visibleItems, setVisibleItems] = useState(3);
@@ -58,16 +58,37 @@ export default function ProductDetails({ initialSlug, onBack }) {
   const [allProducts, setAllProducts] = useState([]);
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [currentProduct, setCurrentProduct] = useState(null);
+  const [activeImg, setActiveImg] = useState("");
 
   const getVisibleItems = () => {
     if (typeof window === "undefined") return 3;
-    if (window.innerWidth <= 768) return 1;
+    if (window.innerWidth <= 768) return 2;
     if (window.innerWidth <= 1024) return 2;
     return 3;
   };
 
-  /* ---------- FETCH ---------- */
+  /* ---------- FETCH ----------
+   * If the parent (page.js) already pre-fetched data while Home was rendering,
+   * skip the network calls and use those results directly. Otherwise fall back
+   * to the original self-fetch so direct URL access still works.
+   * --------------------------------------------------------------------- */
   useEffect(() => {
+    // ── Case 1: data was already fetched by home page ──────────────────────
+    if (prefetchedData) {
+      const { allProducts: prods, featuredProducts: feat, categoryMenu: menu } = prefetchedData;
+
+      setAllProducts(prods);
+      setFeaturedProducts(feat);
+      setCategoryMenu(menu);
+
+      // Resolve the initial product to display.
+      const wanted = initialSlug || new URLSearchParams(window.location.search).get("product");
+      const initial = (wanted && prods.find((pr) => pr.slug === wanted)) || prods[0];
+      if (initial) setCurrentProduct(initial);
+      return; // skip self-fetch
+    }
+
+    // ── Case 2: no prefetched data — fetch independently (original logic) ──
     async function fetchAll() {
       try {
         const [catsData, prodsData, featData] = await Promise.all([
@@ -113,7 +134,7 @@ export default function ProductDetails({ initialSlug, onBack }) {
       }
     }
     fetchAll();
-  }, []);
+  }, [prefetchedData]);
 
   // When the parent changes the slug (e.g. user clicks another product in Home), sync it.
   useEffect(() => {
@@ -166,6 +187,7 @@ export default function ProductDetails({ initialSlug, onBack }) {
     const w = list(currentProduct?.weights);
     if (w.length) setSelectedSize((w.find((x) => x.popular) || w[0]).label);
     setIndex(0);
+    if (currentProduct) setActiveImg(getProductImage(currentProduct));
   }, [currentProduct]);
 
   /* ---------- DERIVED ---------- */
@@ -215,18 +237,45 @@ export default function ProductDetails({ initialSlug, onBack }) {
   const maxIndex = Math.max((carouselItems.length || 1) - visibleItems, 0);
   const prev = () => setIndex((i) => Math.max(i - 1, 0));
   const next = () => setIndex((i) => Math.min(i + 1, maxIndex));
- const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState({
     name: "",
     phone: "",
     email: "",
+    product: "",
     message: "",
   });
 
+  const [errors, setErrors] = useState({});
+
+  const validate = () => {
+    let tempErrors = {};
+    if (!formData.name.trim()) tempErrors.name = "Name is required";
+    if (!formData.phone) {
+      tempErrors.phone = "Phone number is required";
+    } else if (!/^\d{10}$/.test(formData.phone)) {
+      tempErrors.phone = "Phone number must be 10 digits";
+    }
+    if (!formData.email) {
+      tempErrors.email = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      tempErrors.email = "Email is invalid";
+    }
+    if (!formData.product) tempErrors.product = "Please select a product";
+    if (!formData.message.trim()) tempErrors.message = "Message is required";
+
+    setErrors(tempErrors);
+    return Object.keys(tempErrors).length === 0;
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
+    // Clear error for this field when user starts typing
+    if (errors[name]) {
+      setErrors({ ...errors, [name]: "" });
+    }
 
     if (name === "phone") {
-      const numbersOnly = value.replace(/\D/g, "");
+      const numbersOnly = value.replace(/\D/g, "").slice(0, 10);
       setFormData({ ...formData, [name]: numbersOnly });
     } else {
       setFormData({ ...formData, [name]: value });
@@ -236,21 +285,27 @@ export default function ProductDetails({ initialSlug, onBack }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(formData);
-
-    alert("Form submitted successfully!");
-
-    setFormData({
-      name: "",
-      phone: "",
-      email: "",
-      message: "",
-    });
+    if (validate()) {
+      console.log(formData);
+      alert("Form submitted successfully!");
+      setFormData({
+        name: "",
+        phone: "",
+        email: "",
+        product: "",
+        message: "",
+      });
+      setErrors({});
+    }
   };
 
   return (
     <>
       <section className="category-main">
+        <button className="back-home-btn" onClick={onBack}>
+          <img src="./Images/arrow.svg" alt="back" className="back-arrow-icon" />
+          <span>Back to Home</span>
+        </button>
         <div className="category-menu">
           {categoryMenu.map((menu, i) => (
             <div className="menu-item" key={i}>
@@ -270,16 +325,25 @@ export default function ProductDetails({ initialSlug, onBack }) {
         </div>
       </section>
 
-      <section className="product-page">
+      <section className="product-page" id="products">
         <div className="product-container">
           <div className="gallery">
             <div className="main-image">
-              <img src={getProductImage(p) || undefined} alt="product" />
+              <img src={activeImg || getProductImage(p) || undefined} alt="product" />
             </div>
             <div className="thumbs">
-              {galleryThumbs.map((thumb, i) => (
-                <img src={thumb} alt="" key={i} />
-              ))}
+              {list(p?.images).slice(1).map((img, i) => {
+                const url = buildImageUrl(img);
+                return (
+                  <img
+                    src={url}
+                    alt={`thumb-${i}`}
+                    key={i}
+                    onClick={() => setActiveImg(url)}
+                    className={activeImg === url ? "active-thumb" : ""}
+                  />
+                );
+              })}
             </div>
           </div>
 
@@ -380,7 +444,7 @@ export default function ProductDetails({ initialSlug, onBack }) {
         </div>
       </section>
 
-      <section className="benefits-section">
+      <section className="benefits-section" id="benefits">
         <div className="benefits-header">
           <span className="benefits-tag">{hl?.eyebrow}</span>
           <h2 className="benefits-title">
@@ -491,62 +555,82 @@ export default function ProductDetails({ initialSlug, onBack }) {
         </div>
 
         <form className="contact-form" onSubmit={handleSubmit}>
-      <h3>Send us a message</h3>
+          <h3>Send us a message</h3>
 
-      <div className="form-row">
-        <div className="form-group">
-          <label className="name">Name</label>
-          <input
-            type="text"
-            name="name"
-            placeholder="Your name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
-        </div>
+          <div className="form-row">
+            <div className="form-group">
+              <label className="name">Name</label>
+              <input
+                type="text"
+                name="name"
+                placeholder="Your name"
+                value={formData.name}
+                onChange={handleChange}
+              />
+              {errors.name && <span className="error-msg">{errors.name}</span>}
+            </div>
 
-        <div className="form-group">
-          <label className="name">Phone</label>
-          <input
-            type="text"
-            name="phone"
-            placeholder="+91"
-            value={formData.phone}
-            onChange={handleChange}
-            maxLength={10}
-            required
-          />
-        </div>
-      </div>
+            <div className="form-group">
+              <label className="name">Phone</label>
+              <input
+                type="text"
+                name="phone"
+                placeholder="+91"
+                value={formData.phone}
+                onChange={handleChange}
+                maxLength={10}
+              />
+              {errors.phone && <span className="error-msg">{errors.phone}</span>}
+            </div>
+          </div>
 
-      <div className="form-group">
-        <label className="name">Email</label>
-        <input
-          type="email"
-          name="email"
-          placeholder="you@example.com"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-      </div>
+          <div className="form-row">
+            <div className="form-group">
+              <label className="name">Email</label>
+              <input
+                type="email"
+                name="email"
+                placeholder="you@example.com"
+                value={formData.email}
+                onChange={handleChange}
+              />
+              {errors.email && <span className="error-msg">{errors.email}</span>}
+            </div>
 
-      <div className="form-group">
-        <label className="name">Message</label>
-        <textarea
-          name="message"
-          placeholder="Tell us what you'd like to order..."
-          value={formData.message}
-          onChange={handleChange}
-          required
-        />
-      </div>
+            <div className="form-group">
+              <label className="name">Popular Products</label>
+              <select
+                name="product"
+                value={formData.product}
+                onChange={handleChange}
+                className="product-select"
+              >
+                <option value="" disabled>Select a product</option>
+                <option value="Karuppu Kavuni Rice">Karuppu Kavuni Rice</option>
+                <option value="Rathasali Rice">Rathasali Rice</option>
+                <option value="Thuyamalli Rice">Thuyamalli Rice</option>
+                <option value="Beetroot Multivitamin Malt">Beetroot Multivitamin Malt</option>
+                <option value="Panchamirtha Malt">Panchamirtha Malt</option>
+              </select>
+              {errors.product && <span className="error-msg">{errors.product}</span>}
+            </div>
+          </div>
 
-      <button type="submit" className="contact-btn">
-        Order Now →
-      </button>
-    </form>
+          <div className="form-group">
+            <label className="name">Message</label>
+            <textarea
+              name="message"
+              placeholder="Tell us what you'd like to order..."
+              value={formData.message}
+              onChange={handleChange}
+            />
+            {errors.message && <span className="error-msg">{errors.message}</span>}
+          </div>
+
+          <button type="submit" className="contact-btn">
+            Order Now →
+          </button>
+        </form>
       </section>
     </>
   );

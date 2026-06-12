@@ -216,7 +216,7 @@ h1 {
   flex: 1;
 }
 
-.tag {
+.tags {
   color: #c46b2b;
   font-size: 12px;
   letter-spacing: 2px;
@@ -566,7 +566,7 @@ h1 {
 /* Specific alignment for Puttu & Idiyappam section */
 
 .card2 .img-box {
-  height: 450px;
+ height: 595px;
   /* Matched to Soup section dimensions */
   display: flex;
   align-items: center;
@@ -875,7 +875,7 @@ h1 {
 /* Soup & Booster image box — matches .card2 .img-box exactly */
 
 .card3 .img-box {
-  height: 450px;
+ height: 600px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1515,6 +1515,10 @@ h1 {
   gap: 15px;
 }
 
+.form-row .form-group {
+  flex: 1;
+}
+
 /* BUTTON */
 
 .contact-btn {
@@ -1529,6 +1533,13 @@ h1 {
   cursor: pointer;
   margin-top: 4px;
   letter-spacing: 0.3px;
+}
+
+.error-msg {
+  color: #c43b3b;
+  font-size: 12px;
+  margin-top: 4px;
+  display: block;
 }
 
 .name {
@@ -1622,7 +1633,7 @@ h1 {
     margin-left: -35px;
   }
 
-  .tag {
+  .tags {
     font-size: clamp(13px, 1vw, 19px);
   }
 
@@ -1697,7 +1708,7 @@ h1 {
   .card2 .img-box,
   .card3 .img-box,
   .img-box4 {
-    height: clamp(280px, 28vw, 450px);
+   height: clamp(280px, 33vw, 474px);
   }
 
   .card-content,
@@ -2593,7 +2604,7 @@ h1 {
     display: block;
   }
 
-  .tag {
+  .tags {
     color: #c46b2b;
     letter-spacing: 2px;
     margin: 0 auto;
@@ -2606,7 +2617,7 @@ h1 {
     background: #f3e8d7;
     justify-content: center;
     align-items: center;
-    height: 169px;
+           height: 212px;
     display: flex;
   }
 
@@ -2761,7 +2772,7 @@ h1 {
     background: #f3e8d7;
     justify-content: center;
     align-items: center;
-    height: 150px;
+    height: 210px;
     display: flex;
   }
 
@@ -3112,7 +3123,7 @@ h1 {
     line-height: 1.15;
   }
 
-  .tag {
+  .tags {
     font-size: clamp(19px, 1vw, 19px);
     display: block;
     margin: 0 auto 10px;

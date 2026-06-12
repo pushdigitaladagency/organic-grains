@@ -1,12 +1,63 @@
 "use client";
 // HMR trigger
 import Image from "next/image";
-import "./Home.css";
 
+import "./Home.css";
 
 import { useEffect, useState } from "react";
 
-export default function Home({ onProductClick }) {
+/* ─────────────────────────────────────────────────────────────────────────────
+ * Badge class lookup arrays (match original card order for each section)
+ * ───────────────────────────────────────────────────────────────────────────── */
+const RICE_BADGES  = ["badge2", "badge red", "badge yellow"];
+const PUTTU_BADGES = ["badge3", "badge3 red", "badge3 yellow", "badge0", "badge9", "badge9"];
+const SOUP_BADGES  = ["badge4", "badge4 red", "badge4 yellow", "badge56", "badge56"];
+const MALT_BADGES  = ["badge5", "badge5 yellow"];
+
+/* ─────────────────────────────────────────────────────────────────────────────
+ * Static fallback product data — shown while API data loads / not available.
+ * ───────────────────────────────────────────────────────────────────────────── */
+const STATIC_RICE = [
+  { img: "/rice1.png", badge: "badge2",       title: "Karuppu Kavuni Rice", slug: "karuppu-kavuni-rice", desc: "The legendary forbidden black rice",  points: ["✔ Rich in antioxidants", "✔ Supports heart health", "✔ Helps manage diabetes", "✔ Iron-rich (helps anemia)", "✔ Anti-aging & good for skin"] },
+  { img: "/rice2.png", badge: "badge red",    title: "Rathasali Rice",      slug: "rathasali-rice",      desc: "Ancient red rice for vitality",       points: ["✔ Improves blood health", "✔ Increases hemoglobin", "✔ Supports digestion", "✔ Enhances energy & strength", "✔ Helps manage blood sugar"] },
+  { img: "/rice3.png", badge: "badge yellow", title: "Thuyamalli Rice",     slug: "thuyamalli-rice",     desc: "Aromatic, light and easy to digest",  points: ["✔ Easy to digest", "✔ Sustained energy", "✔ Suitable for diabetics", "✔ Boosts immunity", "✔ Rich in nutrients"] },
+];
+
+const STATIC_PUTTU = [
+  { img: "./Images/karuppu-kavuni-puttu-flour-main.svg", alt: "puttu",     badge: "badge3",        badgeText: "Puttu Flour",     slug: "karuppu-kavuni-puttu-flour",    title: "Karuppu Kavuni Puttu Flour",    desc: "Stone-ground black rice for traditional puttu",      points: ["✔ Antioxidant-rich", "✔ Steamed breakfast staple", "✔ Naturally fibrous"] },
+  { img: "./Images/karuppu-kavuni-idiyappam-flour-main.svg", alt: "idiyappam", badge: "badge3 red",    badgeText: "Idiyappam Flour", slug: "karuppu-kavuni-idiyappam-flour", title: "Karuppu Kavuni Idiyappam Flour", desc: "Soft string-hopper flour from heritage black rice",  points: ["✔ Smooth, fine texture", "✔ Healthier dinner choice", "✔ Rich in minerals"] },
+  { img: "./Images/rathasali-puttu-flour-main.svg", alt: "puttu",     badge: "badge3 yellow", badgeText: "Puttu Flour",     slug: "rathasali-puttu-flour",         title: "Rathasali Puttu Flour",         desc: "Iron-rich red rice for warm morning puttu",          points: ["✔ Boosts hemoglobin", "✔ Energising start", "✔ Easy to digest"] },
+  { img: "./Images/rathasali-idiyappam-flour-main.svg", alt: "puttu",     badge: "badge0",        badgeText: "Idiyappam Flour", slug: "rathasali-idiyappam-flour",     title: "Rathasali Idiyappam Flour",     desc: "Delicate red rice idiyappam flour",                  points: ["✔ Light dinner option", "✔ Iron & fibre", "✔ Naturally pigmented"] },
+  { img: "./Images/thuyamalli-puttu-flour-main.svg", alt: "puttu",     badge: "badge9",        badgeText: "Puttu Flour",     slug: "thuyamalli-puttu-flour",        title: "Thuyamalli Puttu Flour",        desc: "Aromatic white rice puttu flour",                    points: ["✔ Soft & fluffy puttu", "✔ Easy on the gut", "✔ Diabetic-friendly"] },
+  { img: "./Images/thooyamalli-idiyappam-flour-main.svg", alt: "puttu",     badge: "badge9",        badgeText: "Idiyappam Flour", slug: "thooyamalli-idiyappam-flour",   title: "Thuyamalli Idiyappam Flour",    desc: "Silky-smooth idiyappam flour",                       points: ["✔ Light supper choice", "✔ Aromatic & fragrant", "✔ Sustained energy"] },
+];
+
+const STATIC_SOUP = [
+  { img: "./Images/karuppu-kavuni-soup-mix-main.svg", alt: "soup",    badge: "badge4",        badgeText: "Soup Mix",       slug: "karuppu-kavuni-soup-mix",           title: "Karuppu Kavuni Soup Mix",          desc: "Hearty black rice nourishing soup",         points: ["✔ Antioxidant-rich broth", "✔ Comforting & filling", "✔ Quick to prepare"] },
+  { img: "./Images/rathasali-soup-mix-main.svg", alt: "soup",    badge: "badge4 red",    badgeText: "Soup Mix",       slug: "rathasali-soup-mix",                title: "Rathasali Soup Mix",               desc: "Warming red rice soup blend",               points: ["✔ Boosts hemoglobin", "✔ Builds stamina", "✔ Wholesome nutrition"] },
+  { img: "./Images/rathasali-health-mix-main.svg", alt: "booster", badge: "badge4 yellow", badgeText: "Iron Booster",   slug: "rathasali-iron-rich-mix",           title: "Rathasali Iron Rich Mix",          desc: "A daily dose of natural iron",              points: ["✔ Combats anemia", "✔ Increases hemoglobin", "✔ Supports blood health"] },
+  { img: "./Images/karuppu-kavuni-health-mix-main.svg", alt: "soup",    badge: "badge56",       badgeText: "Immune Booster", slug: "karuppu-kavuni-immune-booster-mix", title: "Karuppu Kavuni Immune Booster Mix", desc: "Daily immunity from traditional grains",    points: ["✔ Strengthens immunity", "✔ Antioxidant protection", "✔ Immune Booster"] },
+  { img: "/soup888.png", alt: "soup",    badge: "badge56",       badgeText: "Kali Mix",       slug: "kk-black-gram-kali-mix",            title: "KK & Black Gram Kali Mix",         desc: "Karuppu Kavuni + Black Gram protein power", points: ["✔ Balanced carbs, protein & minerals", "✔ Improves strength & stamina", "✔ Supports postpartum recovery", "✔ Long-lasting energy"] },
+];
+
+const STATIC_MALT = [
+  { img: "./Images/beetroot-multivitamin-malt-main.svg", badge: "badge5",        title: "Beetroot Multivitamin Malt", slug: "beetroot-multivitamin-malt", desc: "Detoxify and glow naturally",          points: ["✔ Supports detoxification", "✔ Improves skin health", "✔ Enhances brain function", "✔ Aids digestion"] },
+  { img: "./Images/panchamirtha-malt-main.svg", badge: "badge5 yellow", title: "Panchamirtha Malt",          slug: "panchamirtha-malt",          desc: "Five-fold traditional wellness blend",  points: ["✔ Time-honoured recipe", "✔ Boosts overall wellness", "✔ Naturally sweet & nourishing"] },
+];
+
+/* ─────────────────────────────────────────────────────────────────────────────
+ * API data helpers (mirrors helpers used in Product.js)
+ * ───────────────────────────────────────────────────────────────────────────── */
+const _getName   = (p) => p?.name || p?.title || p?.productName || "";
+const _buildImg  = (f) => (!f ? "" : f.startsWith("http") || f.startsWith("/") ? f : `/Images/${f}`);
+const _getImg    = (p) => _buildImg((Array.isArray(p?.images) ? p.images[0] : null) || p?.image || p?.imageUrl || p?.img || "");
+const _getDesc   = (p) => p?.short_description || p?.description || "";
+const _getPoints = (p) => {
+  const hl = Array.isArray(p?.feature_highlights) ? p.feature_highlights : [];
+  return hl.length ? hl.slice(0, 5).map((h) => `✔ ${h.title}`) : [];
+};
+
+export default function Home({ onProductClick, prefetchedData }) {
   const visibleItems = 3;
 
   const [index, setIndex] = useState(0);
@@ -42,18 +93,46 @@ export default function Home({ onProductClick }) {
       setIndex3(index3 - 1);
     }
   };
- const [formData, setFormData] = useState({
+
+  const [formData, setFormData] = useState({
     name: "",
     phone: "",
     email: "",
+    product: "",
     message: "",
   });
 
+  const [errors, setErrors] = useState({});
+
+  const validate = () => {
+    let tempErrors = {};
+    if (!formData.name.trim()) tempErrors.name = "Name is required";
+    if (!formData.phone) {
+      tempErrors.phone = "Phone number is required";
+    } else if (!/^\d{10}$/.test(formData.phone)) {
+      tempErrors.phone = "Phone number must be 10 digits";
+    }
+    if (!formData.email) {
+      tempErrors.email = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      tempErrors.email = "Email is invalid";
+    }
+    if (!formData.product) tempErrors.product = "Please select a product";
+    if (!formData.message.trim()) tempErrors.message = "Message is required";
+
+    setErrors(tempErrors);
+    return Object.keys(tempErrors).length === 0;
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
+    // Clear error for this field when user starts typing
+    if (errors[name]) {
+      setErrors({ ...errors, [name]: "" });
+    }
 
     if (name === "phone") {
-      const numbersOnly = value.replace(/\D/g, "");
+      const numbersOnly = value.replace(/\D/g, "").slice(0, 10);
       setFormData({ ...formData, [name]: numbersOnly });
     } else {
       setFormData({ ...formData, [name]: value });
@@ -63,17 +142,100 @@ export default function Home({ onProductClick }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(formData);
-
-    alert("Form submitted successfully!");
-
-    setFormData({
-      name: "",
-      phone: "",
-      email: "",
-      message: "",
-    });
+    if (validate()) {
+      console.log(formData);
+      alert("Form submitted successfully!");
+      setFormData({
+        name: "",
+        phone: "",
+        email: "",
+        product: "",
+        message: "",
+      });
+      setErrors({});
+    }
   };
+
+  /* ────────────────────────────────────────────────────────────────────────────
+   * Derive product items from API data (prefetchedData) or fall back to
+   * static arrays when data hasn't arrived yet.
+   *
+   * _getSection(...keywords):
+   *   1. Tries to match categories by title keyword → returns their products.
+   *   2. Falls back to filtering allProducts by slug keyword.
+   * ────────────────────────────────────────────────────────────────────────── */
+  const _allProds = prefetchedData?.allProducts || [];
+  const _catMenu  = prefetchedData?.categoryMenu || [];
+
+  function _getSection(...keywords) {
+    for (const kw of keywords) {
+      const cats = _catMenu.filter((c) => c.title.toLowerCase().includes(kw.toLowerCase()));
+      if (cats.length) {
+        const seen = new Set();
+        return cats
+          .flatMap((c) => c.links)
+          .filter((l) => { if (seen.has(l.slug)) return false; seen.add(l.slug); return true; })
+          .map((l) => _allProds.find((p) => p.slug === l.slug))
+          .filter(Boolean);
+      }
+    }
+    // Slug-level fallback
+    return _allProds.filter((p) =>
+      keywords.some((k) => (p?.slug || "").toLowerCase().includes(k.toLowerCase()))
+    );
+  }
+
+  // ── Rice (up to 3 products) ──────────────────────────────────────────────
+  const riceItems = _allProds.length
+    ? _getSection("rice", "heritage").slice(0, 3).map((p, i) => ({
+        img:    _getImg(p) || `/rice${i + 1}.png`,
+        badge:  RICE_BADGES[i % RICE_BADGES.length],
+        title:  _getName(p),
+        slug:   p?.slug || "",
+        desc:   _getDesc(p),
+        points: _getPoints(p).length ? _getPoints(p) : (STATIC_RICE[i]?.points || []),
+      }))
+    : STATIC_RICE;
+
+  // ── Puttu & Idiyappam (up to 6 products) ────────────────────────────────
+  const puttuItems = _allProds.length
+    ? _getSection("flour", "puttu", "idiyappam").slice(0, 6).map((p, i) => ({
+        img:       _getImg(p) || `/puttu${i + 1}.png`,
+        alt:       p?.slug || "",
+        badge:     PUTTU_BADGES[i % PUTTU_BADGES.length],
+        badgeText: p?.badge || ((p?.slug || "").includes("puttu") ? "Puttu Flour" : "Idiyappam Flour"),
+        slug:      p?.slug || "",
+        title:     _getName(p),
+        desc:      _getDesc(p),
+        points:    _getPoints(p).length ? _getPoints(p) : (STATIC_PUTTU[i]?.points || []),
+      }))
+    : STATIC_PUTTU;
+
+  // ── Soup & Booster Mixes (up to 5 products) ─────────────────────────────
+  const soupItems = _allProds.length
+    ? _getSection("soup", "booster", "mix").slice(0, 5).map((p, i) => ({
+        img:       _getImg(p) || `/soup${i + 1}.png`,
+        alt:       p?.slug || "",
+        badge:     SOUP_BADGES[i % SOUP_BADGES.length],
+        badgeText: p?.badge || "Soup Mix",
+        slug:      p?.slug || "",
+        title:     _getName(p),
+        desc:      _getDesc(p),
+        points:    _getPoints(p).length ? _getPoints(p) : (STATIC_SOUP[i]?.points || []),
+      }))
+    : STATIC_SOUP;
+
+  // ── Health Malts (up to 2 products) ─────────────────────────────────────
+  const maltItems = _allProds.length
+    ? _getSection("malt", "health malt").slice(0, 2).map((p, i) => ({
+        img:    _getImg(p) || `/malt${i + 1}.png`,
+        badge:  MALT_BADGES[i % MALT_BADGES.length],
+        title:  _getName(p),
+        slug:   p?.slug || "",
+        desc:   _getDesc(p),
+        points: _getPoints(p).length ? _getPoints(p) : (STATIC_MALT[i]?.points || []),
+      }))
+    : STATIC_MALT;
 
   return (
     <div>
@@ -127,7 +289,7 @@ export default function Home({ onProductClick }) {
         {/* RIGHT CONTENT */}
         <div className="about-content">
 
-          <span className="tag">ABOUT US</span>
+          <span className="tags">ABOUT US</span>
 
           <h2 className="root">
             Rooted in Tradition,<br />
@@ -210,50 +372,7 @@ export default function Home({ onProductClick }) {
 
         <div className="product-cards">
 
-          {[
-            {
-              img: "/rice1.png",
-              badge: "badge2",
-              title: "Karuppu Kavuni Rice",
-              slug: "karuppu-kavuni-rice",
-              desc: "The legendary forbidden black rice",
-              points: [
-                "✔ Rich in antioxidants",
-                "✔ Supports heart health",
-                "✔ Helps manage diabetes",
-                "✔ Iron-rich (helps anemia)",
-                "✔ Anti-aging & good for skin",
-              ],
-            },
-            {
-              img: "/rice2.png",
-              badge: "badge red",
-              title: "Rathasali Rice",
-              slug: "rathasali-rice",
-              desc: "Ancient red rice for vitality",
-              points: [
-                "✔ Improves blood health",
-                "✔ Increases hemoglobin",
-                "✔ Supports digestion",
-                "✔ Enhances energy & strength",
-                "✔ Helps manage blood sugar",
-              ],
-            },
-            {
-              img: "/rice3.png",
-              badge: "badge yellow",
-              title: "Thuyamalli Rice",
-              slug: "thuyamalli-rice",
-              desc: "Aromatic, light and easy to digest",
-              points: [
-                "✔ Easy to digest",
-                "✔ Sustained energy",
-                "✔ Suitable for diabetics",
-                "✔ Boosts immunity",
-                "✔ Rich in nutrients",
-              ],
-            },
-          ].map((item, index) => (
+          {riceItems.map((item, index) => (
             <div
               className="card"
               key={index}
@@ -304,92 +423,7 @@ export default function Home({ onProductClick }) {
               style={{ transform: `translateX(-${index * (100 / visibleItems)}%)` }}
             >
 
-              {[
-                {
-                  img: "/puttu111.png",
-                  alt: "puttu",
-                  badge: "badge3",
-                  badgeText: "Puttu Flour",
-                  slug: "karuppu-kavuni-puttu-flour",
-                  title: "Karuppu Kavuni Puttu Flour",
-                  desc: "Stone-ground black rice for traditional puttu",
-                  points: [
-                    "✔ Antioxidant-rich",
-                    "✔ Steamed breakfast staple",
-                    "✔ Naturally fibrous",
-                  ],
-                },
-                {
-                  img: "/puttu222.png",
-                  alt: "idiyappam",
-                  badge: "badge3 red",
-                  badgeText: "Idiyappam Flour",
-                  slug: "karuppu-kavuni-idiyappam-flour",
-                  title: "Karuppu Kavuni Idiyappam Flour",
-                  desc: "Soft string-hopper flour from heritage black rice",
-                  points: [
-                    "✔ Smooth, fine texture",
-                    "✔ Healthier dinner choice",
-                    "✔ Rich in minerals",
-                  ],
-                },
-                {
-                  img: "/puttu333.png",
-                  alt: "puttu",
-                  badge: "badge3 yellow",
-                  badgeText: "Puttu Flour",
-                  slug: "rathasali-puttu-flour",
-                  title: "Rathasali Puttu Flour",
-                  desc: "Iron-rich red rice for warm morning puttu",
-                  points: [
-                    "✔ Boosts hemoglobin",
-                    "✔ Energising start",
-                    "✔ Easy to digest",
-                  ],
-                },
-                {
-                  img: "/puttu444.png",
-                  alt: "puttu",
-                  badge: "badge0",
-                  badgeText: "Idiyappam Flour",
-                  slug: "rathasali-idiyappam-flour",
-                  title: "Rathasali Idiyappam Flour",
-                  desc: "Delicate red rice idiyappam flour",
-                  points: [
-                    "✔ Light dinner option",
-                    "✔ Iron & fibre",
-                    "✔ Naturally pigmented",
-                  ],
-                },
-                {
-                  img: "/puttu555.png",
-                  alt: "puttu",
-                  badge: "badge9",
-                  badgeText: "Puttu Flour",
-                  slug: "thuyamalli-puttu-flour",
-                  title: "Thuyamalli Puttu Flour",
-                  desc: "Aromatic white rice puttu flour",
-                  points: [
-                    "✔ Soft & fluffy puttu",
-                    "✔ Easy on the gut",
-                    "✔ Diabetic-friendly",
-                  ],
-                },
-                {
-                  img: "/puttu999.png",
-                  alt: "puttu",
-                  badge: "badge9",
-                  badgeText: "Idiyappam Flour",
-                  slug: "thooyamalli-idiyappam-flour",
-                  title: "Thuyamalli Idiyappam Flour",
-                  desc: "Silky-smooth idiyappam flour",
-                  points: [
-                    "✔ Light supper choice",
-                    "✔ Aromatic & fragrant",
-                    "✔ Sustained energy",
-                  ],
-                },
-              ].map((item, i) => (
+              {puttuItems.map((item, i) => (
                 <div className="carousel-item" key={i}>
                   <div
                     className="card2"
@@ -435,18 +469,6 @@ export default function Home({ onProductClick }) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
       <div className="products-wrapper">
 
         <section className="products3" id="products3">
@@ -470,79 +492,7 @@ export default function Home({ onProductClick }) {
                 style={{ transform: `translateX(-${index3 * (100 / visibleItems)}%)` }}
               >
 
-                {[
-                  {
-                    img: "/soup222.png",
-                    alt: "soup",
-                    badge: "badge4",
-                    badgeText: "Soup Mix",
-                    slug: "karuppu-kavuni-soup-mix",
-                    title: "Karuppu Kavuni Soup Mix",
-                    desc: "Hearty black rice nourishing soup",
-                    points: [
-                      "✔ Antioxidant-rich broth",
-                      "✔ Comforting & filling",
-                      "✔ Quick to prepare",
-                    ],
-                  },
-                  {
-                    img: "/soup333.png",
-                    alt: "soup",
-                    badge: "badge4 red",
-                    badgeText: "Soup Mix",
-                    slug: "rathasali-soup-mix",
-                    title: "Rathasali Soup Mix",
-                    desc: "Warming red rice soup blend",
-                    points: [
-                      "✔ Boosts hemoglobin",
-                      "✔ Builds stamina",
-                      "✔ Wholesome nutrition",
-                    ],
-                  },
-                  {
-                    img: "/soup444.png",
-                    alt: "booster",
-                    badge: "badge4 yellow",
-                    badgeText: "Iron Booster",
-                    slug: "rathasali-iron-rich-mix",
-                    title: "Rathasali Iron Rich Mix",
-                    desc: "A daily dose of natural iron",
-                    points: [
-                      "✔ Combats anemia",
-                      "✔ Increases hemoglobin",
-                      "✔ Supports blood health",
-                    ],
-                  },
-                  {
-                    img: "/soup555.png",
-                    alt: "soup",
-                    badge: "badge56",
-                    badgeText: "Immune Booster",
-                    slug: "karuppu-kavuni-immune-booster-mix",
-                    title: "Karuppu Kavuni Immune Booster Mix",
-                    desc: "Daily immunity from traditional grains",
-                    points: [
-                      "✔ Strengthens immunity",
-                      "✔ Antioxidant protection",
-                      "✔ Immune Booster",
-                    ],
-                  },
-                  {
-                    img: "/soup888.png",
-                    alt: "soup",
-                    badge: "badge56",
-                    badgeText: "Kali Mix",
-                    slug: "kk-black-gram-kali-mix",
-                    title: "KK & Black Gram Kali Mix",
-                    desc: "Karuppu Kavuni + Black Gram protein power",
-                    points: [
-                      "✔ Balanced carbs, protein & minerals",
-                      "✔ Improves strength & stamina",
-                      "✔ Supports postpartum recovery",
-                      "✔ Long-lasting energy",
-                    ],
-                  },
-                ].map((item, i) => (
+                {soupItems.map((item, i) => (
                   <div className="carousel-item" key={i}>
                     <div
                       className="card3"
@@ -594,33 +544,13 @@ export default function Home({ onProductClick }) {
 
           <div className="product4-cards">
 
-            {[
-              {
-                img: "/malt11.png",
-                badge: "badge5",
-                title: "Beetroot Multivitamin Malt",
-                desc: "Detoxify and glow naturally",
-                points: [
-                  "✔ Supports detoxification",
-                  "✔ Improves skin health",
-                  "✔ Enhances brain function",
-                  "✔ Aids digestion",
-                ],
-              },
-              {
-                img: "/malt22.png",
-                badge: "badge5 yellow",
-                title: "Panchamirtha Malt",
-                desc: "Five-fold traditional wellness blend",
-                points: [
-                  "✔Time-honoured recipe",
-                  "✔ Boosts overall wellness",
-                  "✔ Naturally sweet & nourishing",
-
-                ],
-              },
-            ].map((item, i) => (
-              <div className="card4" key={i}>
+            {maltItems.map((item, i) => (
+              <div
+                className="card4"
+                key={i}
+                style={{ cursor: "pointer" }}
+                onClick={() => onProductClick && item.slug && onProductClick(item.slug)}
+              >
 
                 <div className="img-box4">
                   <img src={item.img} alt="malt" />
@@ -819,7 +749,7 @@ export default function Home({ onProductClick }) {
               </div>
               <div>
                 <span className="phone">LOCATION</span>
-                <p>Thirugai Life style Center 
+                <p>Thirugai Life style Center
 Thirukarugavur, Thanjavur -614302</p>
               </div>
             </div>
@@ -841,8 +771,8 @@ Thirukarugavur, Thanjavur -614302</p>
             placeholder="Your name"
             value={formData.name}
             onChange={handleChange}
-            required
           />
+          {errors.name && <span className="error-msg">{errors.name}</span>}
         </div>
 
         <div className="form-group">
@@ -854,21 +784,41 @@ Thirukarugavur, Thanjavur -614302</p>
             value={formData.phone}
             onChange={handleChange}
             maxLength={10}
-            required
           />
+          {errors.phone && <span className="error-msg">{errors.phone}</span>}
         </div>
       </div>
 
-      <div className="form-group">
-        <label className="name">Email</label>
-        <input
-          type="email"
-          name="email"
-          placeholder="you@example.com"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
+      <div className="form-row">
+        <div className="form-group">
+          <label className="name">Email</label>
+          <input
+            type="email"
+            name="email"
+            placeholder="you@example.com"
+            value={formData.email}
+            onChange={handleChange}
+          />
+          {errors.email && <span className="error-msg">{errors.email}</span>}
+        </div>
+
+        <div className="form-group">
+          <label className="name">Popular Products</label>
+          <select
+            name="product"
+            value={formData.product}
+            onChange={handleChange}
+            className="product-select"
+          >
+            <option value="" disabled>Select a product</option>
+            <option value="Karuppu Kavuni Rice">Karuppu Kavuni Rice</option>
+            <option value="Rathasali Rice">Rathasali Rice</option>
+            <option value="Thuyamalli Rice">Thuyamalli Rice</option>
+            <option value="Beetroot Multivitamin Malt">Beetroot Multivitamin Malt</option>
+            <option value="Panchamirtha Malt">Panchamirtha Malt</option>
+          </select>
+          {errors.product && <span className="error-msg">{errors.product}</span>}
+        </div>
       </div>
 
       <div className="form-group">
@@ -878,8 +828,8 @@ Thirukarugavur, Thanjavur -614302</p>
           placeholder="Tell us what you'd like to order..."
           value={formData.message}
           onChange={handleChange}
-          required
         />
+        {errors.message && <span className="error-msg">{errors.message}</span>}
       </div>
 
       <button type="submit" className="contact-btn">

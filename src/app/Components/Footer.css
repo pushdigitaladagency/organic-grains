@@ -4,7 +4,7 @@
 
 .oh-foot {
   width: 100%;
-  background:#354C24;
+  background: #354C24;
   padding: 80px 0 28px;
   position: relative;
   overflow: hidden;
@@ -34,10 +34,10 @@
 }
 
 .logo2 {
-    object-fit: contain;
-    width: 149px;
-    height: 145px;
-    margin-top: -5px;
+  object-fit: contain;
+  width: 149px;
+  height: 145px;
+  margin-top: -5px;
 }
 
 .oh-foot__tag {
@@ -134,10 +134,10 @@
 }
 
 .oh-foot__social {
-    flex-direction: row;
-    gap: 28px;
-    margin-left: 81px;
-    display: flex;
+  flex-direction: row;
+  gap: 28px;
+  margin-left: 81px;
+  display: flex;
 }
 
 .oh-foot__socialBtn {
@@ -194,12 +194,13 @@
     gap: clamp(20px, 3vw, 40px);
     grid-template-columns: 350px 1fr 1fr 1fr;
   }
+
   .logo2 {
     object-fit: contain;
     width: 100px;
     height: 119px;
     margin-top: -5px;
-}
+  }
 
 
   .oh-foot__bottom {
@@ -213,8 +214,10 @@
   .oh-foot__container {
     width: 100%;
     padding: 0 clamp(20px, 5vw, 50px);
-    gap: clamp(15px, 2vw, 30px);
-    grid-template-columns: 1.2fr 0.8fr 1.2fr 0.8fr;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: flex-start !important;
+    gap: 50px !important;
   }
 
   .oh-foot__bottom {
@@ -247,6 +250,7 @@
     gap: clamp(20px, 3vw, 36px);
     display: flex;
     margin-left: 0;
+    flex: 0 1 auto !important;
   }
 
   .oh-foot__heading,
@@ -284,20 +288,23 @@
 @media screen and (min-width: 641px) and (max-width: 1023px) {
   .oh-foot__container {
     width: 100%;
-    padding: 0 clamp(20px, 3vw, 40px);
-    gap: clamp(20px, 3vw, 40px);
-    grid-template-columns: repeat(2, 1fr);
+   padding: 0 clamp(12px, 7vw, 40px);
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 30px !important;
+    justify-content: flex-start !important;
     margin-left: 0;
     max-width: 100%;
   }
 
   .oh-foot__brand {
-    grid-column: 1 / -1;
+    flex: 0 0 100% !important;
     gap: 12px;
     max-width: 100%;
     flex-direction: column;
     display: flex;
     margin-top: 0;
+    margin-bottom: 10px;
   }
 
   .oh-foot__tag {
@@ -311,11 +318,14 @@
   .oh-foot__logo .logo {
     display: none;
   }
-.oh-foot__col {
+
+  .oh-foot__col {
     flex-direction: column;
-    gap: 36px;
+    gap: 20px !important;
     display: flex;
-}
+    flex: 1 1 180px !important;
+  }
+
   .oh-foot__heading,
   .oh-foot__heading1 {
     font-size: clamp(11px, 1.2vw, 12px);
@@ -341,6 +351,7 @@
 
   .oh-foot__list--touch li {
     width: 100%;
+            height: 39px;
   }
 
   .oh-foot__social {
@@ -374,7 +385,7 @@
   }
 
   .oh-foot__list {
-   
+
     flex-direction: column;
     align-items: flex-start;
     margin: 0 0 0 42px;
@@ -429,13 +440,13 @@
     margin-left: 36px;
   }
 
-  .oh-foot__heading1 {
-    font-size: 13px;
-    letter-spacing: 0.16em;
-    color: white;
-    margin: 0;
-    margin-left: 46px;
-  }
+     .oh-foot__heading1 {
+        letter-spacing: .16em;
+        color: #fff;
+        /* margin: 0 0 0 18px; */
+        font-size: 13px;
+        margin-left: -66px;
+    }
 
   .oh-foot__container {
     grid-template-columns: 1fr 1fr !important;
@@ -471,13 +482,13 @@
   }
 
   .oh-foot__col {
-   align-items: flex-start;
+    align-items: flex-start;
     margin-left: -13px;
     gap: 16px !important;
     width: 100% !important;
   }
 
-  #get{
+  #get {
     margin-left: 4px;
   }
 
@@ -501,6 +512,12 @@
   .oh-foot__list--touch li * {
     font-family: 'Inter', sans-serif !important;
     gap: 12px;
+  }
+
+  .oh-foot__list--touch svg {
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
   }
 
   .oh-foot__social {
@@ -543,9 +560,11 @@
   .oh-foot {
     padding: 60px 0 20px;
   }
+
   .oh-foot__bottom {
     margin-top: 40px;
     padding-top: 20px;
     padding-bottom: 30px;
+
   }
 }
