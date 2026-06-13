@@ -1,6 +1,6 @@
 "use client";
 // HMR trigger
-import Image from "next/image";
+import { asset } from "../lib/asset";
 
 import "./Home.css";
 
@@ -205,7 +205,7 @@ export default function Home({ onProductClick, prefetchedData }) {
       {/* 🔹 HERO SECTION */}
       <section className="hero" id="home">
         <video autoPlay muted loop className="background-video">
-          <source src="/hero_bg1.mp4" type="video/mp4" />
+          <source src={asset("/hero_bg1.mp4")} type="video/mp4" />
         </video>
 
 
@@ -237,10 +237,10 @@ export default function Home({ onProductClick, prefetchedData }) {
 
       {/* 🔹 ABOUT SECTION */}
       <section className="about" id="about">
-        <img src="/red_wheat.png" alt="background" className="products10" />
+        <img src={asset("/red_wheat.png")} alt="background" className="products10" />
         {/* LEFT IMAGE */}
         <div className="about-img">
-          <img src="/paddy.png" alt="about" />
+          <img src={asset("/paddy.png")} alt="about" />
           <div className="quote">
             "Food should be pure, simple, and beneficial — just the way nature intended."
           </div>
@@ -264,7 +264,7 @@ export default function Home({ onProductClick, prefetchedData }) {
 
             <div className="feature">
               <div className="icon5">
-                <img src="/leaf.png" alt="leaf icon" />
+                <img src={asset("/leaf.png")} alt="leaf icon" />
               </div>
               <div>
                 <h4 className="head">Sourced with Care</h4>
@@ -274,7 +274,7 @@ export default function Home({ onProductClick, prefetchedData }) {
 
             <div className="feature">
               <div className="icon">
-                <img src="/shield.png" alt="leaf icon" />
+                <img src={asset("/shield.png")} alt="leaf icon" />
               </div>
               <div>
                 <h4 className="head">Minimally Processed</h4>
@@ -284,7 +284,7 @@ export default function Home({ onProductClick, prefetchedData }) {
 
             <div className="feature">
               <div className="icon6">
-                <img src="/heart.png" alt="leaf icon" />
+                <img src={asset("/heart.png")} alt="leaf icon" />
               </div>
               <div>
                 <h4 className="head">Made for Wellness</h4>
@@ -294,15 +294,15 @@ export default function Home({ onProductClick, prefetchedData }) {
 
           </div> <div className="stats">
             <div>
-              <h2>17+ <img className= "star" src="/star.png" /></h2>
+              <h2>17+ <img className= "star" src={asset("/star.png")} /></h2>
               <p>Heritage Products</p>
             </div>
             <div>
-              <h2>100% <img className= "star" src="/star.png" /></h2>
+              <h2>100% <img className= "star" src={asset("/star.png")} /></h2>
               <p>Organic & Natural</p>
             </div>
             <div>
-              <h2>0 <img className= "star"src="/star.png" /></h2>
+              <h2>0 <img className= "star"src={asset("/star.png")} /></h2>
               <p>Preservatives</p>
             </div>
           </div>
@@ -314,7 +314,7 @@ export default function Home({ onProductClick, prefetchedData }) {
 
       {/* 🔹 PRODUCTS SECTION */}
       <section className="products" id="products">
-        <img src="/heritage-bg.png" alt="background" className="products-bg96" />
+        <img src={asset("/heritage-bg.png")} alt="background" className="products-bg96" />
 
         <span className="product-tag">OUR PRODUCTS</span>
 
@@ -341,7 +341,7 @@ export default function Home({ onProductClick, prefetchedData }) {
             >
 
               <div className="img-box">
-                <img src={item.img} alt="rice" />
+                <img src={asset(item.img)} alt="rice" />
 
                 <div className="card-overlay">
                   <ul>
@@ -366,7 +366,7 @@ export default function Home({ onProductClick, prefetchedData }) {
       </section>
 
       <section className="products2" id="products2">
-        <img src="/back_paddy1.png" alt="background" className="products-bg2" />
+        <img src={asset("/back_paddy1.png")} alt="background" className="products-bg2" />
 
         <h3 className="product2-title">Puttu & Idiyappam</h3>
 
@@ -374,7 +374,7 @@ export default function Home({ onProductClick, prefetchedData }) {
 
           {/* LEFT ARROW */}
           <button className="arrow left" onClick={prev}>
-            <img src="/buttonleft.png" alt="Prev" />
+            <img src={asset("/buttonleft.png")} alt="Prev" />
           </button>
 
           <div className="carousel-container">
@@ -394,7 +394,7 @@ export default function Home({ onProductClick, prefetchedData }) {
                   >
 
                     <div className="img-box">
-                      <img src={item.img} alt={item.alt} />
+                      <img src={asset(item.img)} alt={item.alt} />
 
                       <div className="card2-overlay">
                         <ul>
@@ -422,7 +422,7 @@ export default function Home({ onProductClick, prefetchedData }) {
 
           {/* RIGHT ARROW */}
           <button className="arrow right" onClick={next}>
-            <img src="/buttonright.png" alt="Next" />
+            <img src={asset("/buttonright.png")} alt="Next" />
           </button>
 
         </div>
@@ -434,8 +434,8 @@ export default function Home({ onProductClick, prefetchedData }) {
       <div className="products-wrapper">
 
         <section className="products3" id="products3">
-          <img src="/back_paddy.png" alt="background" className="products-bg3" />
-          <img src="/wheat_collec.png" alt="background" className="products-bg6" />
+          <img src={asset("/back_paddy.png")} alt="background" className="products-bg3" />
+          <img src={asset("/wheat_collec.png")} alt="background" className="products-bg6" />
 
           <h3 className="product3-title">Soup & Booster Mixes</h3>
 
@@ -443,7 +443,7 @@ export default function Home({ onProductClick, prefetchedData }) {
 
             {/* LEFT ARROW */}
             <button className="arrow left" onClick={prev3}>
-              <img src="/buttonleft.png" alt="Prev" />
+              <img src={asset("/buttonleft.png")} alt="Prev" />
             </button>
 
             <div className="carousel-container">
@@ -463,7 +463,7 @@ export default function Home({ onProductClick, prefetchedData }) {
                     >
 
                       <div className="img-box">
-                        <img src={item.img} alt={item.alt} />
+                        <img src={asset(item.img)} alt={item.alt} />
 
                         <div className="card2-overlay">
                           <ul>
@@ -491,7 +491,7 @@ export default function Home({ onProductClick, prefetchedData }) {
 
             {/* RIGHT ARROW */}
             <button className="arrow right" onClick={next3}>
-              <img src="/buttonright.png" alt="Next" />
+              <img src={asset("/buttonright.png")} alt="Next" />
             </button>
 
           </div>
@@ -515,7 +515,7 @@ export default function Home({ onProductClick, prefetchedData }) {
               >
 
                 <div className="img-box4">
-                  <img src={item.img} alt="malt" />
+                  <img src={asset(item.img)} alt="malt" />
 
                   <div className="card4-overlay">
                     <ul>
@@ -543,7 +543,7 @@ export default function Home({ onProductClick, prefetchedData }) {
       </div>
 
       <section className="benefits-section" id="benefits">
-        <img src="/red_wheat.png" alt="background" className="products-bg8" />
+        <img src={asset("/red_wheat.png")} alt="background" className="products-bg8" />
         <span className="benefitss-tag">WHY CHOOSE US</span>
 
         <h2 className="benefits-heading">
@@ -556,7 +556,7 @@ export default function Home({ onProductClick, prefetchedData }) {
           {/* BOX 1 */}
           <div className="benefit-box">
             <div className="benefit-icon">
-              <img src="/icon1.png" alt="icon" />
+              <img src={asset("/icon1.png")} alt="icon" />
             </div>
             <h4 className="grown">100% Natural & Organic</h4>
             <p>Grown without synthetic chemicals or fertilizers.</p>
@@ -565,7 +565,7 @@ export default function Home({ onProductClick, prefetchedData }) {
           {/* BOX 2 */}
           <div className="benefit-box">
             <div className="benefit-icon">
-              <img src="/icon2.png" alt="icon" />
+              <img src={asset("/icon2.png")} alt="icon" />
             </div>
             <h4 className="grown">No Preservatives</h4>
             <p>Nothing artificial. Just pure, wholesome food.</p>
@@ -574,7 +574,7 @@ export default function Home({ onProductClick, prefetchedData }) {
           {/* BOX 3 */}
           <div className="benefit-box">
             <div className="benefit-icon">
-              <img src="/icon3.png" alt="icon" />
+              <img src={asset("/icon3.png")} alt="icon" />
             </div>
             <h4 className="grown">Authentic Heritage Varieties</h4>
             <p>Traditional grains preserved through generations.</p>
@@ -583,7 +583,7 @@ export default function Home({ onProductClick, prefetchedData }) {
           {/* BOX 4 */}
           <div className="benefit-box">
             <div className="benefit-icon">
-              <img src="/icon4.png" alt="icon" />
+              <img src={asset("/icon4.png")} alt="icon" />
             </div>
             <h4 className="grown">Rich in Nutrients</h4>
             <p>Naturally packed with vitamins and minerals.</p>
@@ -592,7 +592,7 @@ export default function Home({ onProductClick, prefetchedData }) {
           {/* BOX 5 */}
           <div className="benefit-box">
             <div className="benefit-icon">
-              <img src="/icon5.png" alt="icon" />
+              <img src={asset("/icon5.png")} alt="icon" />
             </div>
             <h4 className="grown">Supports Wellness</h4>
             <p>Holistic nutrition that nurtures lasting health.</p>
@@ -601,7 +601,7 @@ export default function Home({ onProductClick, prefetchedData }) {
           {/* BOX 6 */}
           <div className="benefit-box">
             <div className="benefit-icon">
-              <img src="/icon6.png" alt="icon" />
+              <img src={asset("/icon6.png")} alt="icon" />
             </div>
             <h4 className="grown">For All Age Groups</h4>
             <p>Suitable for children, adults, and elders alike.</p>
@@ -611,7 +611,7 @@ export default function Home({ onProductClick, prefetchedData }) {
 
       </section>
       <section className="life-section">
-        <img src="/grass.png" alt="background" className="products-bg10" />
+        <img src={asset("/grass.png")} alt="background" className="products-bg10" />
         <span className="life-tag">FOR EVERY GENERATION</span>
 
         <h2 className="life-heading">
@@ -625,7 +625,7 @@ export default function Home({ onProductClick, prefetchedData }) {
           <div className="life-item">
             <div className="life-circle">
               <span className="life-number">01</span>
-              <img src="/Component 1.png" alt="icon" />
+              <img src={asset("/Component 1.png")} alt="icon" />
             </div>
             <h4>Growing Children</h4>
             <p>Build strong bodies and sharp minds.</p>
@@ -635,7 +635,7 @@ export default function Home({ onProductClick, prefetchedData }) {
           <div className="life-item">
             <div className="life-circle">
               <span className="life-number">02</span>
-              <img src="/Component 2.png" alt="icon" />
+              <img src={asset("/Component 2.png")} alt="icon" />
             </div>
             <h4>Working Professionals</h4>
             <p>Sustained energy through busy days.</p>
@@ -645,7 +645,7 @@ export default function Home({ onProductClick, prefetchedData }) {
           <div className="life-item">
             <div className="life-circle">
               <span className="life-number">03</span>
-              <img src="/Component 3.png" alt="icon" />
+              <img src={asset("/Component 3.png")} alt="icon" />
             </div>
             <h4>Pregnant & Postpartum Women</h4>
             <p>Gentle, nourishing strength.</p>
@@ -655,7 +655,7 @@ export default function Home({ onProductClick, prefetchedData }) {
           <div className="life-item">
             <div className="life-circle">
               <span className="life-number">04</span>
-              <img src="/Component 4.png" alt="icon" />
+              <img src={asset("/Component 4.png")} alt="icon" />
             </div>
             <h4>Elderly Care</h4>
             <p>Easy-to-digest wholesome nutrition.</p>
@@ -667,7 +667,7 @@ export default function Home({ onProductClick, prefetchedData }) {
 
 
       <section className="contact-section" id="contact">
-        <img src="/heritage-bg.png" alt="background" className="products-bg11" />
+        <img src={asset("/heritage-bg.png")} alt="background" className="products-bg11" />
         {/* LEFT SIDE */}
         <div className="contact-left">
 
@@ -687,7 +687,7 @@ export default function Home({ onProductClick, prefetchedData }) {
 
             <div className="info-box">
               <div className="info-icon">
-                <img src="./Images/mobile.svg" alt="phone" />
+                <img src={asset("./Images/mobile.svg")} alt="phone" />
               </div>
               <div>
                 <span className="phone">PHONE</span>
@@ -697,7 +697,7 @@ export default function Home({ onProductClick, prefetchedData }) {
 
             <div className="info-box">
               <div className="info-icon" id="email">
-                <img src="./Images/mail.svg" alt="email" id="emails"/>
+                <img src={asset("./Images/mail.svg")} alt="email" id="emails"/>
               </div>
               <div>
                 <span className="phone">EMAIL</span>
@@ -707,7 +707,7 @@ export default function Home({ onProductClick, prefetchedData }) {
 
             <div className="info-box">
               <div className="info-icon" id="location-icon">
-                <img src="./Images/location.svg" alt="location" />
+                <img src={asset("./Images/location.svg")} alt="location" />
               </div>
               <div>
                 <span className="phone">LOCATION</span>

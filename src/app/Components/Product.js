@@ -1,5 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
+import { asset } from "../lib/asset";
 import "./product.css";
 
 const BASE_URL = process.env.NEXT_PUBLIC_PRODUC_URI;
@@ -61,8 +63,9 @@ const list = (v) => (Array.isArray(v) ? v : []);
 // Already-absolute URLs (http//) or absolute paths (/) are returned unchanged.
 const buildImageUrl = (filename) => {
   if (!filename) return "";
-  if (filename.startsWith("http") || filename.startsWith("/")) return filename;
-  return `/Images/${filename}`;
+  if (filename.startsWith("http")) return filename;
+  // Route public/static images through the base-path-aware asset() helper.
+  return asset(filename.startsWith("/") ? filename : `/Images/${filename}`);
 };
 
 const getProductName = (p) => p?.name || p?.title || p?.productName || "";
@@ -87,6 +90,7 @@ function splitHeading(str) {
 }
 
 export default function ProductDetails({ initialSlug, onBack, prefetchedData }) {
+  const router = useRouter();
   const [selectedSize, setSelectedSize] = useState("");
   const [index, setIndex] = useState(0);
   const [visibleItems, setVisibleItems] = useState(3);
@@ -103,74 +107,25 @@ export default function ProductDetails({ initialSlug, onBack, prefetchedData }) 
     return 3;
   };
 
-  /* ---------- FETCH ----------
-   * If the parent (page.js) already pre-fetched data while Home was rendering,
-   * skip the network calls and use those results directly. Otherwise fall back
-   * to the original self-fetch so direct URL access still works.
+  /* ---------- DATA ----------
+   * Product data is fetched ONCE by the shared DataProvider in the root layout
+   * and handed in via `prefetchedData`. This view never fetches the catalogue
+   * itself — it just consumes the shared data once it is available.
    * --------------------------------------------------------------------- */
   useEffect(() => {
-    // ── Case 1: data was already fetched by home page ──────────────────────
-    if (prefetchedData) {
-      const { allProducts: prods, featuredProducts: feat, categoryMenu: menu } = prefetchedData;
+    if (!prefetchedData) return; // wait for the shared prefetch to resolve
 
-      setAllProducts(prods);
-      setFeaturedProducts(feat);
-      setCategoryMenu(menu);
+    const { allProducts: prods, featuredProducts: feat, categoryMenu: menu } = prefetchedData;
 
-      // Resolve the initial product to display.
-      const wanted = initialSlug || new URLSearchParams(window.location.search).get("product");
-      const initial = (wanted && prods.find((pr) => pr.slug === wanted)) || prods[0];
-      if (initial) setCurrentProduct(initial);
-      return; // skip self-fetch
-    }
+    setAllProducts(prods);
+    setFeaturedProducts(feat);
+    setCategoryMenu(menu);
 
-    // ── Case 2: no prefetched data — fetch independently (original logic) ──
-    async function fetchAll() {
-      try {
-        const [catsData, prodsData, featData] = await Promise.all([
-          fetch(`${BASE_URL}/api/grains/categories`).then((r) => r.json()),
-          fetch(`${BASE_URL}/api/grains/products`).then((r) => r.json()),
-          fetch(`${BASE_URL}/api/grains/products/featured`).then((r) => r.json()),
-        ]);
-
-        const cats = list(catsData.data ?? catsData.categories ?? catsData);
-        const prods = list(prodsData.data ?? prodsData.products ?? prodsData);
-        const feat = list(featData.data ?? featData.products ?? featData);
-
-        setAllProducts(prods);
-        setFeaturedProducts(feat);
-
-        // Open: initialSlug (from Home click) → URL param → first product.
-        const wanted = initialSlug || new URLSearchParams(window.location.search).get("product");
-        const initial = (wanted && prods.find((pr) => pr.slug === wanted)) || prods[0];
-        if (initial) setCurrentProduct(initial);
-
-        // Build each dropdown from the per-category products endpoint.
-        const menu = await Promise.all(
-          cats.map(async (cat) => {
-            const catName = getCategoryName(cat);
-            const catSlug = getCategorySlug(cat);
-            let products;
-            try {
-              const data = await fetch(`${BASE_URL}/api/grains/categories/${catSlug}/products`).then((r) => r.json());
-              products = list(data.data ?? data.products ?? data);
-            } catch {
-              products = prods.filter((pr) => matchProductCategory(pr, catSlug, catName));
-            }
-            return {
-              title: catName,
-              dropdownClass: catName.toLowerCase().includes("flour") ? "flour-dropdown" : undefined,
-              links: products.map((pr) => ({ name: getProductName(pr), slug: pr?.slug || "" })).filter((l) => l.name),
-            };
-          })
-        );
-        setCategoryMenu(menu);
-      } catch (err) {
-        console.error("Product fetch error:", err);
-      }
-    }
-    fetchAll();
-  }, [prefetchedData]);
+    // Resolve the initial product to display.
+    const wanted = initialSlug || new URLSearchParams(window.location.search).get("product");
+    const initial = (wanted && prods.find((pr) => pr.slug === wanted)) || prods[0];
+    if (initial) setCurrentProduct(initial);
+  }, [prefetchedData, initialSlug]);
 
   // When the parent changes the slug (e.g. user clicks another product in Home), sync it.
   useEffect(() => {
@@ -185,7 +140,7 @@ export default function ProductDetails({ initialSlug, onBack, prefetchedData }) 
     const found = allProducts.find((p) => p.slug === slug) || featuredProducts.find((p) => p.slug === slug);
     const show = (prod) => {
       setCurrentProduct(prod);
-      if (prod?.slug) window.history.pushState({}, "", `?product=${prod.slug}`);
+      if (prod?.slug) router.push(`/product/${prod.slug}`);
       window.scrollTo({ top: 0, behavior: "smooth" });
     };
     if (found) return show(found);
@@ -206,17 +161,6 @@ export default function ProductDetails({ initialSlug, onBack, prefetchedData }) 
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, []);
-
-  // Keep the shown product in sync with the URL on back/forward navigation.
-  useEffect(() => {
-    const onPop = () => {
-      const slug = new URLSearchParams(window.location.search).get("product");
-      const prod = allProducts.find((pr) => pr.slug === slug);
-      if (prod) setCurrentProduct(prod);
-    };
-    window.addEventListener("popstate", onPop);
-    return () => window.removeEventListener("popstate", onPop);
-  }, [allProducts]);
 
   // Default the pack size to the product's "popular" weight when it changes.
   useEffect(() => {
@@ -339,7 +283,7 @@ export default function ProductDetails({ initialSlug, onBack, prefetchedData }) 
     <>
       <section className="category-main">
         <button className="back-home-btn" onClick={onBack}>
-          <img src="./Images/arrow.svg" alt="back" className="back-arrow-icon" />
+          <img src={asset("./Images/arrow.svg")} alt="back" className="back-arrow-icon" />
           <span>Back to Home</span>
         </button>
         <div className="category-menu">
@@ -347,7 +291,7 @@ export default function ProductDetails({ initialSlug, onBack, prefetchedData }) 
             <div className="menu-item" key={i}>
               <div className="menu-title">
                 <span>{menu.title}</span>
-                <img src="./Images/arrow.svg" alt="arrow" className="arrowss" />
+                <img src={asset("./Images/arrow.svg")} alt="arrow" className="arrowss" />
               </div>
               <div className={menu.dropdownClass ? `dropdown ${menu.dropdownClass}` : "dropdown"}>
                 {menu.links.map((link, j) => (
@@ -381,7 +325,7 @@ export default function ProductDetails({ initialSlug, onBack, prefetchedData }) 
 
           <div className="product-info">
             <span className="category">
-              <img src="./Images/drop.svg" alt="dropdown" className="dropdown-icon" />
+              <img src={asset("./Images/drop.svg")} alt="dropdown" className="dropdown-icon" />
               {p?.badge}
             </span>
 
@@ -418,7 +362,7 @@ export default function ProductDetails({ initialSlug, onBack, prefetchedData }) 
               {featureItems.map((feature, i) => (
                 <div className="feature-card" key={i}>
                   <div className="icon-circle">
-                    <img src={feature.icon} alt={feature.title} />
+                    <img src={asset(feature.icon)} alt={feature.title} />
                   </div>
                   <div className="words">
                     <h5>{feature.title}</h5>
@@ -450,7 +394,7 @@ export default function ProductDetails({ initialSlug, onBack, prefetchedData }) 
             {recipeIngredients.map((ing, i) => (
               <div className="ingredient-card" key={i}>
                 <div className="icon-shadow">
-                  <img src={ing.icon} alt={ing.title} className="ingredient-icon" />
+                  <img src={asset(ing.icon)} alt={ing.title} className="ingredient-icon" />
                 </div>
                 <div className="sen">
                   <h5 className="ingredients">{ing.title}</h5>
@@ -494,7 +438,7 @@ export default function ProductDetails({ initialSlug, onBack, prefetchedData }) 
               {benefitItems.map((benefit, i) => (
                 <div className="benefit-card" key={i}>
                   <div className="benefit-icon-circle">
-                    <img src={benefit.icon} alt="" />
+                    <img src={asset(benefit.icon)} alt="" />
                   </div>
                   <h4>{benefit.title}</h4>
                   <p>{benefit.text}</p>
@@ -509,7 +453,7 @@ export default function ProductDetails({ initialSlug, onBack, prefetchedData }) 
               <div className="storage-item" key={i}>
                 <div className="storage-item-inner">
                   <div className="storage-icon-circle">
-                    <img src={item.icon} alt="" />
+                    <img src={asset(item.icon)} alt="" />
                   </div>
                   <div>
                     <h4>{item.title}</h4>
@@ -539,7 +483,7 @@ export default function ProductDetails({ initialSlug, onBack, prefetchedData }) 
         </div>
         <div className="pi-carousel-wrapper">
           <button className="pi-arrow pi-left" onClick={prev}>
-            <img src="/buttonleft.png" alt="Prev" />
+            <img src={asset("/buttonleft.png")} alt="Prev" />
           </button>
 
           <div className="pi-carousel-container">
@@ -560,7 +504,7 @@ export default function ProductDetails({ initialSlug, onBack, prefetchedData }) 
           </div>
 
           <button className="pi-arrow pi-right" onClick={next}>
-            <img src="/buttonright.png" alt="Next" />
+            <img src={asset("/buttonright.png")} alt="Next" />
           </button>
         </div>
       </section>
@@ -578,7 +522,7 @@ export default function ProductDetails({ initialSlug, onBack, prefetchedData }) 
             {contactInfo.map((info, i) => (
               <div className="info-box" key={i}>
                 <div className="info-icon" id={info.iconId}>
-                  <img src={info.icon} alt={info.alt} />
+                  <img src={asset(info.icon)} alt={info.alt} />
                 </div>
                 <div>
                   <span className="phone">{info.label}</span>

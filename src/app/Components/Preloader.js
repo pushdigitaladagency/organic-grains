@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import { asset } from "../lib/asset";
 import "./Preloader.css";
 
 const Preloader = () => {
@@ -17,7 +18,7 @@ const Preloader = () => {
 
   return (
     <div className={`preloader-container ${!loading ? "fade-out" : ""}`}>
-      <img src="/logo11.png" alt="Organic Heritage Logo" className="preloader-logo" />
+      <img src={asset("/logo11.png")} alt="Organic Heritage Logo" className="preloader-logo" />
       <h1 className="preloader-text">Organic Heritage</h1>
       <div className="loader-bar"></div>
     </div>

@@ -1,6 +1,7 @@
  "use client"
  import React from 'react';
 // import { LocationIcon, PhoneIcon, MailIcon, FacebookIcon, InstagramIcon, YoutubeIcon } from '../assets/icons';
+import { asset } from '../lib/asset';
 import './Footer.css';
  const FacebookIcon = () => (
     <svg width="48" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -65,7 +66,7 @@ return (
             <div className="oh-foot__logo">
               <div className="oh-header__logoMark oh-header__logoMark--dark">
                 {/* <span>O</span><i>H</i> */}
-                <img src="/logo11.png" alt="Organic Heritage" className="logo2 " />
+                <img src={asset("/logo11.png")} alt="Organic Heritage" className="logo2 " />
               </div>
             </div>
 

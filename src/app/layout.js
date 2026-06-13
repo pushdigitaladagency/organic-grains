@@ -1,4 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
+import { BASE_PATH } from "./lib/asset";
+import DataProvider from "./Components/DataProvider";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -12,17 +14,20 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
+  metadataBase: new URL("https://organicheritage.store/grains"),
   title: "Organic Heritage",
   description: "Organic Heritage - Premium Quality Grains",
   icons: {
-    icon: "/logo11.png",
+    icon: `${BASE_PATH}/logo11.png`,
   },
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body>{children}</body>
+      <body>
+        <DataProvider>{children}</DataProvider>
+      </body>
     </html>
   );
 }

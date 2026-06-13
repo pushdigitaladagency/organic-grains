@@ -1,9 +1,12 @@
 "use client";
 // HMR trigger
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { asset } from "../lib/asset";
 import "./Navbar.css";
 
 export default function Navbar({ onBack }) {
+  const router = useRouter();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
@@ -15,15 +18,10 @@ export default function Navbar({ onBack }) {
     if (element) {
       e.preventDefault();
       element.scrollIntoView({ behavior: "smooth" });
-    } else if (onBack) {
+    } else {
+      // Section isn't on the current page (e.g. a product route) → go home and scroll there.
       e.preventDefault();
-      onBack();
-      setTimeout(() => {
-        const afterElement = document.getElementById(id);
-        if (afterElement) {
-          afterElement.scrollIntoView({ behavior: "smooth" });
-        }
-      }, 100);
+      router.push(`/#${id}`);
     }
   };
 
@@ -79,7 +77,7 @@ export default function Navbar({ onBack }) {
       <a href="#products" className={`nav-link ${activeSection === "products" ? "active" : ""}`} onClick={(e) => handleLinkClick(e, "products")}>Products</a>
 
       <a href="#home" className="logo" onClick={(e) => handleLinkClick(e, "home")}>
-        <img src="/logo11.png" alt="logo" />
+        <img src={asset("/logo11.png")} alt="logo" />
       </a>
 
       <a href="#benefits" className={`nav-link ${activeSection === "benefits" ? "active" : ""}`} onClick={(e) => handleLinkClick(e, "benefits")}>Benefits</a>
