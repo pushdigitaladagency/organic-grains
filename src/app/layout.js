@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   metadataBase: new URL("https://organicheritage.store/grains"),
-  title: "Organic Heritage",
-  description: "Organic Heritage - Premium Quality Grains",
+  title: "Organic Grains",
+  description: "Organic Grains - Premium Quality Grains",
   icons: {
     icon: `${BASE_PATH}/logo11.png`,
   },

@@ -66,7 +66,7 @@ return (
             <div className="oh-foot__logo">
               <div className="oh-header__logoMark oh-header__logoMark--dark">
                 {/* <span>O</span><i>H</i> */}
-                <img src={asset("/logo11.png")} alt="Organic Heritage" className="logo2 " />
+                <img src={asset("/logo11.png")} alt="Organic Grains" className="logo2 " />
               </div>
             </div>
 
@@ -130,8 +130,8 @@ Thirukarugavur, Thanjavur -614302</span>
         </div>
 
         <div className="oh-foot__bottom">
-          <span>© 2026 Organic Heritage. All right reserved.</span>
-          <span className="oh-foot__bottomBrand">ORGANIC HERITAGE — NOURISHING LIFE NATURALLY</span>
+          <span>© 2026 Organic Grains. All right reserved.</span>
+          <span className="oh-foot__bottomBrand">ORGANIC GRAINS — NOURISHING LIFE NATURALLY</span>
         </div>
       </footer>
 )

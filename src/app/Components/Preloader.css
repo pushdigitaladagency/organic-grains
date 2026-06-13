@@ -34,6 +34,7 @@
   opacity: 0;
   text-align: center;
   animation: fadeInText 1s ease-out forwards 0.5s;
+  font-weight: 300;
 }
 
 .loader-bar {

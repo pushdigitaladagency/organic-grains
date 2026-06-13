@@ -14,9 +14,9 @@ const storageIcons = ["./Images/store.svg", "./Images/seal.svg", "./Images/best.
 
 // Static contact details (no API source).
 const contactInfo = [
-  { icon: "/ph.png", alt: "phone", label: "PHONE", value: "+91 9940399388" },
-  { icon: "/em.png", alt: "email", label: "EMAIL", value: " thirugailifestylecenter@gmail.com" },
-  { icon: "/log1.png", alt: "location", label: "LOCATION", value: "Thirugai Life style Center, Thirukarugavur, Thanjavur - 614302", iconId: "location-icon" },
+  { icon: "./Images/mobile.svg", alt: "phone", label: "PHONE", value: "+91 9940399388" },
+  { icon: "./Images/mail.svg", alt: "email", label: "EMAIL", value: " thirugailifestylecenter@gmail.com" },
+  { icon: "./Images/location.svg", alt: "location", label: "LOCATION", value: "Thirugai Life style Center, Thirukarugavur, Thanjavur - 614302",  },
 ];
 
 /* ─────────────────────────────────────────────────────────────────────────────

@@ -1889,7 +1889,7 @@ body.inner-page-active .navbar {
     border-radius: 12px;
     justify-content: center;
     align-items: center;
-   width: 57px;
+   width: 84px;
         height: 43px;
     display: flex;
   }
@@ -1900,8 +1900,8 @@ body.inner-page-active .navbar {
   }
 
   .info-icon img {
-    width: 16px;
-    height: 30%;
+            width: 45px;
+        height: 23px;
   }
 
   .product-page {
@@ -2106,9 +2106,9 @@ body.inner-page-active .navbar {
   }
 
   .contact-section {
-    padding: clamp(70px, 6.5vw, 100px) clamp(60px, 6vw, 100px) clamp(50px, 5vw, 80px);
-    gap: clamp(32px, 4vw, 60px);
     align-items: flex-start;
+        gap: clamp(32px, 4vw, 60px);
+        padding: clamp(70px, 6.5vw, 100px) clamp(44px, 4vw, 93px) clamp(50px, 4vw, 80px);
   }
 
   .contact-tag {
@@ -2136,7 +2136,7 @@ body.inner-page-active .navbar {
   }
 
   .dropdown-selected {
-    font-size: clamp(14px, 1.2vw, 16px);
+   font-size: clamp(12px, -0.8vw, 13px);
   }
 
   .info-box {
