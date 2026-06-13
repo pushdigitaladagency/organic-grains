@@ -324,7 +324,7 @@ h1 {
 /* PRODUCTS SECTION */
 
 .products {
-  padding: 100px 166px 60px;
+padding: 100px 6vw 60px;
   background: #f8f6f2;
   text-align: center;
   position: relative;
@@ -472,7 +472,7 @@ h1 {
 /* Image wrapper — matches .card2 .img-box exactly */
 
 .card .img-box {
-  height: 567px;
+  height: 621px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1706,7 +1706,7 @@ h1 {
   .products3,
   .products-wrapper,
   .products4 {
-    padding: clamp(60px, 6vw, 100px) clamp(60px, 6vw, 100px) clamp(50px, 5vw, 80px);
+    /* padding: clamp(60px, 6vw, 100px) clamp(60px, 6vw, 100px) clamp(50px, 5vw, 80px); */
   }
 
   .carousel-wrapper {
@@ -1772,7 +1772,10 @@ h1 {
   .card4-content h4 {
     font-size: clamp(13px, 1vw, 16px);
   }
-
+#emails{
+  width:17px;
+  height: 14px;
+}
   .card-content p,
   .card2-content p,
   .card3-content p,
@@ -2888,7 +2891,7 @@ height: 47vw;
     background: #f3e8d7;
     justify-content: center;
     align-items: center;
-    height: 290px;
+    height: 290vw;
     display: flex;
     position: relative;
     overflow: hidden;
@@ -2919,7 +2922,12 @@ height: 47vw;
     font-size: 8px;
     line-height: 1.5;
   }
-
+#email{
+  width:45px
+}
+#emails{
+  width: 17px;
+}
   /* BENEFITS GRID */
 
   .benefits-grid {

@@ -687,7 +687,7 @@ export default function Home({ onProductClick, prefetchedData }) {
 
             <div className="info-box">
               <div className="info-icon">
-                <img src="/ph.png" alt="phone" />
+                <img src="./Images/mobile.svg" alt="phone" />
               </div>
               <div>
                 <span className="phone">PHONE</span>
@@ -696,8 +696,8 @@ export default function Home({ onProductClick, prefetchedData }) {
             </div>
 
             <div className="info-box">
-              <div className="info-icon">
-                <img src="/em.png" alt="email" />
+              <div className="info-icon" id="email">
+                <img src="./Images/mail.svg" alt="email" id="emails"/>
               </div>
               <div>
                 <span className="phone">EMAIL</span>
@@ -707,7 +707,7 @@ export default function Home({ onProductClick, prefetchedData }) {
 
             <div className="info-box">
               <div className="info-icon" id="location-icon">
-                <img src="/log1.png" alt="location" />
+                <img src="./Images/location.svg" alt="location" />
               </div>
               <div>
                 <span className="phone">LOCATION</span>

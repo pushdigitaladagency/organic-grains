@@ -99,7 +99,7 @@
 }
 
 .oh-foot__heading1 {
-  margin-left: 69px;
+  /* margin-left: 69px; */
 }
 
 .oh-foot__list {
@@ -136,7 +136,7 @@
 .oh-foot__social {
   flex-direction: row;
   gap: 28px;
-  margin-left: 81px;
+  /* margin-left: 81px; */
   display: flex;
 }
 
@@ -257,6 +257,7 @@
   .oh-foot__heading1 {
     font-size: clamp(11px, 1.1vw, 12px);
     margin-left: 0;
+            width: 106px;
   }
 
   .oh-foot__social {
@@ -308,13 +309,15 @@
   }
 
   .oh-foot__tag {
-    font-size: clamp(12px, 1.3vw, 14px);
-    color: #fff;
-    margin: 0;
-    line-height: 1.5;
-    font-family: 'Inter', sans-serif;
-  }
-
+        color: #fff;
+        /* margin: 0; */
+        font-family: Inter, sans-serif;
+        font-size: clamp(12px, 1.3vw, 14px);
+        line-height: 1.5;
+        margin-left: 235px;
+        text-align: center;
+        width: 276px;
+    }
   .oh-foot__logo .logo {
     display: none;
   }
@@ -374,7 +377,7 @@
   .logo2 {
     width: clamp(80px, 10vw, 110px);
     height: auto;
-    margin-top: 0;
+          margin-left: 338px;
   }
 }
 

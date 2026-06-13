@@ -859,8 +859,8 @@ body.inner-page-active .navbar {
 }
 
 .info-icon img {
-  width: 13px;
-  height: 33%;
+ width: 19px;
+    height: 39%;
 }
 
 /* RIGHT FORM */
@@ -1304,14 +1304,16 @@ body.inner-page-active .navbar {
   }
 
   .main-image {
-    width: clamp(315px, 37vw, 433px);
-    height: clamp(500px, 50vw, 680px);
+    /* width: clamp(315px, 37vw, 433px); */
+   height: clamp(498px, 47vw, 663px);
+   width: 34vw;
   }
 
   .thumbs {
     flex-direction: column;
-    gap: clamp(10px, 2.5vw, 32px);
+    /* gap: clamp(10px, 2.5vw, 32px); */
     display: flex;
+    gap: 2vw;
   }
 
   .features-grid {
@@ -1380,7 +1382,21 @@ body.inner-page-active .navbar {
   .rating-row {
     margin: clamp(10px, 1.5vw, 30px) 0;
   }
-
+.flour-dropdown {
+    min-width: 15vw;
+}
+.dropdown {
+    z-index: 9999;
+    background: #fff;
+    border: 1px solid #b9b9b9;
+    flex-direction: column;
+    min-width: 16.6vw;
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    box-shadow: 0 2px 8px #00000014;
+}
   .size-header {
     margin: clamp(15px, 2vw, 35px) 0 10px;
   }
@@ -1640,7 +1656,8 @@ body.inner-page-active .navbar {
   }
 
   .pi-card .pi-img-box {
-    height: clamp(280px, 28vw, 450px);
+    /* height: clamp(280px, 28vw, 450px); */
+            height: 35vw;
   }
 
   .pi-card .pi-img-box img {
@@ -1721,12 +1738,12 @@ body.inner-page-active .navbar {
     top: 100px !important;
   }
 
-  .main-image {
-    width: 320px !important;
-    max-width: 100%;
-    height: auto !important;
-    aspect-ratio: 1 / 1.5;
-  }
+      .main-image {
+        aspect-ratio: 1 / 1.5;
+        max-width: 100%;
+        width: 35vw !important;
+        height: auto !important;
+    }
 
   .thumbs .thumb-wrapper,
   .thumbs img {
@@ -1787,11 +1804,11 @@ body.inner-page-active .navbar {
   }
 
   .dropdown {
-    min-width: 220px;
+   min-width: 30.5vw;
   }
 
   .flour-dropdown {
-    min-width: 220px;
+   min-width: 30.5vw;
   }
 
 
@@ -1814,8 +1831,8 @@ body.inner-page-active .navbar {
     border-radius: 12px;
     justify-content: center;
     align-items: center;
-    width: 77px;
-    height: 47px;
+   width: 57px;
+        height: 43px;
     display: flex;
   }
 
@@ -2556,7 +2573,8 @@ body.inner-page-active .navbar {
     border-radius: 12px;
     justify-content: center;
     align-items: center;
-    width: 77px;
+          width: 65px;
+
     height: 47px;
     display: flex;
   }
