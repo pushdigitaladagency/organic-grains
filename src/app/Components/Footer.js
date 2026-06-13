@@ -1,9 +1,10 @@
- "use client"
- import React from 'react';
-// import { LocationIcon, PhoneIcon, MailIcon, FacebookIcon, InstagramIcon, YoutubeIcon } from '../assets/icons';
+"use client"
+import React from 'react';
+import { useRouter } from "next/navigation";
 import { asset } from '../lib/asset';
 import './Footer.css';
- const FacebookIcon = () => (
+
+const FacebookIcon = () => (
     <svg width="48" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <path d="M14 8h2V5h-2.5C11.6 5 10 6.6 10 8.5V11H8v3h2v7h3v-7h2.5l.5-3H13V9c0-.6.4-1 1-1z" fill="#FAF7EE" />
     </svg>
@@ -53,6 +54,19 @@ const LocationIcon = ({ size = 25 }) => (
   
 
   export default function Footer() {
+    const router = useRouter();
+
+    const handleLinkClick = (e, id) => {
+      e.preventDefault();
+      const element = document.getElementById(id);
+  
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      } else {
+        // Section isn't on the current page (e.g. a product route) → go home and scroll there.
+        router.push(`/#${id}`);
+      }
+    };
 
 return (
 <footer className="oh-foot" id="contact">
@@ -90,11 +104,11 @@ foods that nourished generations.
           <div className="oh-foot__col">
             <h4 className="oh-foot__heading inter-font">Quick links</h4>
             <ul className="oh-foot__list">
-              <li><a href="#home" onClick={(e) => { e.preventDefault(); scrollTo("home"); }}>Home</a></li>
-              <li><a href="#about" onClick={(e) => { e.preventDefault(); scrollTo("about"); }}>About Us</a></li>
-              <li><a href="#products" onClick={(e) => { e.preventDefault(); scrollTo("products"); }}>Products</a></li>
-              <li><a href="#philosophy" onClick={(e) => { e.preventDefault(); scrollTo("philosophy"); }}>Ingredients</a></li>
-              <li><a href="#contact" onClick={(e) => { e.preventDefault(); scrollTo("contact"); }}>Contact</a></li>
+              <li><a href="#home" onClick={(e) => handleLinkClick(e, "home")}>Home</a></li>
+              <li><a href="#about" onClick={(e) => handleLinkClick(e, "about")}>About Us</a></li>
+              <li><a href="#products" onClick={(e) => handleLinkClick(e, "products")}>Products</a></li>
+              <li><a href="#benefits" onClick={(e) => handleLinkClick(e, "benefits")}>Benefits</a></li>
+              <li><a href="#contact" onClick={(e) => handleLinkClick(e, "contact")}>Contact</a></li>
             </ul>
           </div>
 

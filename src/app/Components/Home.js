@@ -133,7 +133,10 @@ export default function Home({ onProductClick, prefetchedData }) {
       setErrors({ ...errors, [name]: "" });
     }
 
-    if (name === "phone") {
+    if (name === "name") {
+      const lettersOnly = value.replace(/[0-9]/g, "");
+      setFormData({ ...formData, [name]: lettersOnly });
+    } else if (name === "phone") {
       const numbersOnly = value.replace(/\D/g, "").slice(0, 10);
       setFormData({ ...formData, [name]: numbersOnly });
     } else {
