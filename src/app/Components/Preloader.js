@@ -19,7 +19,7 @@ const Preloader = () => {
   return (
     <div className={`preloader-container ${!loading ? "fade-out" : ""}`}>
       <img src={asset("/logo11.png")} alt="Organic Heritage Logo" className="preloader-logo" />
-      <h1 className="preloader-text">Organic Heritage</h1>
+      <h1 className="preloader-text">Organic Grains</h1>
       <div className="loader-bar"></div>
     </div>
   );

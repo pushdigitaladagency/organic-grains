@@ -9,49 +9,49 @@ import { useEffect, useState } from "react";
 /* ─────────────────────────────────────────────────────────────────────────────
  * Badge class lookup arrays (match original card order for each section)
  * ───────────────────────────────────────────────────────────────────────────── */
-const RICE_BADGES  = ["badge2", "badge red", "badge yellow"];
+const RICE_BADGES = ["badge2", "badge red", "badge yellow"];
 const PUTTU_BADGES = ["badge3", "badge3 red", "badge3 yellow", "badge0", "badge9", "badge9"];
-const SOUP_BADGES  = ["badge4", "badge4 red", "badge4 yellow", "badge56", "badge56"];
-const MALT_BADGES  = ["badge5", "badge5 yellow"];
+const SOUP_BADGES = ["badge4", "badge4 red", "badge4 yellow", "badge56", "badge56"];
+const MALT_BADGES = ["badge5", "badge5 yellow"];
 
 /* ─────────────────────────────────────────────────────────────────────────────
  * Static fallback product data — shown while API data loads / not available.
  * ───────────────────────────────────────────────────────────────────────────── */
 const STATIC_RICE = [
-  { img: "./Images/karuppu-kavuni-rice-main.svg", badge: "badge2",       title: "Karuppu Kavuni Rice", slug: "karuppu-kavuni-rice", desc: "The legendary forbidden black rice",  points: ["✔ Rich in antioxidants", "✔ Supports heart health", "✔ Helps manage diabetes", "✔ Iron-rich (helps anemia)", "✔ Anti-aging & good for skin"] },
-  { img: "./Images/rathasali-rice-main.svg", badge: "badge red",    title: "Rathasali Rice",      slug: "rathasali-rice",      desc: "Ancient red rice for vitality",       points: ["✔ Improves blood health", "✔ Increases hemoglobin", "✔ Supports digestion", "✔ Enhances energy & strength", "✔ Helps manage blood sugar"] },
-  { img: "./Images/thuyamalli-rice-main.svg", badge: "badge yellow", title: "Thuyamalli Rice",     slug: "thuyamalli-rice",     desc: "Aromatic, light and easy to digest",  points: ["✔ Easy to digest", "✔ Sustained energy", "✔ Suitable for diabetics", "✔ Boosts immunity", "✔ Rich in nutrients"] },
+  { img: "./Images/karuppu-kavuni-rice-main.svg", badge: "badge2", title: "Karuppu Kavuni Rice", slug: "karuppu-kavuni-rice", desc: "The legendary forbidden black rice", points: ["✔ Rich in antioxidants", "✔ Supports heart health", "✔ Helps manage diabetes", "✔ Iron-rich (helps anemia)", "✔ Anti-aging & good for skin"] },
+  { img: "./Images/rathasali-rice-main.svg", badge: "badge red", title: "Rathasali Rice", slug: "rathasali-rice", desc: "Ancient red rice for vitality", points: ["✔ Improves blood health", "✔ Increases hemoglobin", "✔ Supports digestion", "✔ Enhances energy & strength", "✔ Helps manage blood sugar"] },
+  { img: "./Images/thuyamalli-rice-main.svg", badge: "badge yellow", title: "Thuyamalli Rice", slug: "thuyamalli-rice", desc: "Aromatic, light and easy to digest", points: ["✔ Easy to digest", "✔ Sustained energy", "✔ Suitable for diabetics", "✔ Boosts immunity", "✔ Rich in nutrients"] },
 ];
 
 const STATIC_PUTTU = [
-  { img: "./Images/karuppu-kavuni-puttu-flour-main.svg", alt: "puttu",     badge: "badge3",        badgeText: "Puttu Flour",     slug: "karuppu-kavuni-puttu-flour",    title: "Karuppu Kavuni Puttu Flour",    desc: "Stone-ground black rice for traditional puttu",      points: ["✔ Antioxidant-rich", "✔ Steamed breakfast staple", "✔ Naturally fibrous"] },
-  { img: "./Images/karuppu-kavuni-idiyappam-flour-main.svg", alt: "idiyappam", badge: "badge3 red",    badgeText: "Idiyappam Flour", slug: "karuppu-kavuni-idiyappam-flour", title: "Karuppu Kavuni Idiyappam Flour", desc: "Soft string-hopper flour from heritage black rice",  points: ["✔ Smooth, fine texture", "✔ Healthier dinner choice", "✔ Rich in minerals"] },
-  { img: "./Images/rathasali-puttu-flour-main.svg", alt: "puttu",     badge: "badge3 yellow", badgeText: "Puttu Flour",     slug: "rathasali-puttu-flour",         title: "Rathasali Puttu Flour",         desc: "Iron-rich red rice for warm morning puttu",          points: ["✔ Boosts hemoglobin", "✔ Energising start", "✔ Easy to digest"] },
-  { img: "./Images/rathasali-idiyappam-flour-main.svg", alt: "puttu",     badge: "badge0",        badgeText: "Idiyappam Flour", slug: "rathasali-idiyappam-flour",     title: "Rathasali Idiyappam Flour",     desc: "Delicate red rice idiyappam flour",                  points: ["✔ Light dinner option", "✔ Iron & fibre", "✔ Naturally pigmented"] },
-  { img: "./Images/thuyamalli-puttu-flour-main.svg", alt: "puttu",     badge: "badge9",        badgeText: "Puttu Flour",     slug: "thuyamalli-puttu-flour",        title: "Thuyamalli Puttu Flour",        desc: "Aromatic white rice puttu flour",                    points: ["✔ Soft & fluffy puttu", "✔ Easy on the gut", "✔ Diabetic-friendly"] },
-  { img: "./Images/thooyamalli-idiyappam-flour-main.svg", alt: "puttu",     badge: "badge9",        badgeText: "Idiyappam Flour", slug: "thooyamalli-idiyappam-flour",   title: "Thuyamalli Idiyappam Flour",    desc: "Silky-smooth idiyappam flour",                       points: ["✔ Light supper choice", "✔ Aromatic & fragrant", "✔ Sustained energy"] },
+  { img: "./Images/karuppu-kavuni-puttu-flour-main.svg", alt: "puttu", badge: "badge3", badgeText: "Puttu Flour", slug: "karuppu-kavuni-puttu-flour", title: "Karuppu Kavuni Puttu Flour", desc: "Stone-ground black rice for traditional puttu", points: ["✔ Antioxidant-rich", "✔ Steamed breakfast staple", "✔ Naturally fibrous"] },
+  { img: "./Images/karuppu-kavuni-idiyappam-flour-main.svg", alt: "idiyappam", badge: "badge3 red", badgeText: "Idiyappam Flour", slug: "karuppu-kavuni-idiyappam-flour", title: "Karuppu Kavuni Idiyappam Flour", desc: "Soft string-hopper flour from heritage black rice", points: ["✔ Smooth, fine texture", "✔ Healthier dinner choice", "✔ Rich in minerals"] },
+  { img: "./Images/rathasali-puttu-flour-main.svg", alt: "puttu", badge: "badge3 yellow", badgeText: "Puttu Flour", slug: "rathasali-puttu-flour", title: "Rathasali Puttu Flour", desc: "Iron-rich red rice for warm morning puttu", points: ["✔ Boosts hemoglobin", "✔ Energising start", "✔ Easy to digest"] },
+  { img: "./Images/rathasali-idiyappam-flour-main.svg", alt: "puttu", badge: "badge0", badgeText: "Idiyappam Flour", slug: "rathasali-idiyappam-flour", title: "Rathasali Idiyappam Flour", desc: "Delicate red rice idiyappam flour", points: ["✔ Light dinner option", "✔ Iron & fibre", "✔ Naturally pigmented"] },
+  { img: "./Images/thuyamalli-puttu-flour-main.svg", alt: "puttu", badge: "badge9", badgeText: "Puttu Flour", slug: "thuyamalli-puttu-flour", title: "Thuyamalli Puttu Flour", desc: "Aromatic white rice puttu flour", points: ["✔ Soft & fluffy puttu", "✔ Easy on the gut", "✔ Diabetic-friendly"] },
+  { img: "./Images/thooyamalli-idiyappam-flour-main.svg", alt: "puttu", badge: "badge9", badgeText: "Idiyappam Flour", slug: "thooyamalli-idiyappam-flour", title: "Thuyamalli Idiyappam Flour", desc: "Silky-smooth idiyappam flour", points: ["✔ Light supper choice", "✔ Aromatic & fragrant", "✔ Sustained energy"] },
 ];
 
 const STATIC_SOUP = [
-  { img: "./Images/karuppu-kavuni-soup-mix-main.svg", alt: "soup",    badge: "badge4",        badgeText: "Soup Mix",       slug: "karuppu-kavuni-soup-mix",           title: "Karuppu Kavuni Soup Mix",          desc: "Hearty black rice nourishing soup",         points: ["✔ Antioxidant-rich broth", "✔ Comforting & filling", "✔ Quick to prepare"] },
-  { img: "./Images/rathasali-soup-mix-main.svg", alt: "soup",    badge: "badge4 red",    badgeText: "Soup Mix",       slug: "rathasali-soup-mix",                title: "Rathasali Soup Mix",               desc: "Warming red rice soup blend",               points: ["✔ Boosts hemoglobin", "✔ Builds stamina", "✔ Wholesome nutrition"] },
-  { img: "./Images/rathasali-health-mix-main.svg", alt: "booster", badge: "badge4 yellow", badgeText: "Iron Booster",   slug: "rathasali-iron-rich-mix",           title: "Rathasali Iron Rich Mix",          desc: "A daily dose of natural iron",              points: ["✔ Combats anemia", "✔ Increases hemoglobin", "✔ Supports blood health"] },
-  { img: "./Images/karuppu-kavuni-health-mix-main.svg", alt: "soup",    badge: "badge56",       badgeText: "Immune Booster", slug: "karuppu-kavuni-immune-booster-mix", title: "Karuppu Kavuni Immune Booster Mix", desc: "Daily immunity from traditional grains",    points: ["✔ Strengthens immunity", "✔ Antioxidant protection", "✔ Immune Booster"] },
-  { img: "/soup888.png", alt: "soup",    badge: "badge56",       badgeText: "Kali Mix",       slug: "kk-black-gram-kali-mix",            title: "KK & Black Gram Kali Mix",         desc: "Karuppu Kavuni + Black Gram protein power", points: ["✔ Balanced carbs, protein & minerals", "✔ Improves strength & stamina", "✔ Supports postpartum recovery", "✔ Long-lasting energy"] },
+  { img: "./Images/karuppu-kavuni-soup-mix-main.svg", alt: "soup", badge: "badge4", badgeText: "Soup Mix", slug: "karuppu-kavuni-soup-mix", title: "Karuppu Kavuni Soup Mix", desc: "Hearty black rice nourishing soup", points: ["✔ Antioxidant-rich broth", "✔ Comforting & filling", "✔ Quick to prepare"] },
+  { img: "./Images/rathasali-soup-mix-main.svg", alt: "soup", badge: "badge4 red", badgeText: "Soup Mix", slug: "rathasali-soup-mix", title: "Rathasali Soup Mix", desc: "Warming red rice soup blend", points: ["✔ Boosts hemoglobin", "✔ Builds stamina", "✔ Wholesome nutrition"] },
+  { img: "./Images/rathasali-health-mix-main.svg", alt: "booster", badge: "badge4 yellow", badgeText: "Iron Booster", slug: "rathasali-iron-rich-mix", title: "Rathasali Iron Rich Mix", desc: "A daily dose of natural iron", points: ["✔ Combats anemia", "✔ Increases hemoglobin", "✔ Supports blood health"] },
+  { img: "./Images/karuppu-kavuni-health-mix-main.svg", alt: "soup", badge: "badge56", badgeText: "Immune Booster", slug: "karuppu-kavuni-immune-booster-mix", title: "Karuppu Kavuni Immune Booster Mix", desc: "Daily immunity from traditional grains", points: ["✔ Strengthens immunity", "✔ Antioxidant protection", "✔ Immune Booster"] },
+  { img: "/soup888.png", alt: "soup", badge: "badge56", badgeText: "Kali Mix", slug: "kk-black-gram-kali-mix", title: "KK & Black Gram Kali Mix", desc: "Karuppu Kavuni + Black Gram protein power", points: ["✔ Balanced carbs, protein & minerals", "✔ Improves strength & stamina", "✔ Supports postpartum recovery", "✔ Long-lasting energy"] },
 ];
 
 const STATIC_MALT = [
-  { img: "./Images/beetroot-multivitamin-malt-main.svg", badge: "badge5",        title: "Beetroot Multivitamin Malt", slug: "beetroot-multivitamin-malt", desc: "Detoxify and glow naturally",          points: ["✔ Supports detoxification", "✔ Improves skin health", "✔ Enhances brain function", "✔ Aids digestion"] },
-  { img: "./Images/panchamirtha-malt-main.svg", badge: "badge5 yellow", title: "Panchamirtha Malt",          slug: "panchamirtha-malt",          desc: "Five-fold traditional wellness blend",  points: ["✔ Time-honoured recipe", "✔ Boosts overall wellness", "✔ Naturally sweet & nourishing"] },
+  { img: "./Images/beetroot-multivitamin-malt-main.svg", badge: "badge5", title: "Beetroot Multivitamin Malt", slug: "beetroot-multivitamin-malt", desc: "Detoxify and glow naturally", points: ["✔ Supports detoxification", "✔ Improves skin health", "✔ Enhances brain function", "✔ Aids digestion"] },
+  { img: "./Images/panchamirtha-malt-main.svg", badge: "badge5 yellow", title: "Panchamirtha Malt", slug: "panchamirtha-malt", desc: "Five-fold traditional wellness blend", points: ["✔ Time-honoured recipe", "✔ Boosts overall wellness", "✔ Naturally sweet & nourishing"] },
 ];
 
 /* ─────────────────────────────────────────────────────────────────────────────
  * API data helpers (mirrors helpers used in Product.js)
  * ───────────────────────────────────────────────────────────────────────────── */
-const _getName   = (p) => p?.name || p?.title || p?.productName || "";
-const _buildImg  = (f) => (!f ? "" : f.startsWith("http") || f.startsWith("/") ? f : `/Images/${f}`);
-const _getImg    = (p) => _buildImg((Array.isArray(p?.images) ? p.images[0] : null) || p?.image || p?.imageUrl || p?.img || "");
-const _getDesc   = (p) => p?.short_description || p?.description || "";
+const _getName = (p) => p?.name || p?.title || p?.productName || "";
+const _buildImg = (f) => (!f ? "" : f.startsWith("http") || f.startsWith("/") ? f : `/Images/${f}`);
+const _getImg = (p) => _buildImg((Array.isArray(p?.images) ? p.images[0] : null) || p?.image || p?.imageUrl || p?.img || "");
+const _getDesc = (p) => p?.short_description || p?.description || "";
 const _getPoints = (p) => {
   const hl = Array.isArray(p?.feature_highlights) ? p.feature_highlights : [];
   return hl.length ? hl.slice(0, 5).map((h) => `✔ ${h.title}`) : [];
@@ -165,7 +165,7 @@ export default function Home({ onProductClick, prefetchedData }) {
    *   2. Falls back to filtering allProducts by slug keyword.
    * ────────────────────────────────────────────────────────────────────────── */
   const _allProds = prefetchedData?.allProducts || [];
-  const _catMenu  = prefetchedData?.categoryMenu || [];
+  const _catMenu = prefetchedData?.categoryMenu || [];
 
   function _getSection(...keywords) {
     for (const kw of keywords) {
@@ -215,7 +215,7 @@ export default function Home({ onProductClick, prefetchedData }) {
 
           <h1>
             Pure Organic Nutrition <br />
-            for a <span style={{color:"#E6C9A8"}}>Healthier Life</span>
+            for a <span style={{ color: "#E6C9A8" }}>Healthier Life</span>
           </h1>
 
           <p className="des">
@@ -268,7 +268,7 @@ export default function Home({ onProductClick, prefetchedData }) {
               </div>
               <div>
                 <h4 className="head">Sourced with Care</h4>
-                <p className="head2"id="hea">Grown by traditional farmers using time-honoured organic methods.</p>
+                <p className="head2" id="hea">Grown by traditional farmers using time-honoured organic methods.</p>
               </div>
             </div>
 
@@ -278,7 +278,7 @@ export default function Home({ onProductClick, prefetchedData }) {
               </div>
               <div>
                 <h4 className="head">Minimally Processed</h4>
-                <p className="head2"id="hea">Pure, simple foods that retain every gram of natural nutrition.</p>
+                <p className="head2" id="hea">Pure, simple foods that retain every gram of natural nutrition.</p>
               </div>
             </div>
 
@@ -288,21 +288,21 @@ export default function Home({ onProductClick, prefetchedData }) {
               </div>
               <div>
                 <h4 className="head">Made for Wellness</h4>
-                <p className="head2"id="hea">Designed to nourish every generation — from children to elders.</p>
+                <p className="head2" id="hea">Designed to nourish every generation — from children to elders.</p>
               </div>
             </div>
 
           </div> <div className="stats">
             <div>
-              <h2>17+ <img className= "star" src={asset("/star.png")} /></h2>
+              <h2>17+ <img className="star" src={asset("/star.png")} /></h2>
               <p>Heritage Products</p>
             </div>
             <div>
-              <h2>100% <img className= "star" src={asset("/star.png")} /></h2>
+              <h2>100% <img className="star" src={asset("/star.png")} /></h2>
               <p>Organic & Natural</p>
             </div>
             <div>
-              <h2>0 <img className= "star"src={asset("/star.png")} /></h2>
+              <h2>0 <img className="star" src={asset("/star.png")} /></h2>
               <p>Preservatives</p>
             </div>
           </div>
@@ -354,7 +354,7 @@ export default function Home({ onProductClick, prefetchedData }) {
 
               <div className={item.badge}>Heritage Rice</div>
 
-              <div className="card-content"id={index==1?"card2":index==2 ?"card3":" "} >
+              <div className="card-content" id={index == 1 ? "card2" : index == 2 ? "card3" : " "} >
                 <h4>{item.title}</h4>
                 <p>{item.desc}</p>
               </div>
@@ -697,7 +697,7 @@ export default function Home({ onProductClick, prefetchedData }) {
 
             <div className="info-box">
               <div className="info-icon" id="email">
-                <img src={asset("./Images/mail.svg")} alt="email" id="emails"/>
+                <img src={asset("./Images/mail.svg")} alt="email" id="emails" />
               </div>
               <div>
                 <span className="phone">EMAIL</span>
@@ -712,7 +712,7 @@ export default function Home({ onProductClick, prefetchedData }) {
               <div>
                 <span className="phone">LOCATION</span>
                 <p>Thirugai Life style Center
-Thirukarugavur, Thanjavur -614302</p>
+                  Thirukarugavur, Thanjavur -614302</p>
               </div>
             </div>
 
@@ -721,50 +721,50 @@ Thirukarugavur, Thanjavur -614302</p>
         </div>
 
         {/* RIGHT SIDE FORM */}
-          <form className="contact-form" onSubmit={handleSubmit}>
-      <h3>Send us a message</h3>
+        <form className="contact-form" onSubmit={handleSubmit}>
+          <h3>Send us a message</h3>
 
-      <div className="form-row">
-        <div className="form-group">
-          <label className="name">Name</label>
-          <input
-            type="text"
-            name="name"
-            placeholder="Your name"
-            value={formData.name}
-            onChange={handleChange}
-          />
-          {errors.name && <span className="error-msg">{errors.name}</span>}
-        </div>
+          <div className="form-row">
+            <div className="form-group">
+              <label className="name">Name</label>
+              <input
+                type="text"
+                name="name"
+                placeholder="Your name"
+                value={formData.name}
+                onChange={handleChange}
+              />
+              {errors.name && <span className="error-msg">{errors.name}</span>}
+            </div>
 
-        <div className="form-group">
-          <label className="name">Phone</label>
-          <input
-            type="text"
-            name="phone"
-            placeholder="+91"
-            value={formData.phone}
-            onChange={handleChange}
-            maxLength={10}
-          />
-          {errors.phone && <span className="error-msg">{errors.phone}</span>}
-        </div>
-      </div>
+            <div className="form-group">
+              <label className="name">Phone</label>
+              <input
+                type="text"
+                name="phone"
+                placeholder="+91"
+                value={formData.phone}
+                onChange={handleChange}
+                maxLength={10}
+              />
+              {errors.phone && <span className="error-msg">{errors.phone}</span>}
+            </div>
+          </div>
 
-      <div className="form-row">
-        <div className="form-group">
-          <label className="name">Email</label>
-          <input
-            type="email"
-            name="email"
-            placeholder="you@example.com"
-            value={formData.email}
-            onChange={handleChange}
-          />
-          {errors.email && <span className="error-msg">{errors.email}</span>}
-        </div>
+          <div className="form-row">
+            <div className="form-group">
+              <label className="name">Email</label>
+              <input
+                type="email"
+                name="email"
+                placeholder="you@example.com"
+                value={formData.email}
+                onChange={handleChange}
+              />
+              {errors.email && <span className="error-msg">{errors.email}</span>}
+            </div>
 
-        <div className="form-group">
+            {/* <div className="form-group">
           <label className="name">Popular Products</label>
           <select
             name="product"
@@ -780,27 +780,27 @@ Thirukarugavur, Thanjavur -614302</p>
             <option value="Panchamirtha Malt">Panchamirtha Malt</option>
           </select>
           {errors.product && <span className="error-msg">{errors.product}</span>}
-        </div>
-      </div>
+        </div> */}
+          </div>
 
-      <div className="form-group">
-        <label className="name">Message</label>
-        <textarea
-          name="message"
-          placeholder="Tell us what you'd like to order..."
-          value={formData.message}
-          onChange={handleChange}
-        />
-        {errors.message && <span className="error-msg">{errors.message}</span>}
-      </div>
+          <div className="form-group">
+            <label className="name">Message</label>
+            <textarea
+              name="message"
+              placeholder="Tell us what you'd like to order..."
+              value={formData.message}
+              onChange={handleChange}
+            />
+            {errors.message && <span className="error-msg">{errors.message}</span>}
+          </div>
 
-      <button type="submit" className="contact-btn">
-        Order Now →
-      </button>
-    </form>
+          <button type="submit" className="contact-btn">
+            Order Now →
+          </button>
+        </form>
 
       </section>
-     
+
 
     </div>
   );

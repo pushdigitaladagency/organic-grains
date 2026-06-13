@@ -100,6 +100,28 @@ export default function ProductDetails({ initialSlug, onBack, prefetchedData }) 
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [currentProduct, setCurrentProduct] = useState(null);
   const [activeImg, setActiveImg] = useState("");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [activeCategoryMenu, setActiveCategoryMenu] = useState(null);
+  const dropdownRef = useRef(null);
+
+  const toggleCategoryMenu = (index) => {
+    setActiveCategoryMenu(activeCategoryMenu === index ? null : index);
+  };
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+      // Also close category menu if clicking outside the category-menu section
+      if (activeCategoryMenu !== null && !event.target.closest(".category-menu")) {
+        setActiveCategoryMenu(null);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [activeCategoryMenu]);
 
   const getVisibleItems = () => {
     if (typeof window === "undefined") return 3;
@@ -288,12 +310,16 @@ export default function ProductDetails({ initialSlug, onBack, prefetchedData }) 
         </button>
         <div className="category-menu">
           {categoryMenu.map((menu, i) => (
-            <div className="menu-item" key={i}>
+            <div 
+              className={`menu-item ${activeCategoryMenu === i ? "active" : ""}`} 
+              key={i}
+              onClick={() => toggleCategoryMenu(i)}
+            >
               <div className="menu-title">
                 <span>{menu.title}</span>
-                <img src={asset("./Images/arrow.svg")} alt="arrow" className="arrowss" />
+                <img src={asset("./Images/arrow.svg")} alt="arrow" className={`arrowss ${activeCategoryMenu === i ? "rotate" : ""}`} />
               </div>
-              <div className={menu.dropdownClass ? `dropdown ${menu.dropdownClass}` : "dropdown"}>
+              <div className={`dropdown ${menu.dropdownClass || ""} ${activeCategoryMenu === i ? "show" : ""}`}>
                 {menu.links.map((link, j) => (
                   <a href="#" key={j} onClick={(e) => { e.preventDefault(); handleProductSelect(link.slug); }}>
                     {link.name}
@@ -578,19 +604,35 @@ export default function ProductDetails({ initialSlug, onBack, prefetchedData }) 
 
             <div className="form-group">
               <label className="name">Popular Products</label>
-              <select
-                name="product"
-                value={formData.product}
-                onChange={handleChange}
-                className="product-select"
-              >
-                <option value="" disabled>Select a product</option>
-                <option value="Karuppu Kavuni Rice">Karuppu Kavuni Rice</option>
-                <option value="Rathasali Rice">Rathasali Rice</option>
-                <option value="Thuyamalli Rice">Thuyamalli Rice</option>
-                <option value="Beetroot Multivitamin Malt">Beetroot Multivitamin Malt</option>
-                <option value="Panchamirtha Malt">Panchamirtha Malt</option>
-              </select>
+              <div className="product-custom-dropdown" ref={dropdownRef}>
+                <div
+                  className={`dropdown-selected ${errors.product ? "error" : ""}`}
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                >
+                  {formData.product || "Select a product"}
+                  <img
+                    src={asset("./Images/arrow.svg")}
+                    alt="arrow"
+                    className={`dropdown-arrow ${isDropdownOpen ? "open" : ""}`}
+                  />
+                </div>
+                {isDropdownOpen && (
+                  <ul className="dropdown-options">
+                    {["Karuppu Kavuni Rice", "Rathasali Rice", "Thuyamalli Rice", "Beetroot Multivitamin Malt", "Panchamirtha Malt"].map((item) => (
+                      <li
+                        key={item}
+                        onClick={() => {
+                          setFormData({ ...formData, product: item });
+                          setIsDropdownOpen(false);
+                          if (errors.product) setErrors({ ...errors, product: "" });
+                        }}
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
               {errors.product && <span className="error-msg">{errors.product}</span>}
             </div>
           </div>
