@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { asset } from "../lib/asset";
+import { sendContact } from "../lib/sendContact";
 import "./product.css";
 
 const BASE_URL = process.env.NEXT_PUBLIC_PRODUC_URI;
@@ -239,6 +240,13 @@ export default function ProductDetails({ initialSlug, onBack, prefetchedData }) 
   const maxIndex = Math.max((carouselItems.length || 1) - visibleItems, 0);
   const prev = () => setIndex((i) => Math.max(i - 1, 0));
   const next = () => setIndex((i) => Math.min(i + 1, maxIndex));
+
+  // "Popular Products" dropdown options: the current product first, then its
+  // related products (same set shown in the carousel above), de-duplicated.
+  const productOptions = [
+    getProductName(p),
+    ...carouselItems.map((c) => c.title),
+  ].filter((name, i, arr) => name && arr.indexOf(name) === i);
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -248,6 +256,8 @@ export default function ProductDetails({ initialSlug, onBack, prefetchedData }) 
   });
 
   const [errors, setErrors] = useState({});
+  const [submitting, setSubmitting] = useState(false);
+  const [status, setStatus] = useState(null); // { type: "success" | "error", text }
 
   const validate = () => {
     let tempErrors = {};
@@ -284,20 +294,32 @@ export default function ProductDetails({ initialSlug, onBack, prefetchedData }) 
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validate() || submitting) return;
 
-    if (validate()) {
-      console.log(formData);
-      alert("Form submitted successfully!");
-      setFormData({
-        name: "",
-        phone: "",
-        email: "",
-        product: "",
-        message: "",
+    setStatus(null);
+    try {
+      setSubmitting(true);
+      await sendContact({
+        name: formData.name,
+        phone: formData.phone,
+        email: formData.email,
+        message: formData.message,
+        product: formData.product,
       });
+      setStatus({ type: "success", text: "Thank you! Your message has been sent — our team will get back to you shortly." });
       setErrors({});
+      // Clear the form fields and hide the message after 2 seconds.
+      setTimeout(() => {
+        setFormData({ name: "", phone: "", email: "", product: "", message: "" });
+        setStatus(null);
+      }, 2000);
+    } catch (err) {
+      console.error("Contact send error:", err);
+      setStatus({ type: "error", text: "Sorry, we couldn't send your message right now. Please try again." });
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -618,18 +640,22 @@ export default function ProductDetails({ initialSlug, onBack, prefetchedData }) 
                 </div>
                 {isDropdownOpen && (
                   <ul className="dropdown-options">
-                    {["Karuppu Kavuni Rice", "Rathasali Rice", "Thuyamalli Rice", "Beetroot Multivitamin Malt", "Panchamirtha Malt"].map((item) => (
-                      <li
-                        key={item}
-                        onClick={() => {
-                          setFormData({ ...formData, product: item });
-                          setIsDropdownOpen(false);
-                          if (errors.product) setErrors({ ...errors, product: "" });
-                        }}
-                      >
-                        {item}
-                      </li>
-                    ))}
+                    {productOptions.length === 0 ? (
+                      <li className="dropdown-empty" aria-disabled="true">No products available</li>
+                    ) : (
+                      productOptions.map((item) => (
+                        <li
+                          key={item}
+                          onClick={() => {
+                            setFormData({ ...formData, product: item });
+                            setIsDropdownOpen(false);
+                            if (errors.product) setErrors({ ...errors, product: "" });
+                          }}
+                        >
+                          {item}
+                        </li>
+                      ))
+                    )}
                   </ul>
                 )}
               </div>
@@ -648,9 +674,24 @@ export default function ProductDetails({ initialSlug, onBack, prefetchedData }) 
             {errors.message && <span className="error-msg">{errors.message}</span>}
           </div>
 
-          <button type="submit" className="contact-btn">
-            Order Now →
+          <button type="submit" className="contact-btn" disabled={submitting}>
+            {submitting ? "Sending..." : "Order Now →"}
           </button>
+
+          {status && (
+            <p
+              className={`form-status ${status.type}`}
+              role="status"
+              style={{
+                marginTop: "12px",
+                fontSize: "0.95rem",
+                fontWeight: 500,
+                color: status.type === "success" ? "#2e7d32" : "#c62828",
+              }}
+            >
+              {status.text}
+            </p>
+          )}
         </form>
       </section>
     </>
