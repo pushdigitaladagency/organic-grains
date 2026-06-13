@@ -1,6 +1,7 @@
 "use client";
-// HMR trigger
+// HMR trigger — contact form: "Sending..." button + inline status message
 import { asset } from "../lib/asset";
+import { sendContact } from "../lib/sendContact";
 
 import "./Home.css";
 
@@ -103,6 +104,8 @@ export default function Home({ onProductClick, prefetchedData }) {
   });
 
   const [errors, setErrors] = useState({});
+  const [submitting, setSubmitting] = useState(false);
+  const [status, setStatus] = useState(null); // { type: "success" | "error", text }
 
   const validate = () => {
     let tempErrors = {};
@@ -117,7 +120,6 @@ export default function Home({ onProductClick, prefetchedData }) {
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       tempErrors.email = "Email is invalid";
     }
-    if (!formData.product) tempErrors.product = "Please select a product";
     if (!formData.message.trim()) tempErrors.message = "Message is required";
 
     setErrors(tempErrors);
@@ -139,20 +141,31 @@ export default function Home({ onProductClick, prefetchedData }) {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validate() || submitting) return;
 
-    if (validate()) {
-      console.log(formData);
-      alert("Form submitted successfully!");
-      setFormData({
-        name: "",
-        phone: "",
-        email: "",
-        product: "",
-        message: "",
+    setStatus(null);
+    try {
+      setSubmitting(true);
+      await sendContact({
+        name: formData.name,
+        phone: formData.phone,
+        email: formData.email,
+        message: formData.message,
       });
+      setStatus({ type: "success", text: "Thank you! Your message has been sent — our team will get back to you shortly." });
       setErrors({});
+      // Clear the form fields and hide the message after 2 seconds.
+      setTimeout(() => {
+        setFormData({ name: "", phone: "", email: "", product: "", message: "" });
+        setStatus(null);
+      }, 2000);
+    } catch (err) {
+      console.error("Contact send error:", err);
+      setStatus({ type: "error", text: "Sorry, we couldn't send your message right now. Please try again." });
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -794,9 +807,24 @@ export default function Home({ onProductClick, prefetchedData }) {
             {errors.message && <span className="error-msg">{errors.message}</span>}
           </div>
 
-          <button type="submit" className="contact-btn">
-            Order Now →
+          <button type="submit" className="contact-btn" disabled={submitting}>
+            {submitting ? "Sending..." : "Order Now →"}
           </button>
+
+          {status && (
+            <p
+              className={`form-status ${status.type}`}
+              role="status"
+              style={{
+                marginTop: "12px",
+                fontSize: "0.95rem",
+                fontWeight: 500,
+                color: status.type === "success" ? "#2e7d32" : "#c62828",
+              }}
+            >
+              {status.text}
+            </p>
+          )}
         </form>
 
       </section>

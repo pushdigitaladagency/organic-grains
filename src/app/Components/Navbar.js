@@ -76,16 +76,9 @@ export default function Navbar({ onBack }) {
       <a href="#about" className={`nav-link ${activeSection === "about" ? "active" : ""}`} onClick={(e) => handleLinkClick(e, "about")}>About</a>
       <a href="#products" className={`nav-link ${activeSection === "products" ? "active" : ""}`} onClick={(e) => handleLinkClick(e, "products")}>Products</a>
 
-    <a
-  href="https://organicheritage.store"
-  className="logo"
-  rel="noopener noreferrer"
->
-  <img
-    src={asset("/logo11.png")}
-    alt="logo"
-  />
-</a>
+      <a href="https://organicheritage.store/" className="logo" >
+        <img src={asset("/logo11.png")} alt="logo" />
+      </a>
 
       <a href="#benefits" className={`nav-link ${activeSection === "benefits" ? "active" : ""}`} onClick={(e) => handleLinkClick(e, "benefits")}>Benefits</a>
       <a href="#contact" className={`nav-link ${activeSection === "contact" ? "active" : ""}`} onClick={(e) => handleLinkClick(e, "contact")}>Contact</a>
