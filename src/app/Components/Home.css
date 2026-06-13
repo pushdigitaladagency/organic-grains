@@ -355,7 +355,7 @@ h1 {
 /* PRODUCTS SECTION */
 
 .products {
-  padding: 100px 6vw 60px;
+     padding: 97px 11vw 60px;
   background: #f8f6f2;
   text-align: center;
   position: relative;
@@ -483,7 +483,7 @@ h1 {
 
 .product-cards {
   justify-content: center;
-  gap: 21px;
+    gap: 2.7vw;
   display: flex;
   flex-direction: row;
   align-items: stretch;
@@ -822,7 +822,7 @@ h1 {
 .carousel-wrapper {
   position: relative;
   width: 100%;
-  max-width: 100%;
+ max-width: 87%;
   margin: 0 auto;
   padding: clamp(16px, 1.8vw, 28px) 0;
   overflow: visible;
@@ -1772,7 +1772,7 @@ h1 {
   .product2-title,
   .product3-title,
   .product4-title {
-    margin-bottom: 2px;
+           margin-bottom: 21px;
   }
 
   /* ---- CARDS ---- */
