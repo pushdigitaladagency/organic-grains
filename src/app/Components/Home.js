@@ -38,7 +38,7 @@ const STATIC_SOUP = [
   { img: "./Images/rathasali-soup-mix-main.svg", alt: "soup", badge: "badge4 red", badgeText: "Soup Mix", slug: "rathasali-soup-mix", title: "Rathasali Soup Mix", desc: "Warming red rice soup blend", points: ["✔ Boosts hemoglobin", "✔ Builds stamina", "✔ Wholesome nutrition"] },
   { img: "./Images/rathasali-health-mix-main.svg", alt: "booster", badge: "badge4 yellow", badgeText: "Iron Booster", slug: "rathasali-iron-rich-mix", title: "Rathasali Iron Rich Mix", desc: "A daily dose of natural iron", points: ["✔ Combats anemia", "✔ Increases hemoglobin", "✔ Supports blood health"] },
   { img: "./Images/karuppu-kavuni-health-mix-main.svg", alt: "soup", badge: "badge56", badgeText: "Immune Booster", slug: "karuppu-kavuni-immune-booster-mix", title: "Karuppu Kavuni Immune Booster Mix", desc: "Daily immunity from traditional grains", points: ["✔ Strengthens immunity", "✔ Antioxidant protection", "✔ Immune Booster"] },
-  { img: "/soup888.png", alt: "soup", badge: "badge56", badgeText: "Kali Mix", slug: "kk-black-gram-kali-mix", title: "KK & Black Gram Kali Mix", desc: "Karuppu Kavuni + Black Gram protein power", points: ["✔ Balanced carbs, protein & minerals", "✔ Improves strength & stamina", "✔ Supports postpartum recovery", "✔ Long-lasting energy"] },
+  { img: "./Images/karuppu-ulunthu-karuppu-kavuni-kali-mix-main.svg", alt: "soup", badge: "badge56", badgeText: "Kali Mix", slug: "kk-black-gram-kali-mix", title: "KK & Black Gram Kali Mix", desc: "Karuppu Kavuni + Black Gram protein power", points: ["✔ Balanced carbs, protein & minerals", "✔ Improves strength & stamina", "✔ Supports postpartum recovery", "✔ Long-lasting energy"] },
 ];
 
 const STATIC_MALT = [
