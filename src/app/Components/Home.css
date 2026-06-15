@@ -1408,8 +1408,8 @@ h1 {
   position: absolute;
   top: -7px;
   right: -7px;
-  width: 21px;
-  height: 21px;
+ width: 33px;
+    height: 33px;
   background: #c46b2b;
   color: #ffffff;
   font-size: 9px;
@@ -1899,7 +1899,24 @@ h1 {
   .life-container {
     padding: 0;
   }
-
+.life-number {
+    color: #fff;
+    letter-spacing: 0;
+    background: #c46b2b;
+    border: 1.5px solid #f8f4ee;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    width: 1.5vw;
+    height: 1.5vw;
+    font-size: 9px;
+    font-weight: 800;
+    line-height: 1;
+    display: flex;
+    position: absolute;
+    top: -7px;
+    right: -7px;
+}
   .life-circle {
     width: clamp(52px, 4.5vw, 70px);
     height: clamp(52px, 4.5vw, 70px);
@@ -3351,10 +3368,10 @@ h1 {
 
   .card .img-box,
   .card2 .img-box,
-  .card3 .img-box,
+  
   .img-box4 {
     /* height: clamp(375px, 28vw, 450px); */
-    height: 32vw;
+   height: 37vw;
   }
 
   .card3 {
@@ -3365,9 +3382,17 @@ h1 {
     display: flex;
     position: relative;
     overflow: hidden;
-    height: 41vw;
+           height: 45vw;
   }
-
+.card3 .img-box {
+    background: #f3e8d7;
+    justify-content: center;
+    align-items: center;
+    height: 32vw;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+}
   .card-content,
   .card2-content,
   .card3-content,
@@ -3583,7 +3608,7 @@ h1 {
     text-align: center;
     z-index: 10;
     background: #f8f6f2;
-    padding: 18px 68px 19px;
+    padding: 18px 107px 19px;
     position: relative;
     overflow: hidden;
   }

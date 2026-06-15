@@ -627,7 +627,7 @@ body.inner-page-active .navbar {
   color: #2f2a25;
   line-height: 1.2;
   margin-bottom: 16px;
-  margin-left: -852px;
+  /* margin-left: -852px; */
   font-family: "Inter", sans-serif;
 }
 
@@ -636,13 +636,13 @@ body.inner-page-active .navbar {
 }
 
 .benefits-desc {
-  margin-top: 0;
-  font-size: 18px;
-  color: #6b645c;
-  max-width: 1099px;
-  line-height: 1.8;
+    color: #6b645c;
+    max-width: 1099px;
+    margin-top: 0;
+    font-size: 18px;
+    line-height: 1.8;
+/* margin-left: -150px; */
 }
-
 .benefits-grid1 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -2039,7 +2039,7 @@ body.inner-page-active .navbar {
   }
 
   .benefits-section {
-    padding: clamp(40px, 7vw, 80px) 5%;
+    padding: clamp(40px, 7vw, 80px) 1%;
     text-align: center;
   }
 
@@ -2075,14 +2075,13 @@ body.inner-page-active .navbar {
     gap: 40px;
   }
 
-  .benefits-grid1 {
-    width: 100%;
-    max-width: 700px;
-    margin: 0 auto;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-  }
-
+      .benefits-grid1 {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        width: 100%;
+        max-width: 878px;
+        margin: 0 auto;
+    }
   .benefit-card p {
     color: #6b645c;
     text-align: left;
@@ -2101,7 +2100,7 @@ body.inner-page-active .navbar {
   .storage-box {
     flex-shrink: 1;
     width: 100%;
-    max-width: 650px;
+  max-width: 862px;
     margin: 29px auto 22px;
   }
 
@@ -2225,7 +2224,7 @@ body.inner-page-active .navbar {
   .pi-products {
     text-align: center;
     background: #f8f6f2;
-    padding: 57px 121px 3px;
+    padding: 57px 3vw 3px;
     position: relative;
     overflow: hidden;
   }
@@ -2329,7 +2328,11 @@ body.inner-page-active .navbar {
     font-size: 16px;
     line-height: 1.7;
   }
-
+.menu-title {
+    gap: 20px;
+    display: flex;
+    margin-left: -6px;
+}
   .main-image {
     width: 100%;
     height: auto;
@@ -2683,12 +2686,14 @@ body.inner-page-active .navbar {
   .dropdown-selected {
     font-size: 14px;
     padding: 12px 15px;
+    
   }
 
 
   .pi-card-content h4 {
     margin-bottom: 5px;
     font-size: 10px;
+    margin-left: -14px;
   }
 
   .pi-card-content p {
