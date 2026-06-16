@@ -629,6 +629,7 @@ body.inner-page-active .navbar {
   margin-bottom: 16px;
   /* margin-left: -852px; */
   font-family: "Inter", sans-serif;
+  text-align: left;
 }
 
 .benefits-title span {
@@ -641,6 +642,7 @@ body.inner-page-active .navbar {
     margin-top: 0;
     font-size: 18px;
     line-height: 1.8;
+    text-align: left;
 /* margin-left: -150px; */
 }
 .benefits-grid1 {
