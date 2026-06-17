@@ -2067,7 +2067,7 @@ body {
 
   .carousel-wrapper {
     /* Zero out side padding — section already provides the margin */
-    padding: clamp(16px, 1.8vw, 28px) 0;
+  padding: clamp(4px, -1.2vw, 17px) 0;
     overflow: visible;
   }
 
@@ -2184,7 +2184,7 @@ body {
     padding: 35px 44px 1px;
     position: relative;
     overflow: visible;
-    margin-top: -36px;
+    margin-top: -60px;
   }
 
   /* ---- CAROUSEL ---- */

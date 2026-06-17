@@ -1482,7 +1482,9 @@ body.inner-page-active .navbar {
 
   /* recipe section */
   .recipe-section {
-    padding: clamp(40px, 5vw, 79px) clamp(20px, 5vw, 10%);
+
+        padding: clamp(12px, 1vw, 73px) clamp(20px, 5vw, 10%);
+
   }
 
   .desc-title {
