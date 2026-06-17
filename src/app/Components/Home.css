@@ -121,7 +121,9 @@ body {
 }
 
 @keyframes video-spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* NAVBAR */
@@ -155,7 +157,7 @@ body {
   letter-spacing: 1px;
 }
 
-h1 {
+.pure {
   font-size: 72px;
   line-height: 1.05;
   margin-bottom: 24px;
@@ -206,7 +208,7 @@ h1 {
   width: fit-content;
   padding: 0px 21px;
   display: flex;
-  margin: 0 24px;
+  margin: 0 2px;
 }
 
 .stats h2 {
@@ -303,7 +305,7 @@ h1 {
 
 .about-content p {
   color: #555;
-  margin-bottom: 28px;
+  margin-bottom: 19px;
   font-size: 18px;
   line-height: 1.7;
 }
@@ -314,6 +316,7 @@ h1 {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  margin-left: -18px;
 }
 
 .feature {
@@ -355,7 +358,7 @@ h1 {
 /* PRODUCTS SECTION */
 
 .products {
-     padding: 97px 11vw 60px;
+  padding: 97px 11vw 60px;
   background: #f8f6f2;
   text-align: center;
   position: relative;
@@ -483,7 +486,7 @@ h1 {
 
 .product-cards {
   justify-content: center;
-    gap: 2.7vw;
+  gap: 1.2vw;
   display: flex;
   flex-direction: row;
   align-items: stretch;
@@ -822,7 +825,7 @@ h1 {
 .carousel-wrapper {
   position: relative;
   width: 100%;
- max-width: 87%;
+  max-width: 87%;
   margin: 0 auto;
   padding: clamp(16px, 1.8vw, 28px) 0;
   overflow: visible;
@@ -1029,7 +1032,7 @@ h1 {
   font-size: 40px;
   font-weight: 700;
   color: #1a2210;
-     margin-bottom: 41px;
+  margin-bottom: 41px;
 }
 
 /* card4 — Health Malts: master-matched to Puttu & Idiyappam */
@@ -1166,6 +1169,323 @@ h1 {
   line-height: 1.5;
 }
 
+/* =============================================
+   PRODUCTS5 — Special Mixes (mirrors products3)
+   ============================================= */
+
+.products5 {
+  text-align: center;
+  z-index: 10;
+  background: #f8f6f2;
+  padding: 9px 61px 0px;
+  position: relative;
+  overflow: visible;
+  margin-top: -20px;
+}
+
+.product5-title {
+  font-size: 40px;
+  font-weight: 700;
+  color: #1a2210;
+  margin-bottom: 10px;
+}
+
+/* Decorative grain — left side of Soup & Booster section */
+
+.products-wheat {
+  object-fit: contain;
+  z-index: 0;
+  opacity: .18;
+  pointer-events: none;
+  width: 29%;
+  height: auto;
+  position: absolute;
+  top: -97px;
+  left: -121px;
+  rotate: -21deg;
+}
+
+/* Decorative background image for products5 */
+.products-bg5 {
+  object-fit: contain;
+  z-index: 0;
+  opacity: .18;
+  pointer-events: none;
+  width: clamp(20%, 25vw, 29%);
+  height: auto;
+  position: absolute;
+  top: -40px;
+  right: -20px;
+  transform: scaleX(-1) rotate(-21deg);
+}
+
+/* card5 — mirrors card3 exactly */
+.card5 {
+  background: #fff;
+  border-radius: 16px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.card5 img {
+  width: 100%;
+  object-fit: contain;
+  background: #f3e8d7;
+}
+
+/* Image box — matches card3 .img-box */
+.img-box5 {
+  height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f3e8d7;
+  overflow: hidden;
+  position: relative;
+}
+
+.img-box5 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.4s ease;
+  display: block;
+}
+
+/* Overlay */
+.card5-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: 0.4s ease;
+  padding: 20px 30px;
+}
+
+.card5-overlay ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.card5-overlay li {
+  margin-bottom: 12px;
+  font-size: 15px;
+  color: #2c2c2c;
+  white-space: nowrap;
+}
+
+/* Hover effect */
+.img-box5:hover img {
+  filter: blur(2px);
+  transform: scale(1.05);
+}
+
+.img-box5:hover .card5-overlay {
+  opacity: 1;
+}
+
+/* Badge */
+.badge5s {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #5c8f3a;
+  color: white;
+  padding: 5px 10px;
+  font-size: 12px;
+  border-radius: 12px;
+}
+
+/* Content */
+.card5-content {
+  padding: 18px 16px 16px;
+  text-align: left;
+  flex: 1;
+}
+
+.card5-content h4 {
+  margin-bottom: 6px;
+  font-size: 17px;
+  font-weight: 700;
+  color: #1a2210;
+  line-height: 1.3;
+}
+
+.card5-content p {
+  font-size: 15px;
+  color: #777;
+  line-height: 1.5;
+}
+
+/* =============================================
+   PRODUCTS6 — Additional Section (mirrors products5)
+   ============================================= */
+
+.products6 {
+  text-align: center;
+  z-index: 10;
+  background: #f8f6f2;
+  padding: 9px 61px 0px;
+  position: relative;
+  overflow: visible;
+}
+
+/* Decorative grain — right side of Heritage Rice section */
+
+.products-paddy {
+  object-fit: contain;
+  z-index: 0;
+  opacity: .18;
+  pointer-events: none;
+  width: 22%;
+  height: auto;
+  position: absolute;
+  top: -61px;
+  right: -17px;
+  rotate: 27deg;
+}
+
+.product6-title {
+  font-size: 40px;
+  font-weight: 700;
+  color: #1a2210;
+  margin-bottom: 10px;
+}
+
+/* Decorative background image for products6 */
+.products-bg6-other {
+  object-fit: contain;
+  z-index: 0;
+  opacity: .3;
+  pointer-events: none;
+  width: clamp(30%, 40vw, 50%);
+  height: auto;
+  position: absolute;
+  top: -80px;
+  right: -50px;
+  rotate: 15deg;
+}
+
+/* card6 — mirrors card5 exactly */
+.card6 {
+  background: #fff;
+  border-radius: 16px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.card6 img {
+  width: 100%;
+  object-fit: contain;
+  background: #f3e8d7;
+}
+
+/* Image box */
+.img-box6 {
+  height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f3e8d7;
+  overflow: hidden;
+  position: relative;
+}
+
+.img-box6 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.4s ease;
+  display: block;
+}
+
+/* Overlay */
+.card6-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: 0.4s ease;
+  padding: 20px 30px;
+}
+
+.card6-overlay ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.card6-overlay li {
+  margin-bottom: 12px;
+  font-size: 15px;
+  color: #2c2c2c;
+  white-space: nowrap;
+}
+
+/* Hover effect */
+.img-box6:hover img {
+  filter: blur(2px);
+  transform: scale(1.05);
+}
+
+.img-box6:hover .card6-overlay {
+  opacity: 1;
+}
+
+/* Badge */
+.badge6s {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #c46b2b;
+  color: white;
+  padding: 5px 10px;
+  font-size: 12px;
+  border-radius: 12px;
+}
+
+/* Content */
+.card6-content {
+  padding: 18px 16px 16px;
+  text-align: left;
+  flex: 1;
+}
+
+.card6-content h4 {
+  margin-bottom: 6px;
+  font-size: 17px;
+  font-weight: 700;
+  color: #1a2210;
+  line-height: 1.3;
+}
+
+.card6-content p {
+  font-size: 15px;
+  color: #777;
+  line-height: 1.5;
+}
+
 /* BENEFITS SECTION */
 
 .benefits-section {
@@ -1187,7 +1507,7 @@ h1 {
   height: auto;
   position: absolute;
   top: -21px;
-  left: -220px;
+  left: -269px;
   rotate: 6deg;
 }
 
@@ -1225,7 +1545,9 @@ h1 {
 
 .benefit-box {
   text-align: left;
-  background: #fff;
+  background: #ffffff !important;
+  position: relative;
+  z-index: 1;
   border-radius: 20px;
   padding: 36px 32px;
   transition: transform 0.35s ease, box-shadow 0.35s ease;
@@ -1408,8 +1730,8 @@ h1 {
   position: absolute;
   top: -7px;
   right: -7px;
- width: 33px;
-    height: 33px;
+  width: 33px;
+  height: 33px;
   background: #c46b2b;
   color: #ffffff;
   font-size: 9px;
@@ -1472,7 +1794,7 @@ h1 {
 
 .products-bg11 {
   object-fit: contain;
-  opacity: .3;
+  opacity: .2;
   width: 30%;
   height: 100%;
   position: absolute;
@@ -1513,7 +1835,8 @@ h1 {
   font-size: 18px;
   line-height: 1.7;
   margin-bottom: 32px;
-  max-width: 420px;
+  max-width: 593px;
+
 }
 
 /* INFO BOX */
@@ -1557,7 +1880,8 @@ h1 {
   flex: 1;
   padding: 68px 30px;
   box-shadow: 0 5px 15px #0000001a;
-  margin-top: 23px;
+  margin-top: 8px;
+  height: 26vw;
 }
 
 .contact-form h3 {
@@ -1771,8 +2095,10 @@ h1 {
 
   .product2-title,
   .product3-title,
-  .product4-title {
-           margin-bottom: 21px;
+  .product4-title,
+  .product5-title,
+  .product6-title {
+    margin-bottom: 21px;
   }
 
   /* ---- CARDS ---- */
@@ -1787,21 +2113,27 @@ h1 {
   .card2 .img-box,
   .card3 .img-box,
   .card4 .img-box,
-  .img-box4 {
+  .img-box4,
+  .img-box5,
+  .img-box6 {
     height: 33vw;
   }
 
   .card-content,
   .card2-content,
   .card3-content,
-  .card4-content {
+  .card4-content,
+  .card5-content,
+  .card6-content {
     padding: clamp(14px, 1.2vw, 18px) clamp(12px, 1vw, 16px);
   }
 
   .card-content h4,
   .card2-content h4,
   .card3-content h4,
-  .card4-content h4 {
+  .card4-content h4,
+  .card5-content h4,
+  .card6-content h4 {
     font-size: clamp(13px, 1vw, 16px);
   }
 
@@ -1813,8 +2145,46 @@ h1 {
   .card-content p,
   .card2-content p,
   .card3-content p,
-  .card4-content p {
+  .card4-content p,
+  .card5-content p,
+  .card6-content p {
     font-size: clamp(11px, 0.8vw, 13px);
+  }
+
+  .product6-title {
+    font-size: clamp(24px, 2.2vw, 36px);
+    margin-bottom: 21px;
+  }
+
+  .products6 {
+    padding: 35px 44px 1px;
+  }
+
+  .products-paddy {
+    width: clamp(16%, 20vw, 22%);
+    top: -50px;
+    right: clamp(-20px, -1vw, 0px);
+  }
+
+  .products-wheat {
+    width: clamp(20%, 24vw, 29%);
+    top: -80px;
+    left: clamp(-58px, -10vw, -80px);
+  }
+
+  .product5-title {
+    font-size: clamp(24px, 2.2vw, 36px);
+    margin-bottom: 21px;
+  }
+
+  .products5 {
+    text-align: center;
+    z-index: 10;
+    background: #f8f6f2;
+    padding: 35px 44px 1px;
+    position: relative;
+    overflow: visible;
+    margin-top: -36px;
   }
 
   /* ---- CAROUSEL ---- */
@@ -1874,6 +2244,9 @@ h1 {
   }
 
   .benefit-box {
+    background: #ffffff !important;
+    position: relative;
+    z-index: 10;
     padding: clamp(24px, 2.2vw, 36px) clamp(20px, 2vw, 32px);
   }
 
@@ -1899,7 +2272,8 @@ h1 {
   .life-container {
     padding: 0;
   }
-.life-number {
+
+  .life-number {
     color: #fff;
     letter-spacing: 0;
     background: #c46b2b;
@@ -1916,7 +2290,8 @@ h1 {
     position: absolute;
     top: -7px;
     right: -7px;
-}
+  }
+
   .life-circle {
     width: clamp(52px, 4.5vw, 70px);
     height: clamp(52px, 4.5vw, 70px);
@@ -1942,11 +2317,21 @@ h1 {
   .contact-section {
     padding: clamp(70px, 6.5vw, 100px) clamp(60px, 6vw, 100px) clamp(50px, 5vw, 80px);
     gap: clamp(32px, 4vw, 60px);
-    align-items: flex-start;
+    align-items: stretch;
   }
 
   .contact-tag {
     font-size: clamp(11px, 0.8vw, 13px);
+  }
+
+  .contact-form {
+    background: #fff;
+    border-radius: 20px;
+    flex: 1;
+    margin-top: 0;
+    padding: 68px 30px;
+    box-shadow: 0 5px 15px #0000001a;
+    height: auto;
   }
 
   .contact-left h2 {
@@ -1961,7 +2346,6 @@ h1 {
   .contact-form {
     padding: clamp(24px, 2.5vw, 40px) clamp(20px, 2vw, 30px);
     margin-top: 0;
-    align-self: flex-start;
   }
 
   .contact-form h3 {
@@ -2036,9 +2420,11 @@ h1 {
   }
 
   .products-bg8 {
-    width: clamp(20%, 24vw, 29%);
-    top: 20px;
+
+    width: clamp(25%, 38vw, 29%);
+    top: 76px;
     left: clamp(-80px, -6vw, -30px);
+
   }
 
   .products-bg11 {
@@ -2186,7 +2572,7 @@ h1 {
     font-size: 20px;
   }
 
-  .product-title, .product2-title, .product3-title {
+  .product-title, .product2-title, .product3-title, .product5-title {
     font-size: 42px;
   }
 
@@ -2296,7 +2682,7 @@ h1 {
     text-align: center;
   }
 
-  h1 {
+  .pure {
     width: 100%;
     max-width: 95vw;
     /* margin-bottom: 65px; */
@@ -2445,6 +2831,149 @@ h1 {
     background: #f8f6f2;
     padding: 60px 100px 80px;
     position: relative;
+  }
+
+  .products5 {
+    text-align: center;
+    z-index: 10;
+    background: #f8f6f2;
+    padding: 13px 9px;
+    position: relative;
+    /* Self-clip the decorative grain (.products-wheat, left: -35px) so it can't
+       bleed off-screen on mobile and cause horizontal scroll / a left-side gap.
+       Matches the overflow:hidden every other section already uses. */
+    overflow: hidden;
+  }
+
+  .products-wheat {
+    object-fit: contain;
+    z-index: 0;
+    opacity: .3;
+    pointer-events: none;
+    width: 37%;
+    height: 34%;
+    position: absolute;
+    top: -40px;
+    left: -35px;
+    rotate: -21deg;
+  }
+
+  .product5-title {
+    font-size: 28px;
+  }
+
+  .card5 .img-box5 {
+    background: #f3e8d7;
+    justify-content: center;
+    align-items: center;
+    height: 47vw;
+    display: flex;
+  }
+
+  .card5 .img-box5 img {
+    object-fit: cover;
+    width: 100%;
+    height: 115%;
+    transition: all .4s;
+    display: block;
+  }
+
+  .card5-content {
+    text-align: left;
+    flex: 1;
+    padding: 12px 13px 2px;
+  }
+
+  .card5-content h4 {
+    margin-bottom: 5px;
+    font-size: 10px;
+  }
+
+  .card5-content p {
+    color: #777;
+    font-size: 9px;
+    line-height: 1.5;
+  }
+
+  .card5-overlay li {
+    color: #2c2c2c;
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    margin-bottom: 8px;
+    font-size: 11px;
+    font-weight: 500;
+  }
+
+  .products6 {
+    text-align: center;
+    z-index: 10;
+    background: #f8f6f2;
+    padding: 13px 9px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .products-paddy {
+    object-fit: contain;
+    z-index: 0;
+    pointer-events: none;
+    width: 39%;
+    height: 48%;
+    position: absolute;
+    top: -26px;
+    right: 14px;
+    rotate: 27deg;
+    opacity: .3;
+  }
+
+  .product6-title {
+    font-size: 28px;
+  }
+
+  .card6 .img-box6 {
+    background: #f3e8d7;
+    justify-content: center;
+    align-items: center;
+    height: 47vw;
+    display: flex;
+  }
+
+  .card6 .img-box6 img {
+    object-fit: cover;
+    width: 100%;
+    height: 115%;
+    transition: all .4s;
+    display: block;
+  }
+
+  .card6-content {
+    text-align: left;
+    flex: 1;
+    padding: 12px 13px 2px;
+  }
+
+  .card6-content h4 {
+    margin-bottom: 5px;
+    font-size: 10px;
+  }
+
+  .card6-content p {
+    color: #777;
+    font-size: 9px;
+    line-height: 1.5;
+  }
+
+  .card6-overlay li {
+    color: #2c2c2c;
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    margin-bottom: 8px;
+    font-size: 11px;
+    font-weight: 500;
   }
 
   .products10 {
@@ -2681,6 +3210,36 @@ h1 {
     gap: 2px;
   }
 
+  .card5-overlay {
+    opacity: 0;
+    background: #fff9;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 19px 13px;
+    transition: all .4s;
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .card6-overlay {
+    opacity: 0;
+    background: #fff9;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 20px 11px;
+    transition: all .4s;
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
   .products,
   .products2,
   .products3,
@@ -2902,6 +3461,19 @@ h1 {
 
   .products4 {
     padding: 29px 22px;
+  }
+
+  .products-bg8 {
+    object-fit: contain;
+    z-index: 0;
+    opacity: .18;
+    pointer-events: none;
+    width: 54%;
+    height: auto;
+    position: absolute;
+    top: 35px;
+    left: -70px;
+    rotate: 6deg;
   }
 
   /* CAROUSEL */
@@ -3176,7 +3748,7 @@ h1 {
     padding: 0 clamp(60px, 10vw, 200px);
   }
 
-  h1 {
+  .pure {
     font-size: clamp(42px, 4.5vw, 72px);
     line-height: 1.08;
     margin-bottom: clamp(16px, 1.5vw, 24px);
@@ -3368,10 +3940,10 @@ h1 {
 
   .card .img-box,
   .card2 .img-box,
-  
+
   .img-box4 {
     /* height: clamp(375px, 28vw, 450px); */
-   height: 37vw;
+    height: 37vw;
   }
 
   .card3 {
@@ -3382,9 +3954,10 @@ h1 {
     display: flex;
     position: relative;
     overflow: hidden;
-           height: 45vw;
+    height: 45vw;
   }
-.card3 .img-box {
+
+  .card3 .img-box {
     background: #f3e8d7;
     justify-content: center;
     align-items: center;
@@ -3392,7 +3965,8 @@ h1 {
     display: flex;
     position: relative;
     overflow: hidden;
-}
+  }
+
   .card-content,
   .card2-content,
   .card3-content,
@@ -3455,6 +4029,9 @@ h1 {
   }
 
   .benefit-box {
+    background: #ffffff !important;
+    position: relative;
+    z-index: 10;
     padding: clamp(24px, 2.2vw, 36px) clamp(20px, 2vw, 32px);
   }
 
@@ -3479,6 +4056,19 @@ h1 {
   .info-icon img {
     width: 16px;
     height: 30%;
+  }
+
+  .products-bg8 {
+    object-fit: contain;
+    z-index: 0;
+    opacity: .18;
+    pointer-events: none;
+    width: 60%;
+    height: auto;
+    position: absolute;
+    top: 11px;
+    left: -84px;
+    rotate: 6deg;
   }
 
   /* ---- LIFE SECTION ---- */
@@ -3546,6 +4136,7 @@ h1 {
     padding: clamp(24px, 2.5vw, 40px) clamp(20px, 2vw, 30px);
     margin-top: 0;
     align-self: flex-start;
+    height: 445px;
   }
 
   .contact-form h3 {
@@ -3589,6 +4180,19 @@ h1 {
     width: clamp(16%, 20vw, 22%);
     top: -50px;
     right: clamp(-20px, -1vw, 0px);
+  }
+
+  .products-bg8 {
+    object-fit: contain;
+    z-index: 0;
+    opacity: .18;
+    pointer-events: none;
+    width: 59%;
+    height: auto;
+    position: absolute;
+    top: 33px;
+    left: -86px;
+    rotate: 6deg;
   }
 
   .products-bg96 {
@@ -3673,16 +4277,124 @@ h1 {
     overflow: visible;
   }
 
+  .products5 {
+    text-align: center;
+    z-index: 10;
+    background: rgb(248, 246, 242);
+    padding: 35px 44px 1px;
+    position: relative;
+    overflow: visible;
+  }
+
+  .products-wheat {
+    object-fit: contain;
+    z-index: 0;
+    opacity: .3;
+    pointer-events: none;
+    width: clamp(50%, 24vw, 29%);
+    height: auto;
+    position: absolute;
+    top: -80px;
+    left: clamp(-130px, -10vw, -80px);
+    rotate: -21deg;
+  }
+
+  .products-wheat {
+    /* width: clamp(20%, 24vw, 29%); */
+    top: -80px;
+    left: clamp(-130px, -10vw, -80px);
+  }
+
+  .product5-title {
+    font-size: clamp(24px, 2.2vw, 36px);
+    margin-bottom: 10px;
+  }
+
+  .img-box5 {
+    height: 32vw;
+  }
+
+  .card5-content h4 {
+    color: #1a2210;
+    margin-bottom: 6px;
+    font-size: clamp(13px, 1vw, 16px);
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .card5-content p {
+    color: #777;
+    font-size: clamp(11px, .8vw, 13px);
+    line-height: 1.5;
+  }
+
+  .card5-content {
+    text-align: left;
+    flex: 1;
+    padding: 18px 8px 16px;
+  }
+
+  .card6-content h4 {
+    color: #1a2210;
+    margin-bottom: 6px;
+    font-size: clamp(11px, .8vw, 13px);
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .card6-content p {
+    color: #777;
+    font-size: clamp(11px, 0.8vw, 13px);
+    line-height: 1.5;
+  }
+
+  .products6 {
+    text-align: center;
+    z-index: 10;
+    background: rgb(248, 246, 242);
+    padding: 35px 44px 1px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .products-paddy {
+    width: clamp(16%, 20vw, 22%);
+    top: -50px;
+    right: clamp(-20px, -1vw, 0px);
+  }
+
+  .products-paddy {
+    object-fit: contain;
+    z-index: 0;
+    opacity: .3;
+    pointer-events: none;
+    width: 35%;
+    height: auto;
+    position: absolute;
+    top: -7px;
+    right: -17px;
+    rotate: 27deg;
+  }
+
+  .product6-title {
+    font-size: clamp(24px, 2.2vw, 36px);
+    margin-bottom: 10px;
+  }
+
+  .img-box6 {
+    height: 32vw;
+  }
+
   .products-bg8 {
     object-fit: contain;
     z-index: 0;
     opacity: .18;
     pointer-events: none;
-    width: 66%;
+    width: 61%;
     height: auto;
     position: absolute;
     top: -21px;
-    left: -220px;
+    left: -120px;
     rotate: 6deg;
   }
 
@@ -3836,7 +4548,7 @@ h1 {
 
 .contact-tag {
   font-size: 18px;
-  text-align: center;
+  text-align: left;
   display: block;
 }
 

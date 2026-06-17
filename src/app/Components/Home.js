@@ -30,20 +30,44 @@ const STATIC_PUTTU = [
   { img: "./Images/rathasali-puttu-flour-main.svg", alt: "puttu", badge: "badge3 yellow", badgeText: "Puttu Flour", slug: "rathasali-puttu-flour", title: "Rathasali Puttu Flour", desc: "Iron-rich red rice for warm morning puttu", points: ["✔ Boosts hemoglobin", "✔ Energising start", "✔ Easy to digest"] },
   { img: "./Images/rathasali-idiyappam-flour-main.svg", alt: "puttu", badge: "badge0", badgeText: "Idiyappam Flour", slug: "rathasali-idiyappam-flour", title: "Rathasali Idiyappam Flour", desc: "Delicate red rice idiyappam flour", points: ["✔ Light dinner option", "✔ Iron & fibre", "✔ Naturally pigmented"] },
   { img: "./Images/thuyamalli-puttu-flour-main.svg", alt: "puttu", badge: "badge9", badgeText: "Puttu Flour", slug: "thuyamalli-puttu-flour", title: "Thuyamalli Puttu Flour", desc: "Aromatic white rice puttu flour", points: ["✔ Soft & fluffy puttu", "✔ Easy on the gut", "✔ Diabetic-friendly"] },
-  { img: "./Images/thooyamalli-idiyappam-flour-main.svg", alt: "puttu", badge: "badge9", badgeText: "Idiyappam Flour", slug: "thooyamalli-idiyappam-flour", title: "Thuyamalli Idiyappam Flour", desc: "Silky-smooth idiyappam flour", points: ["✔ Light supper choice", "✔ Aromatic & fragrant", "✔ Sustained energy"] },
+  { img: "./Images/thooyamalli-idiyappam-flour-main.svg", alt: "puttu", badge: "badge9", badgeText: "Idiyappam Flour", slug: "thuyamalli-idiyappam-flour", title: "Thuyamalli Idiyappam Flour", desc: "Silky-smooth idiyappam flour", points: ["✔ Light supper choice", "✔ Aromatic & fragrant", "✔ Sustained energy"] },
+  { img: "./Images/thuyamalli-kozhukattai-flour-main.svg", alt: "puttu", badge: "badge9", badgeText: "kozhukattai-flour", slug: "thuyamalli-kozhukattai-flour", title: "Thuyamalli Kozhukattai Flour", desc: "The traditional heirloom rice for perfect kozhukattai   ", points: ["✔ Source of natural energy", "✔ Supports healthy digestion", "✔ Traditionally nutritious food", "✔ No preservatives"] },
+  { img: "./Images/karuppu-kavuni-kozhukattai-flour-main.svg", alt: "puttu", badge: "badge9", badgeText: "kozhukattai-flour", slug: "karuppu-kavuni-kozhukattai-flour", title: "Karuppu Kavuni Kozhukattai  Flour", desc: "The Authentic Karuppu Kavuni Legacy", points: ["✔ Source of natural energy", "✔ Supports healthy digestion", "✔ Traditionally nutritious food", "✔  No preservatives"] },
+   { img: "./Images/rathasali-kozhukattai-flour-main.svg", alt: "puttu", badge: "badge9", badgeText: "kozhukattai-flour", slug: "rathasali-kozhukattai-flour", title: "Rathasali Kozhukattai Flour", desc: " The ancient royal red rice tradition", points: ["✔ Source of natural energy", "✔Supports healthy digestion", "✔ Traditionally nutritious food", "✔ No preservatives"] },
 ];
 
 const STATIC_SOUP = [
   { img: "./Images/karuppu-kavuni-soup-mix-main.svg", alt: "soup", badge: "badge4", badgeText: "Soup Mix", slug: "karuppu-kavuni-soup-mix", title: "Karuppu Kavuni Soup Mix", desc: "Hearty black rice nourishing soup", points: ["✔ Antioxidant-rich broth", "✔ Comforting & filling", "✔ Quick to prepare"] },
   { img: "./Images/rathasali-soup-mix-main.svg", alt: "soup", badge: "badge4 red", badgeText: "Soup Mix", slug: "rathasali-soup-mix", title: "Rathasali Soup Mix", desc: "Warming red rice soup blend", points: ["✔ Boosts hemoglobin", "✔ Builds stamina", "✔ Wholesome nutrition"] },
-  { img: "./Images/rathasali-health-mix-main.svg", alt: "booster", badge: "badge4 yellow", badgeText: "Iron Booster", slug: "rathasali-iron-rich-mix", title: "Rathasali Iron Rich Mix", desc: "A daily dose of natural iron", points: ["✔ Combats anemia", "✔ Increases hemoglobin", "✔ Supports blood health"] },
-  { img: "./Images/karuppu-kavuni-health-mix-main.svg", alt: "soup", badge: "badge56", badgeText: "Immune Booster", slug: "karuppu-kavuni-immune-booster-mix", title: "Karuppu Kavuni Immune Booster Mix", desc: "Daily immunity from traditional grains", points: ["✔ Strengthens immunity", "✔ Antioxidant protection", "✔ Immune Booster"] },
-  { img: "./Images/karuppu-ulunthu-karuppu-kavuni-kali-mix-main.svg", alt: "soup", badge: "badge56", badgeText: "Kali Mix", slug: "kk-black-gram-kali-mix", title: "KK & Black Gram Kali Mix", desc: "Karuppu Kavuni + Black Gram protein power", points: ["✔ Balanced carbs, protein & minerals", "✔ Improves strength & stamina", "✔ Supports postpartum recovery", "✔ Long-lasting energy"] },
+  { img: "./Images/rathasali-health-mix-main.svg", alt: "booster", badge: "badge4 yellow", badgeText: "Iron Booster", slug: "rathasali-health-mix", title: "Rathasali Iron Rich Mix", desc: "A daily dose of natural iron", points: ["✔ Combats anemia", "✔ Increases hemoglobin", "✔ Supports blood health"] },
+  { img: "./Images/karuppu-kavuni-health-mix-main.svg", alt: "soup", badge: "badge56", badgeText: "Immune Booster", slug: "karuppu-kavuni-health-mix", title: "Karuppu Kavuni Immune Booster Mix", desc: "Daily immunity from traditional grains", points: ["✔ Strengthens immunity", "✔ Antioxidant protection", "✔ Immune Booster"] },
+  { img: "./Images/karuppu-ulunthu-karuppu-kavuni-kali-mix-main.svg", alt: "soup", badge: "badge56", badgeText: "Kali Mix", slug: "karuppu-ulunthu-karuppu-kavuni-kali-mix", title: "KK & Black Gram Kali Mix", desc: "Karuppu Kavuni + Black Gram protein power", points: ["✔ Balanced carbs, protein & minerals", "✔ Improves strength & stamina", "✔ Supports postpartum recovery", "✔ Long-lasting energy"] },
+ { img: "./Images/mapilai-samba-health-mix-main.svg", alt: "soup", badge: "badge56", badgeText: "Kali Mix", slug: "mappillai-samba-health-mix", title: "Mappilai Samba Health Mix", desc: "The Traditional Power Grain for Men’s Strength", points: ["✔ Supports men’s strength & stamina", "✔ Rich in iron & fiber", "✔ Energy boosting nutritious drink", "✔ Supports healthy digestion"] },
+{ img: "./Images/poongar-health-mix-main.svg", alt: "soup", badge: "badge56", badgeText: "Kali Mix", slug: "poongar-health-mix", title: "Poongar Health mix", desc: "The Ancient Grain Elixir for Women's Health", points: ["✔ Supports women’s wellness & vitality", "✔ Rich in iron & fiber", "✔ Nourishing and energy boosting drink", "✔ Supports healthy digestion"] },
 ];
+
+
 
 const STATIC_MALT = [
   { img: "./Images/beetroot-multivitamin-malt-main.svg", badge: "badge5", title: "Beetroot Multivitamin Malt", slug: "beetroot-multivitamin-malt", desc: "Detoxify and glow naturally", points: ["✔ Supports detoxification", "✔ Improves skin health", "✔ Enhances brain function", "✔ Aids digestion"] },
   { img: "./Images/panchamirtha-malt-main.svg", badge: "badge5 yellow", title: "Panchamirtha Malt", slug: "panchamirtha-malt", desc: "Five-fold traditional wellness blend", points: ["✔ Time-honoured recipe", "✔ Boosts overall wellness", "✔ Naturally sweet & nourishing"] },
+];
+
+const COOKIES = [
+  { img: "./Images/rathasali-rice-cookies-main.svg", badgeText: "Cookies", title: "Rathasali Rice Cookies",slug:"rathasali-rice-cookies", desc: "The heritage red rice crafted into crunchy goodness", points: ["✔ Boosts hemoglobin ", "✔ Rich in iron and fiber",  "✔ Provides natural energy" ]},
+  { img: "./Images/thuyamalli-rice-cookies-main.svg", badgeText: "Cookies", title: "Thuyamalli Rice Cookies",slug:"thuyamalli-rice-cookies", desc: "The wholesome goodness of Thuyamalli rice", points: ["✔ Easy to digest", "✔ Rich in natural fiber and energy",  "✔ Supports everyday wellness"] },
+  { img: "./Images/mysore-malli-rice-cookies-main.svg", badgeText: "Cookies", title: "Mysore Malli Rice Cookies",slug:"mysore-malli-rice-cookies", desc: "  The Authentic Mysore Malli Rice Delicacy", points: ["✔ Traditional homemade taste", "✔Crispy and flavorful",  "✔ No artificial colors or flavors"] },
+  { img: "./Images/multivitamin-cookies-main.svg", badgeText: "Cookies", title: "Multivitamin Cookies ",slug:"multivitamin-cookies", desc: "The naturally nourishing beetroot malt cookie", points: ["✔ Supports healthy energy", "✔ Rich in natural fiber ",  "✔ Rich in antioxidants"] },
+  { img: "./Images/panchamirtha-cookies-main.svg", badgeText: "Cookies", title: "Panchamirtha Cookies",slug:"panchamirtha-cookies", desc: " he traditional energy-rich banana cookie", points: ["✔Supports natural energy", "✔ Rich in fiber ",  "✔ Rich in essential nutrients"] },
+   { img: "./Images/karuppu-kavuni-rice-cookies-main.svg", badgeText: "Cookies", title: "Karuppu Kavuni Rice Cookies",slug:"karuppu-kavuni-rice-cookies", desc: "The Ancient Heritage Black Rice Cookie", points: ["✔ Naturally aromatic ", "✔ Rich in natural fiber ",  "✔ Rich in energy",  "✔ Supports everyday wellness"] },
+];
+
+const VADAM_VATHAL = [
+  { img: "./Images/mysore-malli-murukku-vadam-main.svg", badgeText: "vadam", title: "Mysore Malli Murukku Vadam",slug:"mysore-malli-murukku-vadam" ,desc: "The Authentic Mysore Malli Rice Delicacy", points: ["✔ Traditional homemade taste", "✔ Crispy and flavorful", "✔ No artificial colors or flavors" ] },
+  { img: "./Images/thanjavur-special-killu-vadam-main.svg", badgeText: "vadam", title: "Thanjavur Special Killu Vadam",slug:"thanjavur-special-killu-vadam", desc: "  The timeless crispy rice delicacy", points: ["✔Traditional homemade taste ", "✔ Crispy and flavorful", "✔ No artificial colors or flavors" ] },
+  { img: "./Images/thanjavur-special-kudaimilagai-vathal-main.svg", badgeText: "Vathal", title: "Thanjavur Special Kudaimilagai Vathal",slug:"thanjavur-special-kudaimilagai-vathal", desc: " The legendary sun-dried kudai milagai vathal", points: ["✔ Authentic homemade taste ", "✔ Crispy and flavorful", "✔ No artificial colors or preservatives"] },
+  { img: "./Images/mor-milagai-vathal-main.svg", badgeText: "Vathal", title: "Mor Milagai Vathal",slug:"mor-milagai-vathal", desc: "The traditional buttermilk-infused chilli treat", points: ["✔ Spicy & flavourful ", "✔ Light and crispy", "✔ Crisp meal companion"] },
+  { img: "./Images/kothavarai-vathal-main.svg", badgeText: "Vathal", title: "Kothavarai Vathal",slug:"kothavarai-vathal", desc: "The timeless village-style cluster bean vathal", points: ["✔ Spicy & flavourful ", "✔ Light and crispy", "✔ Crisp meal companion"] },
 ];
 
 /* ─────────────────────────────────────────────────────────────────────────────
@@ -59,11 +83,24 @@ const _getPoints = (p) => {
 };
 
 export default function Home({ onProductClick, prefetchedData }) {
-  const visibleItems = 3;
+  // Responsive visible-card count for the product carousels:
+  // 3 cards on desktop/tablet, 2 cards on mobile (max-width: 640px).
+  // This keeps the track step (100 / visibleItems) and maxIndex in sync with
+  // the CSS card width (50% at <=640px) so exactly 2 full cards show on mobile
+  // and the last card stays reachable. Defaults to 3 for SSR/first paint.
+  const [visibleItems, setVisibleItems] = useState(3);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 640px)");
+    const applyVisible = () => setVisibleItems(mq.matches ? 2 : 3);
+    applyVisible();
+    mq.addEventListener("change", applyVisible);
+    return () => mq.removeEventListener("change", applyVisible);
+  }, []);
 
   const [index, setIndex] = useState(0);
 
-  const totalItems = 6;
+  const totalItems = 9;
   const maxIndex = totalItems - visibleItems;
 
   const next = () => {
@@ -80,7 +117,7 @@ export default function Home({ onProductClick, prefetchedData }) {
 
   // Soup & Booster carousel state
   const [index3, setIndex3] = useState(0);
-  const totalItems3 = 5;
+  const totalItems3 = 7;
   const maxIndex3 = totalItems3 - visibleItems;
 
   const next3 = () => {
@@ -92,6 +129,40 @@ export default function Home({ onProductClick, prefetchedData }) {
   const prev3 = () => {
     if (index3 > 0) {
       setIndex3(index3 - 1);
+    }
+  };
+
+  // Special Mixes carousel state
+  const [index5, setIndex5] = useState(0);
+  const totalItems5 = 6;
+  const maxIndex5 = totalItems5 - visibleItems;
+
+  const next5 = () => {
+    if (index5 < maxIndex5) {
+      setIndex5(index5 + 1);
+    }
+  };
+
+  const prev5 = () => {
+    if (index5 > 0) {
+      setIndex5(index5 - 1);
+    }
+  };
+
+  // Other Products carousel state
+  const [index6, setIndex6] = useState(0);
+  const totalItems6 = 5;
+  const maxIndex6 = totalItems6 - visibleItems;
+
+  const next6 = () => {
+    if (index6 < maxIndex6) {
+      setIndex6(index6 + 1);
+    }
+  };
+
+  const prev6 = () => {
+    if (index6 > 0) {
+      setIndex6(index6 - 1);
     }
   };
 
@@ -213,6 +284,12 @@ export default function Home({ onProductClick, prefetchedData }) {
   // ── Health Malts (up to 2 products) ─────────────────────────────────────
   const maltItems = STATIC_MALT;
 
+  // ── Special Mixes (up to 5 products) ─────────────────────────────────────
+  const specialItems = COOKIES;
+
+  // ── Other New Products (up to 5 products) ────────────────────────────────
+  const otherItems = VADAM_VATHAL;
+
   return (
     <div>
 
@@ -229,7 +306,7 @@ export default function Home({ onProductClick, prefetchedData }) {
         <div className="hero-content">
           <div className="badge">🌿 100% PURE & CHEMICAL-FREE</div>
 
-          <h1>
+          <h1 className="pure">
             Pure Organic Nutrition <br />
             for a <span style={{ color: "#E6C9A8" }}>Healthier Life</span>
           </h1>
@@ -555,6 +632,121 @@ export default function Home({ onProductClick, prefetchedData }) {
           </div>
 
         </section>
+
+
+
+        {/* ── Special Mixes ── */}
+        <section className="products5" id="products5">
+          <img src={asset("/back_paddy.png")} alt="background" className="products-wheat" />
+
+          <h3 className="product5-title">Cookies</h3>
+
+          <div className="carousel-wrapper">
+
+            {/* LEFT ARROW */}
+            <button className="arrow left" onClick={prev5}>
+              <img src={asset("/buttonleft.png")} alt="Prev" />
+            </button>
+
+            <div className="carousel-container">
+
+              {/* TRACK - all items inside here */}
+              <div
+                className="carousel-track"
+                style={{ transform: `translateX(-${index5 * (100 / visibleItems)}%)` }}
+              >
+
+                {specialItems.map((item, i) => (
+                  <div className="carousel-item" key={i} onClick={() => onProductClick && item.slug && onProductClick(item.slug)} >
+                    <div className="card5">
+                      <div className="img-box5">
+                        <img src={asset(item.img)} alt="mix" />
+                        <div className="card5-overlay">
+                          <ul>
+                            {item.points.map((point, idx) => (
+                              <li key={idx}>{point}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                      <div className="badge5s">{item.badgeText}</div>
+                      <div className="card5-content">
+                        <h4>{item.title}</h4>
+                        <p>{item.desc}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+
+              </div>
+
+            </div>
+
+            {/* RIGHT ARROW */}
+            <button className="arrow right" onClick={next5}>
+              <img src={asset("/buttonright.png")} alt="Next" />
+            </button>
+
+          </div>
+        </section>
+
+
+
+        {/* ── Additional Section ── */}
+        <section className="products6" id="products6">
+         <img src={asset("/back_paddy1.png")} alt="background" className="products-paddy" />
+
+          <h3 className="product6-title">Vadam & Vathal</h3>
+
+          <div className="carousel-wrapper">
+
+            {/* LEFT ARROW */}
+            <button className="arrow left" onClick={prev6}>
+              <img src={asset("/buttonleft.png")} alt="Prev" />
+            </button>
+
+            <div className="carousel-container">
+
+              {/* TRACK - all items inside here */}
+              <div
+                className="carousel-track"
+                style={{ transform: `translateX(-${index6 * (100 / visibleItems)}%)` }}
+              >
+
+                {otherItems.map((item, i) => (
+                  <div className="carousel-item" key={i} onClick={() => onProductClick && item.slug && onProductClick(item.slug)}>
+                    <div className="card6">
+                      <div className="img-box6">
+                        <img src={asset(item.img)} alt="product" />
+                        <div className="card6-overlay">
+                          <ul>
+                            {item.points.map((point, idx) => (
+                              <li key={idx}>{point}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                      <div className="badge6s">{item.badgeText}</div>
+                      <div className="card6-content">
+                        <h4>{item.title}</h4>
+                        <p>{item.desc}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+
+              </div>
+
+            </div>
+
+            {/* RIGHT ARROW */}
+            <button className="arrow right" onClick={next6}>
+              <img src={asset("/buttonright.png")} alt="Next" />
+            </button>
+
+          </div>
+        </section>
+
 
       </div>
 
