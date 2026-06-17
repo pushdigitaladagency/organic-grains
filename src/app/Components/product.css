@@ -141,7 +141,7 @@ body.inner-page-active .navbar {
 
   padding: 14px 18px;
   font-size: 16px;
-  font-weight: 100;
+  font-weight: 300;
   transition: 0.3s;
 }
 
@@ -1030,10 +1030,11 @@ body.inner-page-active .navbar {
   margin-bottom: 8px;
 }
 
-.contact-tag {
+.contact-tags {
   font-size: 18px;
   text-align: left;
   display: block;
+  color: #E07E29;
 }
 
 /* pi-products */
@@ -2344,8 +2345,8 @@ body.inner-page-active .navbar {
    width: 94vw;
         min-height: 60vw;
     /* max-width: 320px; */
-    aspect-ratio: 1/1.5;
-            margin-left: -5px;
+    /* aspect-ratio: 1/1.5; */
+            /* margin-left: -5px; */
   }
 
   .thumbs {
@@ -2514,7 +2515,13 @@ body.inner-page-active .navbar {
     grid-template-columns: 1fr;
     gap: 15px;
   }
-
+.contact-tag {
+    text-align: center;
+    color: #e07e29;
+    font-size: 18px;
+    display: block;
+    font-weight: 400;
+}
   .ingredient-card {
     gap: 1px;
     width: 100%;
@@ -2751,7 +2758,7 @@ body.inner-page-active .navbar {
   }
 
   .pi-carousel-wrapper {
-    padding: 8px;
+  padding: 19px;
     position: relative;
   }
 
@@ -2760,7 +2767,7 @@ body.inner-page-active .navbar {
     justify-content: center;
     align-items: center;
     height: auto;
-    aspect-ratio: 1 / 1.4;
+    /* aspect-ratio: 1 / 1.4; */
     /* Increased height ratio to give more room for the product */
     display: flex;
     overflow: hidden;
@@ -2815,7 +2822,7 @@ body.inner-page-active .navbar {
     width: 100%;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 5px 15px #0000001a;
+    /* box-shadow: 0 5px 15px #0000001a; */
   }
 
   .pi-products h2 {
@@ -2858,7 +2865,7 @@ body.inner-page-active .navbar {
   }
 
   .pi-arrow.pi-left {
-    left: -2.2vw;
+    left: -0.2vw;
   }
 
   .pi-arrow.pi-right {
