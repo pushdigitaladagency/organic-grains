@@ -196,7 +196,7 @@ body.inner-page-active .navbar {
 .thumbs {
   display: flex;
   flex-direction: column;
-   gap: 2vw;
+  gap: 2vw;
 }
 
 .thumbs .thumb-wrapper {
@@ -239,11 +239,11 @@ body.inner-page-active .navbar {
 }
 
 .product-info h1 {
-    color: #2f2a25;
-    margin: 15px 0;
-   font-size: 46px;
-    width: 100%;
-    max-width: 1320px;
+  color: #2f2a25;
+  margin: 15px 0;
+  font-size: 46px;
+  width: 100%;
+  max-width: 1320px;
 }
 
 .product-info h3 {
@@ -642,14 +642,15 @@ body.inner-page-active .navbar {
 }
 
 .benefits-desc {
-    color: #6b645c;
-    max-width: 1099px;
-    margin-top: 0;
-    font-size: 18px;
-    line-height: 1.8;
-    text-align: left;
-/* margin-left: -150px; */
+  color: #6b645c;
+  max-width: 1099px;
+  margin-top: 0;
+  font-size: 18px;
+  line-height: 1.8;
+  text-align: left;
+  /* margin-left: -150px; */
 }
+
 .benefits-grid1 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -710,9 +711,9 @@ body.inner-page-active .navbar {
   border-radius: 24px;
   flex-shrink: 0;
   width: 669px;
-         /* height: 28vw; */
+  /* height: 28vw; */
   margin-top: 0;
- padding: 1vw 23px;
+  padding: 1vw 23px;
 }
 
 .storage-box h3 {
@@ -813,7 +814,7 @@ body.inner-page-active .navbar {
 
 .contact-tag {
   display: block;
-  color:#E07E29;
+  color: #E07E29;
   letter-spacing: 2.5px;
   font-size: 13px;
   font-weight: 400;
@@ -872,8 +873,8 @@ body.inner-page-active .navbar {
 }
 
 .info-icon img {
- width: 19px;
-    height: 39%;
+  width: 19px;
+  height: 39%;
 }
 
 /* RIGHT FORM */
@@ -938,7 +939,7 @@ body.inner-page-active .navbar {
   background: white;
   border: 1px solid #ddd;
   border-radius: 10px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   list-style: none;
   padding: 8px 0;
   margin: 0;
@@ -1043,7 +1044,7 @@ body.inner-page-active .navbar {
   background: #f8f6f2;
   text-align: center;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .pi-products-bg {
@@ -1212,10 +1213,10 @@ body.inner-page-active .navbar {
 .pi-carousel-wrapper {
   position: relative;
   width: 100%;
-  max-width: 100%;
+  max-width: 93%;
   margin: 0 auto;
-  padding: clamp(16px, 2vw, 28px) clamp(40px, 5vw, 60px);
-  overflow: hidden;
+  padding: clamp(16px, 2vw, 28px) 0;
+  overflow: visible;
   box-sizing: border-box;
 }
 
@@ -1371,8 +1372,8 @@ body.inner-page-active .navbar {
 
   .main-image {
     /* width: clamp(315px, 37vw, 433px); */
-   min-height: clamp(498px, 47vw, 663px);
-   width: 34vw;
+    min-height: clamp(498px, 47vw, 663px);
+    width: 34vw;
   }
 
   .thumbs {
@@ -1448,10 +1449,12 @@ body.inner-page-active .navbar {
   .rating-row {
     margin: clamp(10px, 1.5vw, 30px) 0;
   }
-.flour-dropdown {
+
+  .flour-dropdown {
     min-width: 15vw;
-}
-.dropdown {
+  }
+
+  .dropdown {
     z-index: 9999;
     background: #fff;
     border: 1px solid #b9b9b9;
@@ -1462,7 +1465,8 @@ body.inner-page-active .navbar {
     top: 100%;
     left: 0;
     box-shadow: 0 2px 8px #00000014;
-}
+  }
+
   .size-header {
     margin: clamp(15px, 2vw, 35px) 0 10px;
   }
@@ -1483,7 +1487,7 @@ body.inner-page-active .navbar {
   /* recipe section */
   .recipe-section {
 
-        padding: clamp(12px, 1vw, 73px) clamp(20px, 5vw, 10%);
+    padding: clamp(12px, 1vw, 73px) clamp(20px, 5vw, 10%);
 
   }
 
@@ -1725,7 +1729,7 @@ body.inner-page-active .navbar {
 
   .pi-card .pi-img-box {
     /* height: clamp(280px, 28vw, 450px); */
-            height: 35vw;
+    height: 35vw;
   }
 
   .pi-card .pi-img-box img {
@@ -1751,6 +1755,7 @@ body.inner-page-active .navbar {
   .pi-carousel-wrapper {
     padding: clamp(16px, 1.8vw, 28px) 0;
     overflow: visible;
+    max-width: 100%;
   }
 
   .pi-carousel-item {
@@ -1771,7 +1776,7 @@ body.inner-page-active .navbar {
     background: #f8f6f2;
     padding: 0px 74px 0px;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
   }
 
   .pi-card-overlay li {
@@ -1806,17 +1811,17 @@ body.inner-page-active .navbar {
     top: 100px !important;
   }
 
-      .main-image {
-        aspect-ratio: 1 / 1.5;
-        max-width: 100%;
-        width: 35vw !important;
-        height: auto !important;
-    }
+  .main-image {
+    aspect-ratio: 1 / 1.5;
+    max-width: 100%;
+    width: 35vw !important;
+    height: auto !important;
+  }
 
   .thumbs .thumb-wrapper,
   .thumbs img {
-   width: 7vw !important;
-        height: 8vw !important;
+    width: 7vw !important;
+    height: 8vw !important;
   }
 
   .feature-card p {
@@ -1872,11 +1877,11 @@ body.inner-page-active .navbar {
   }
 
   .dropdown {
-   min-width: 30.5vw;
+    min-width: 30.5vw;
   }
 
   .flour-dropdown {
-   min-width: 30.5vw;
+    min-width: 30.5vw;
   }
 
 
@@ -1899,8 +1904,8 @@ body.inner-page-active .navbar {
     border-radius: 12px;
     justify-content: center;
     align-items: center;
-   width: 84px;
-        height: 43px;
+    width: 84px;
+    height: 43px;
     display: flex;
   }
 
@@ -1910,8 +1915,8 @@ body.inner-page-active .navbar {
   }
 
   .info-icon img {
-            width: 45px;
-        height: 23px;
+    width: 45px;
+    height: 23px;
   }
 
   .product-page {
@@ -2085,13 +2090,14 @@ body.inner-page-active .navbar {
     gap: 40px;
   }
 
-      .benefits-grid1 {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-        width: 100%;
-        max-width: 878px;
-        margin: 0 auto;
-    }
+  .benefits-grid1 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 100%;
+    max-width: 878px;
+    margin: 0 auto;
+  }
+
   .benefit-card p {
     color: #6b645c;
     text-align: left;
@@ -2110,14 +2116,14 @@ body.inner-page-active .navbar {
   .storage-box {
     flex-shrink: 1;
     width: 100%;
-  max-width: 862px;
+    max-width: 862px;
     margin: 29px auto 22px;
   }
 
   .contact-section {
     align-items: flex-start;
-        gap: clamp(32px, 4vw, 60px);
-        padding: clamp(70px, 6.5vw, 100px) clamp(44px, 4vw, 93px) clamp(50px, 4vw, 80px);
+    gap: clamp(32px, 4vw, 60px);
+    padding: clamp(70px, 6.5vw, 100px) clamp(44px, 4vw, 93px) clamp(50px, 4vw, 80px);
   }
 
   .contact-tag {
@@ -2145,7 +2151,7 @@ body.inner-page-active .navbar {
   }
 
   .dropdown-selected {
-   font-size: clamp(12px, -0.8vw, 13px);
+    font-size: clamp(12px, -0.8vw, 13px);
   }
 
   .info-box {
@@ -2216,6 +2222,7 @@ body.inner-page-active .navbar {
   .pi-carousel-wrapper {
     padding: clamp(16px, 1.8vw, 28px) 0;
     overflow: visible;
+    max-width: 100%;
   }
 
   .pi-carousel-item {
@@ -2236,7 +2243,7 @@ body.inner-page-active .navbar {
     background: #f8f6f2;
     padding: 57px 3vw 3px;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
   }
 
   .pi-products-bg {
@@ -2338,17 +2345,19 @@ body.inner-page-active .navbar {
     font-size: 16px;
     line-height: 1.7;
   }
-.menu-title {
+
+  .menu-title {
     gap: 20px;
     display: flex;
     margin-left: -6px;
-}
+  }
+
   .main-image {
-   width: 94vw;
-        min-height: 60vw;
+    width: 94vw;
+    min-height: 60vw;
     /* max-width: 320px; */
     /* aspect-ratio: 1/1.5; */
-            /* margin-left: -5px; */
+    /* margin-left: -5px; */
   }
 
   .thumbs {
@@ -2517,13 +2526,15 @@ body.inner-page-active .navbar {
     grid-template-columns: 1fr;
     gap: 15px;
   }
-.contact-tag {
+
+  .contact-tag {
     text-align: center;
     color: #e07e29;
     font-size: 18px;
     display: block;
     font-weight: 400;
-}
+  }
+
   .ingredient-card {
     gap: 1px;
     width: 100%;
@@ -2651,7 +2662,7 @@ body.inner-page-active .navbar {
     border-radius: 12px;
     justify-content: center;
     align-items: center;
-          width: 65px;
+    width: 65px;
 
     height: 47px;
     display: flex;
@@ -2703,7 +2714,7 @@ body.inner-page-active .navbar {
   .dropdown-selected {
     font-size: 14px;
     padding: 12px 15px;
-    
+
   }
 
 
@@ -2760,7 +2771,7 @@ body.inner-page-active .navbar {
   }
 
   .pi-carousel-wrapper {
-  padding: 19px;
+    padding: 19px;
     position: relative;
   }
 
