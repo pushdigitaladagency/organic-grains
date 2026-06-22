@@ -1,12 +1,13 @@
 "use client";
 // HMR trigger
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { asset } from "../lib/asset";
 import "./Navbar.css";
 
 export default function Navbar({ onBack }) {
   const router = useRouter();
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
@@ -46,7 +47,13 @@ export default function Navbar({ onBack }) {
   }, [menuOpen]);
 
   useEffect(() => {
-    const sections = ["home", "about", "products", "benefits", "contact"];
+    if (pathname.includes("/product/")) {
+      setActiveSection("products");
+    }
+  }, [pathname]);
+
+  useEffect(() => {
+    const sections = ["home", "about", "products", "products2", "products3", "products4", "products5", "products6", "benefits", "contact"];
     const observerOptions = {
       root: null,
       rootMargin: "-20% 0px -70% 0px", // Adjust these margins to control when a section is considered active
@@ -56,7 +63,12 @@ export default function Navbar({ onBack }) {
     const observerCallback = (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
+          const id = entry.target.id;
+          if (id.includes("products")) {
+            setActiveSection("products");
+          } else {
+            setActiveSection(id);
+          }
         }
       });
     };
