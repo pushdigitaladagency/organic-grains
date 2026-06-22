@@ -64,9 +64,8 @@ const list = (v) => (Array.isArray(v) ? v : []);
 // Already-absolute URLs (http//) or absolute paths (/) are returned unchanged.
 const buildImageUrl = (filename) => {
   if (!filename) return "";
-  if (filename.startsWith("http")) return filename;
-  // Route public/static images through the base-path-aware asset() helper.
-  return asset(filename.startsWith("/") ? filename : `/Images/${filename}`);
+  if (filename.startsWith("http") || filename.startsWith("/") || filename.startsWith("./")) return asset(filename);
+  return asset(`/Images/${filename}`);
 };
 
 const getProductName = (p) => p?.name || p?.title || p?.productName || "";

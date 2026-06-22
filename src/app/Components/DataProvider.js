@@ -18,6 +18,8 @@ const matchProductCategory = (product, catSlug, catName) => {
   return val === catSlug.toLowerCase() || val === catName.toLowerCase();
 };
 
+import { ALL_STATIC_PRODUCTS, STATIC_MENU } from "../lib/staticData";
+
 /**
  * Fetches all product data ONCE when the app first mounts and keeps it in
  * context. Because this provider lives in the root layout, it is NOT remounted
@@ -25,7 +27,11 @@ const matchProductCategory = (product, catSlug, catName) => {
  * single time and reused across every page.
  */
 export default function DataProvider({ children }) {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState({
+    allProducts: ALL_STATIC_PRODUCTS,
+    featuredProducts: ALL_STATIC_PRODUCTS.slice(0, 3), // Fallback featured
+    categoryMenu: STATIC_MENU,
+  });
   const fetchStarted = useRef(false);
 
   useEffect(() => {
@@ -43,6 +49,11 @@ export default function DataProvider({ children }) {
         const cats = list(catsData.data ?? catsData.categories ?? catsData);
         const prods = list(prodsData.data ?? prodsData.products ?? prodsData);
         const feat = list(featData.data ?? featData.products ?? featData);
+
+        if (!cats.length && !prods.length) {
+          console.log("Using static fallback data as API returned empty.");
+          return;
+        }
 
         // Build the category → product dropdown menu.
         const menu = await Promise.all(
@@ -66,7 +77,7 @@ export default function DataProvider({ children }) {
 
         setData({ allProducts: prods, featuredProducts: feat, categoryMenu: menu });
       } catch (err) {
-        console.error("Grains prefetch error:", err);
+        console.error("Grains prefetch error - using fallback data:", err);
       }
     }
 
