@@ -3081,7 +3081,7 @@ body {
     padding: 2px 15px;
   }
 
-  .card-content::nth-child(2) {
+  .card-content:nth-child(2) {
     padding: 0 15px;
   }
 
@@ -3243,7 +3243,49 @@ body {
     top: 0;
     left: 0;
   }
-
+.card-overlay{
+  display: none;
+}
+  .card:hover img,
+  .card:active img,
+  .card:focus img,
+  .card:focus-within img {
+    filter: none !important;
+  }
+  .card2 .img-box:hover img,
+  .card2 .img-box:active img,
+  .card2 .img-box:focus img,
+  .card2 .img-box:focus-within img,
+  .card3 .img-box:hover img,
+  .card3 .img-box:active img,
+  .card3 .img-box:focus img,
+  .card3 .img-box:focus-within img,
+  .img-box4:hover img,
+  .img-box4:active img,
+  .img-box4:focus img,
+  .img-box4:focus-within img,
+  .img-box5:hover img,
+  .img-box5:active img,
+  .img-box5:focus img,
+  .img-box5:focus-within img,
+  .img-box6:hover img,
+  .img-box6:active img,
+  .img-box6:focus img,
+  .img-box6:focus-within img {
+    filter: none !important;
+  }
+.card2-overlay{
+  display: none;
+}
+.card4-overlay{
+  display: none;
+}
+.card5-overlay{
+  display: none;
+}
+.card6-overlay{
+  display: none;
+}
   .products,
   .products2,
   .products3,
