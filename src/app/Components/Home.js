@@ -28,7 +28,9 @@ const _getPoints = (p) => {
   return hl.length ? hl.slice(0, 5).map((h) => `✔ ${h.title}`) : [];
 };
 
-export default function Home({ onProductClick, prefetchedData }) {
+export default function Home({ onProductClick, prefetchedData, onHeroVideoReady }) {
+  const heroVideoSrc = asset("/hero_bg1.mp4?v=faststart-ready");
+
   // Responsive visible-card count for the product carousels:
   // 3 cards on desktop/tablet, 2 cards on mobile (max-width: 640px).
   // This keeps the track step (100 / visibleItems) and maxIndex in sync with
@@ -243,8 +245,19 @@ export default function Home({ onProductClick, prefetchedData }) {
 
       {/* 🔹 HERO SECTION */}
       <section className="hero" id="home">
-        <video autoPlay muted loop className="background-video">
-          <source src={asset("/hero_bg1.mp4")} type="video/mp4" />
+        <link rel="preload" as="video" href={heroVideoSrc} type="video/mp4" />
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          className="background-video"
+          onLoadedData={onHeroVideoReady}
+          onCanPlay={onHeroVideoReady}
+          onError={onHeroVideoReady}
+        >
+          <source src={heroVideoSrc} type="video/mp4" />
         </video>
 
 

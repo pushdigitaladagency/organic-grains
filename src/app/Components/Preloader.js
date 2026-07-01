@@ -3,28 +3,38 @@ import React, { useState, useEffect } from "react";
 import { asset } from "../lib/asset";
 import "./Preloader.css";
 
-const Preloader = () => {
+const Preloader = ({ readyToHide = false }) => {
   const [loading, setLoading] = useState(true);
   const [shouldRender, setShouldRender] = useState(true);
+  const [minimumTimeDone, setMinimumTimeDone] = useState(false);
 
   useEffect(() => {
-    // Check if the user has already seen the preloader in this session
-    const hasSeen = sessionStorage.getItem("hasSeenPreloader");
-    
-    if (hasSeen) {
-      setLoading(false);
-      setShouldRender(false);
-      return;
-    }
-
     const timer = setTimeout(() => {
-      setLoading(false);
-      sessionStorage.setItem("hasSeenPreloader", "true");
-      // Allow some time for the fade-out animation to complete before unmounting
-      setTimeout(() => setShouldRender(false), 800);
-    }, 2000);
+      setMinimumTimeDone(true);
+    }, 3000);
 
     return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    if (!minimumTimeDone || !readyToHide || !shouldRender) return;
+
+    setLoading(false);
+    sessionStorage.setItem("hasSeenPreloader", "true");
+    // Allow some time for the fade-out animation to complete before unmounting
+    const fadeTimer = setTimeout(() => setShouldRender(false), 800);
+
+    return () => clearTimeout(fadeTimer);
+  }, [minimumTimeDone, readyToHide, shouldRender]);
+
+  useEffect(() => {
+    const fallbackTimer = setTimeout(() => {
+      setLoading(false);
+      setShouldRender(false);
+      sessionStorage.setItem("hasSeenPreloader", "true");
+    }, 10000);
+
+    return () => clearTimeout(fallbackTimer);
   }, []);
 
   if (!shouldRender) return null;

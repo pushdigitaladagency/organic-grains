@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Home from './Components/Home';
 import Navbar from "./Components/Navbar";
@@ -7,6 +8,7 @@ import Preloader from './Components/Preloader';
 
 export default function Page() {
   const router = useRouter();
+  const [heroVideoReady, setHeroVideoReady] = useState(false);
 
   // Navigate to the product's own route, e.g. /grains/product/beetroot-multivitamin-malt
   const handleProductClick = (slug) => {
@@ -15,9 +17,9 @@ export default function Page() {
 
   return (
     <div>
-      <Preloader />
+      <Preloader readyToHide={heroVideoReady} />
       <Navbar />
-      <Home onProductClick={handleProductClick} />
+      <Home onProductClick={handleProductClick} onHeroVideoReady={() => setHeroVideoReady(true)} />
       <Footer />
     </div>
   );
