@@ -46,6 +46,36 @@ export default function Home({ onProductClick, prefetchedData, onHeroVideoReady 
     return () => mq.removeEventListener("change", applyVisible);
   }, []);
 
+  useEffect(() => {
+    const revealItems = document.querySelectorAll(".reveal, .reveal-left, .reveal-right, .text-reveal");
+
+    if (!revealItems.length) return;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      revealItems.forEach((item) => item.classList.add("active"));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.15,
+        rootMargin: "0px 0px -80px 0px",
+      }
+    );
+
+    revealItems.forEach((item) => observer.observe(item));
+
+    return () => observer.disconnect();
+  }, []);
+
   const [index, setIndex] = useState(0);
 
   const totalItems = 9;
@@ -263,21 +293,21 @@ export default function Home({ onProductClick, prefetchedData, onHeroVideoReady 
 
         {/* HERO CONTENT */}
         <div className="hero-content">
-          <div className="badge">🌿 100% PURE & CHEMICAL-FREE</div>
+          <div className="badge text-reveal delay-1 active">🌿 100% PURE & CHEMICAL-FREE</div>
 
-          <h1 className="pure">
+          <h1 className="pure text-reveal delay-2 active">
             Pure Organic Nutrition <br />
             for a <span style={{ color: "#E6C9A8" }}>Healthier Life</span>
           </h1>
 
-          <p className="des">
+          <p className="des text-reveal delay-3 active">
             Rediscover the power of traditional grains and natural health drinks.<br />
             Nourish your body with chemical-free, nutrient-rich foods.
           </p>
 
           <div className="buttons">
-            <button className="explore" onClick={() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })}>Explore Products →</button>
-            <button className="contact" onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>Contact Us</button>
+            <button className="explore text-reveal delay-4 active" onClick={() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })}>Explore Products →</button>
+            <button className="contact text-reveal delay-5 active" onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>Contact Us</button>
           </div>
         </div>
 
@@ -291,7 +321,7 @@ export default function Home({ onProductClick, prefetchedData, onHeroVideoReady 
       <section className="about" id="about">
         <img src={asset("/red_wheat.png")} alt="background" className="products10" />
         {/* LEFT IMAGE */}
-        <div className="about-img">
+        <div className="about-img reveal-left">
           <img src={asset("/paddy.png")} alt="about" />
           <div className="quote">
             "Food should be pure, simple, and beneficial — just the way nature intended."
@@ -299,7 +329,7 @@ export default function Home({ onProductClick, prefetchedData, onHeroVideoReady 
         </div>
 
         {/* RIGHT CONTENT */}
-        <div className="about-content">
+        <div className="about-content reveal-right">
 
           <span className="tags">ABOUT US</span>
 
@@ -368,19 +398,19 @@ export default function Home({ onProductClick, prefetchedData, onHeroVideoReady 
       <section className="products" id="products">
         <img src={asset("/heritage-bg.png")} alt="background" className="products-bg96" />
 
-        <span className="product-tag">OUR PRODUCTS</span>
+        <span className="product-tag reveal">OUR PRODUCTS</span>
 
-        <h2>
+        <h2 className="reveal">
           Heritage Grains & <br />
           <span>Wellness Drinks</span>
         </h2>
 
-        <p className="product-desc">
+        <p className="product-desc reveal">
           From traditional rice and flours to nourishing mixes and malts –
           explore our complete range of pure, organic foods.
         </p>
 
-        <h3 className="product-title">Heritage Rice</h3>
+        <h3 className="product-title reveal">Heritage Rice</h3>
 
         <div className="product-cards">
 
@@ -420,7 +450,7 @@ export default function Home({ onProductClick, prefetchedData, onHeroVideoReady 
       <section className="products2" id="products2">
         <img src={asset("/back_paddy1.png")} alt="background" className="products-bg2" />
 
-        <h3 className="product2-title">Puttu & Idiyappam</h3>
+        <h3 className="product2-title reveal">Puttu & Idiyappam</h3>
 
         <div className="carousel-wrapper">
 
@@ -489,7 +519,7 @@ export default function Home({ onProductClick, prefetchedData, onHeroVideoReady 
           <img src={asset("/back_paddy.png")} alt="background" className="products-bg3" />
           <img src={asset("/wheat_collec.png")} alt="background" className="products-bg6" />
 
-          <h3 className="product3-title">Soup & Booster Mixes</h3>
+          <h3 className="product3-title reveal">Soup & Booster Mixes</h3>
 
           <div className="carousel-wrapper">
 
@@ -554,7 +584,7 @@ export default function Home({ onProductClick, prefetchedData, onHeroVideoReady 
 
         <section className="products4" id="products4">
 
-          <h3 className="product4-title">Health Malts</h3>
+          <h3 className="product4-title reveal">Health Malts</h3>
 
           <div className="product4-cards">
 
@@ -598,7 +628,7 @@ export default function Home({ onProductClick, prefetchedData, onHeroVideoReady 
         <section className="products5" id="products5">
           <img src={asset("/back_paddy.png")} alt="background" className="products-wheat" />
 
-          <h3 className="product5-title">Cookies</h3>
+          <h3 className="product5-title reveal">Cookies</h3>
 
           <div className="carousel-wrapper">
 
@@ -655,7 +685,7 @@ export default function Home({ onProductClick, prefetchedData, onHeroVideoReady 
         <section className="products6" id="products6">
          <img src={asset("/back_paddy1.png")} alt="background" className="products-paddy" />
 
-          <h3 className="product6-title">Vadam & Vathal</h3>
+          <h3 className="product6-title reveal">Vadam & Vathal</h3>
 
           <div className="carousel-wrapper">
 
@@ -711,9 +741,9 @@ export default function Home({ onProductClick, prefetchedData, onHeroVideoReady 
 
       <section className="benefits-section" id="benefits">
         <img src={asset("/red_wheat.png")} alt="background" className="products-bg8" />
-        <span className="benefitss-tag">WHY CHOOSE US</span>
+        <span className="benefitss-tag reveal">WHY CHOOSE US</span>
 
-        <h2 className="benefits-heading">
+        <h2 className="benefits-heading reveal">
           Pure benefits, <br />
           nothing <span>artificial</span>
         </h2>
@@ -721,7 +751,7 @@ export default function Home({ onProductClick, prefetchedData, onHeroVideoReady 
         <div className="benefits-grid">
 
           {/* BOX 1 */}
-          <div className="benefit-box">
+          <div className="benefit-box reveal">
             <div className="benefit-icon">
               <img src={asset("/icon1.png")} alt="icon" />
             </div>
@@ -730,7 +760,7 @@ export default function Home({ onProductClick, prefetchedData, onHeroVideoReady 
           </div>
 
           {/* BOX 2 */}
-          <div className="benefit-box">
+          <div className="benefit-box reveal">
             <div className="benefit-icon">
               <img src={asset("/icon2.png")} alt="icon" />
             </div>
@@ -739,7 +769,7 @@ export default function Home({ onProductClick, prefetchedData, onHeroVideoReady 
           </div>
 
           {/* BOX 3 */}
-          <div className="benefit-box">
+          <div className="benefit-box reveal">
             <div className="benefit-icon">
               <img src={asset("/icon3.png")} alt="icon" />
             </div>
@@ -748,7 +778,7 @@ export default function Home({ onProductClick, prefetchedData, onHeroVideoReady 
           </div>
 
           {/* BOX 4 */}
-          <div className="benefit-box">
+          <div className="benefit-box reveal">
             <div className="benefit-icon">
               <img src={asset("/icon4.png")} alt="icon" />
             </div>
@@ -757,7 +787,7 @@ export default function Home({ onProductClick, prefetchedData, onHeroVideoReady 
           </div>
 
           {/* BOX 5 */}
-          <div className="benefit-box">
+          <div className="benefit-box reveal">
             <div className="benefit-icon">
               <img src={asset("/icon5.png")} alt="icon" />
             </div>
@@ -766,7 +796,7 @@ export default function Home({ onProductClick, prefetchedData, onHeroVideoReady 
           </div>
 
           {/* BOX 6 */}
-          <div className="benefit-box">
+          <div className="benefit-box reveal">
             <div className="benefit-icon">
               <img src={asset("/icon6.png")} alt="icon" />
             </div>
@@ -779,9 +809,9 @@ export default function Home({ onProductClick, prefetchedData, onHeroVideoReady 
       </section>
       <section className="life-section">
         <img src={asset("/grass.png")} alt="background" className="products-bg10" />
-        <span className="life-tag">FOR EVERY GENERATION</span>
+        <span className="life-tag reveal">FOR EVERY GENERATION</span>
 
-        <h2 className="life-heading">
+        <h2 className="life-heading reveal">
           Nourishment through <br />
           <span>every stage of life</span>
         </h2>
@@ -789,7 +819,7 @@ export default function Home({ onProductClick, prefetchedData, onHeroVideoReady 
         <div className="life-container">
 
           {/* ITEM 1 */}
-          <div className="life-item">
+          <div className="life-item reveal">
             <div className="life-circle">
               <span className="life-number">01</span>
               <img src={asset("/Component 1.png")} alt="icon" />
@@ -799,7 +829,7 @@ export default function Home({ onProductClick, prefetchedData, onHeroVideoReady 
           </div>
 
           {/* ITEM 2 */}
-          <div className="life-item">
+          <div className="life-item reveal">
             <div className="life-circle">
               <span className="life-number">02</span>
               <img src={asset("/Component 2.png")} alt="icon" />
@@ -809,7 +839,7 @@ export default function Home({ onProductClick, prefetchedData, onHeroVideoReady 
           </div>
 
           {/* ITEM 3 */}
-          <div className="life-item">
+          <div className="life-item reveal">
             <div className="life-circle">
               <span className="life-number">03</span>
               <img src={asset("/Component 3.png")} alt="icon" />
@@ -819,7 +849,7 @@ export default function Home({ onProductClick, prefetchedData, onHeroVideoReady 
           </div>
 
           {/* ITEM 4 */}
-          <div className="life-item">
+          <div className="life-item reveal">
             <div className="life-circle">
               <span className="life-number">04</span>
               <img src={asset("/Component 4.png")} alt="icon" />
@@ -836,7 +866,7 @@ export default function Home({ onProductClick, prefetchedData, onHeroVideoReady 
       <section className="contact-section" id="contact">
         <img src={asset("/heritage-bg.png")} alt="background" className="products-bg11" />
         {/* LEFT SIDE */}
-        <div className="contact-left">
+        <div className="contact-left reveal-left">
 
           <span className="contact-tag">GET IN TOUCH</span>
 
@@ -888,7 +918,7 @@ export default function Home({ onProductClick, prefetchedData, onHeroVideoReady 
         </div>
 
         {/* RIGHT SIDE FORM */}
-        <form className="contact-form" onSubmit={handleSubmit}>
+        <form className="contact-form reveal-right" onSubmit={handleSubmit}>
           <h3>Send us a message</h3>
 
           <div className="form-row">
