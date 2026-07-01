@@ -54,7 +54,8 @@ body {
   transform: translateX(0);
   visibility: visible;
 }
-/* TEXT REVEAL ANIMATION — clip-path mask unveil */
+
+/* TEXT REVEAL ANIMATION — clip-path mask unveil */
 @keyframes textRevealUp {
   0% {
     clip-path: inset(100% 0 0 0);
@@ -309,6 +310,7 @@ body {
   height: auto;
   border-radius: 20px;
   display: block;
+  margin-left: 67px;
 }
 
 /* QUOTE BOX */
@@ -321,7 +323,7 @@ body {
   font-size: 18px;
   position: absolute;
   bottom: -24px;
-  left: 40px;
+  left: 150px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   color: #677859;
   line-height: 1.55;
@@ -1385,7 +1387,7 @@ body {
   background: #f8f6f2;
   padding: 9px 61px 0px;
   position: relative;
-  overflow: visible;
+  overflow: hidden;
 }
 
 /* Decorative grain — right side of Heritage Rice section */
@@ -2070,7 +2072,7 @@ body {
 
   .about-img img {
     border-radius: 20px;
-    width: 123%;
+    /* width: 123%; */
     max-width: 106%;
     height: 95%;
     display: block;

@@ -1,5 +1,6 @@
 "use client";
 import { createContext, useContext, useEffect, useRef, useState } from "react";
+import { fetchJson } from "../lib/fetchJson";
 
 const BASE_URL = process.env.NEXT_PUBLIC_PRODUC_URI;
 
@@ -38,12 +39,14 @@ export default function DataProvider({ children }) {
     if (fetchStarted.current) return; // run only once
     fetchStarted.current = true;
 
+    if (!BASE_URL) return;
+
     async function prefetchAll() {
       try {
         const [catsData, prodsData, featData] = await Promise.all([
-          fetch(`${BASE_URL}/api/grains/categories`).then((r) => r.json()),
-          fetch(`${BASE_URL}/api/grains/products`).then((r) => r.json()),
-          fetch(`${BASE_URL}/api/grains/products/featured`).then((r) => r.json()),
+          fetchJson(`${BASE_URL}/api/grains/categories`),
+          fetchJson(`${BASE_URL}/api/grains/products`),
+          fetchJson(`${BASE_URL}/api/grains/products/featured`),
         ]);
 
         const cats = list(catsData.data ?? catsData.categories ?? catsData);
@@ -62,7 +65,7 @@ export default function DataProvider({ children }) {
             const catSlug = getCategorySlug(cat);
             let products;
             try {
-              const d = await fetch(`${BASE_URL}/api/grains/categories/${catSlug}/products`).then((r) => r.json());
+              const d = await fetchJson(`${BASE_URL}/api/grains/categories/${catSlug}/products`);
               products = list(d.data ?? d.products ?? d);
             } catch {
               products = prods.filter((pr) => matchProductCategory(pr, catSlug, catName));
@@ -77,7 +80,7 @@ export default function DataProvider({ children }) {
 
         setData({ allProducts: prods, featuredProducts: feat, categoryMenu: menu });
       } catch (err) {
-        console.error("Grains prefetch error - using fallback data:", err);
+        console.warn("Grains API unavailable - using fallback data:", err.message);
       }
     }
 

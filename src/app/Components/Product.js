@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { asset } from "../lib/asset";
+import { fetchJson } from "../lib/fetchJson";
 import { sendContact } from "../lib/sendContact";
 import "./product.css";
 
@@ -166,10 +167,10 @@ export default function ProductDetails({ initialSlug, onBack, prefetchedData }) 
       window.scrollTo({ top: 0, behavior: "smooth" });
     };
     if (found) return show(found);
-    fetch(`${BASE_URL}/api/grains/products/${slug}`)
-      .then((r) => r.json())
+    if (!BASE_URL) return;
+    fetchJson(`${BASE_URL}/api/grains/products/${slug}`)
       .then((data) => show(data?.data || data?.product || data))
-      .catch((err) => console.error("Product select error:", err));
+      .catch((err) => console.warn("Product select unavailable:", err.message));
   };
 
   useEffect(() => {
@@ -391,7 +392,7 @@ export default function ProductDetails({ initialSlug, onBack, prefetchedData }) 
         <div className="product-container">
           <div className="gallery product-reveal-left active">
             <div className="main-image">
-              <ImageWithSkeleton src={activeImg || getProductImage(p) || undefined} alt="product" />
+              <ImageWithSkeleton key={activeImg || getProductImage(p)} className="main-image-slide" src={activeImg || getProductImage(p) || undefined} alt="product" />
             </div>
             <div className="thumbs">
               {list(p?.images).slice(1).filter(img => img).map((img, i) => {
