@@ -178,6 +178,38 @@ export default function ProductDetails({ initialSlug, onBack, prefetchedData }) 
   }, []);
 
   useEffect(() => {
+    const revealItems = document.querySelectorAll(
+      ".product-reveal, .product-reveal-left, .product-reveal-right, .product-text-reveal"
+    );
+
+    if (!revealItems.length) return;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      revealItems.forEach((item) => item.classList.add("active"));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.15,
+        rootMargin: "0px 0px -80px 0px",
+      }
+    );
+
+    revealItems.forEach((item) => observer.observe(item));
+
+    return () => observer.disconnect();
+  }, [currentProduct]);
+
+  useEffect(() => {
     const onResize = () => setVisibleItems(getVisibleItems());
     onResize();
     window.addEventListener("resize", onResize);
@@ -357,7 +389,7 @@ export default function ProductDetails({ initialSlug, onBack, prefetchedData }) 
 
       <section className="product-page" id="products">
         <div className="product-container">
-          <div className="gallery">
+          <div className="gallery product-reveal-left active">
             <div className="main-image">
               <ImageWithSkeleton src={activeImg || getProductImage(p) || undefined} alt="product" />
             </div>
@@ -373,17 +405,17 @@ export default function ProductDetails({ initialSlug, onBack, prefetchedData }) 
             </div>
           </div>
 
-          <div className="product-info">
-            <span className="category">
+          <div className="product-info product-reveal-right active">
+            <span className="category product-text-reveal product-delay-1 active">
               <img src={asset("./Images/drop.svg")} alt="dropdown" className="dropdown-icon" />
               {p?.badge}
             </span>
 
-            <h1 className="product-title">{getProductName(p)}</h1>
-            <h3>{p?.name_tamil}</h3>
-            <p className="description">{p?.short_description || p?.description}</p>
+            <h1 className="product-title product-text-reveal product-delay-2 active">{getProductName(p)}</h1>
+            <h3 className="product-text-reveal product-delay-3 active">{p?.name_tamil}</h3>
+            <p className="description product-text-reveal product-delay-4 active">{p?.short_description || p?.description}</p>
 
-            <div className="rating-row">
+            <div className="rating-row product-text-reveal product-delay-5 active">
               <div>
                 ⭐⭐⭐⭐⭐ <span>{p?.rating?.value} · {p?.rating?.count} reviews</span>
               </div>
@@ -392,12 +424,12 @@ export default function ProductDetails({ initialSlug, onBack, prefetchedData }) 
 
             <hr />
 
-            <div className="size-header">
+            <div className="size-header product-reveal active">
               <h4 className="pack">PACK SIZE</h4>
               <span className="choose">Choose your weight</span>
             </div>
 
-            <div className="size-options">
+            <div className="size-options product-reveal active">
               {weights.map((size) => (
                 <div key={size} className="size-btn-wrapper">
              
@@ -408,7 +440,7 @@ export default function ProductDetails({ initialSlug, onBack, prefetchedData }) 
               ))}
             </div>
 
-            <div className="features-grid">
+            <div className="features-grid product-reveal active">
               {featureItems.map((feature, i) => (
                 <div className="feature-card" key={i}>
                   <div className="icon-circle">
@@ -426,12 +458,12 @@ export default function ProductDetails({ initialSlug, onBack, prefetchedData }) 
       </section>
 
       <section className="recipe-section">
-        <h2 className="desc-title">Description</h2>
-        <h3 className="desc-subtitle">{p?.description_tagline}</h3>
-        <p className="desc-text">{p?.description || p?.short_description}</p>
-        <h2 className="recipe-heading">{prep?.heading}</h2>
+        <h2 className="desc-title product-reveal">Description</h2>
+        <h3 className="desc-subtitle product-reveal">{p?.description_tagline}</h3>
+        <p className="desc-text product-reveal">{p?.description || p?.short_description}</p>
+        <h2 className="recipe-heading product-reveal">{prep?.heading}</h2>
 
-        <div className="ingredients-box">
+        <div className="ingredients-box product-reveal">
           <div className="recipe-info">
             <span className="recipe-tag">RECIPE</span>
             <h3>{prep?.recipe_title}</h3>
@@ -456,7 +488,7 @@ export default function ProductDetails({ initialSlug, onBack, prefetchedData }) 
           </div>
         </div>
 
-        <div className="steps-grid">
+        <div className="steps-grid product-reveal">
           {recipeSteps.map((step, i) => (
             <div className="step-card" key={i}>
               <div className="step-top">
@@ -474,7 +506,7 @@ export default function ProductDetails({ initialSlug, onBack, prefetchedData }) 
       </section>
 
       <section className="benefits-section" id="benefits">
-        <div className="benefits-header">
+        <div className="benefits-header product-reveal">
           <span className="benefits-tag">{hl?.eyebrow}</span>
           <h2 className="benefits-title">
             {benefitsHeadingMain}<span>{benefitsHeadingAccent}</span>
@@ -483,7 +515,7 @@ export default function ProductDetails({ initialSlug, onBack, prefetchedData }) 
         </div>
 
         <div className="benefits-body">
-          <div className="benefits-left">
+          <div className="benefits-left product-reveal-left">
             <div className="benefits-grid1">
               {benefitItems.map((benefit, i) => (
                 <div className="benefit-card" key={i}>
@@ -497,7 +529,7 @@ export default function ProductDetails({ initialSlug, onBack, prefetchedData }) 
             </div>
           </div>
 
-          <div className="storage-box">
+          <div className="storage-box product-reveal-right">
             <h3>{stg?.heading}</h3>
             {storageItems.map((item, i) => (
               <div className="storage-item" key={i}>
@@ -517,8 +549,8 @@ export default function ProductDetails({ initialSlug, onBack, prefetchedData }) 
       </section>
 
       <section className="pi-products" id="pi-products">
-        <h3 className="pi-product-title">Related product</h3>
-        <div className="heritage-main">
+        <h3 className="pi-product-title product-reveal">Related product</h3>
+        <div className="heritage-main product-reveal">
           <p className="heritage">
             {relatedHeritageParts.length > 1 ? (
               <>
@@ -531,7 +563,7 @@ export default function ProductDetails({ initialSlug, onBack, prefetchedData }) 
             )}
           </p>
         </div>
-        <div className="pi-carousel-wrapper">
+        <div className="pi-carousel-wrapper product-reveal">
           <button className="pi-arrow pi-left" onClick={prev}>
             <img src={asset("/buttonleft.png")} alt="Prev" />
           </button>
@@ -560,7 +592,7 @@ export default function ProductDetails({ initialSlug, onBack, prefetchedData }) 
       </section>
 
       <section className="contact-section" id="contact">
-        <div className="contact-left">
+        <div className="contact-left product-reveal-left">
           <span className="contact-tag">GET IN TOUCH</span>
           <h2>
             Ready to switch to <br />
@@ -583,7 +615,7 @@ export default function ProductDetails({ initialSlug, onBack, prefetchedData }) 
           </div>
         </div>
 
-        <form className="contact-form" onSubmit={handleSubmit}>
+        <form className="contact-form product-reveal-right" onSubmit={handleSubmit}>
           <h3>Send us a message</h3>
 
           <div className="form-row">

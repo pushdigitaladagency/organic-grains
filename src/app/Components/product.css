@@ -2,6 +2,80 @@
 @import url('https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Outfit:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Outfit:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+/* Product detail reveal animations */
+.product-reveal,
+.product-reveal-left,
+.product-reveal-right {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1s cubic-bezier(0.2, 1, 0.3, 1), transform 1s cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.product-reveal {
+  transform: translateY(38px);
+}
+
+.product-reveal-left {
+  transform: translateX(-46px);
+}
+
+.product-reveal-right {
+  transform: translateX(46px);
+}
+
+.product-reveal.active,
+.product-reveal-left.active,
+.product-reveal-right.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(0, 0);
+}
+
+@keyframes productTextRevealUp {
+  0% {
+    clip-path: inset(100% 0 0 0);
+    opacity: 0;
+    transform: translateY(46px);
+  }
+
+  100% {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.product-text-reveal {
+  clip-path: inset(100% 0 0 0);
+  opacity: 0;
+  transform: translateY(46px);
+}
+
+.product-text-reveal.active {
+  animation: productTextRevealUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.product-delay-1.active { animation-delay: 0s; }
+.product-delay-2.active { animation-delay: 0.12s; }
+.product-delay-3.active { animation-delay: 0.24s; }
+.product-delay-4.active { animation-delay: 0.36s; }
+.product-delay-5.active { animation-delay: 0.48s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .product-reveal,
+  .product-reveal-left,
+  .product-reveal-right,
+  .product-text-reveal,
+  .product-text-reveal.active {
+    animation: none;
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+    transform: none;
+    transition: none;
+    visibility: visible;
+  }
+}
+
 /* Force navbar to always have solid background ONLY on inner page (no transparency) */
 body.inner-page-active .navbar {
   background: linear-gradient(to right,
